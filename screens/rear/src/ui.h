@@ -23,21 +23,60 @@ extern "C" {
 #endif
 
 #include "ui_events.h"
-extern lv_obj_t *ui_auxbatt;
-extern lv_obj_t *ui_auxbattvoltagearc;
-extern lv_obj_t *ui_auxbattpercentagelabel;
-extern lv_obj_t *ui_battscreenlabel;
-extern lv_obj_t *ui_batteries_legend_main;
-extern lv_obj_t *ui_batteries_legend_aux;
-extern lv_obj_t *ui_batteries_legend_aux_colour;
-extern lv_obj_t *ui_batteries_legend_main_colour;
-extern lv_obj_t *ui_mainbattpercentagelabel;
-extern lv_obj_t *ui_mainbattvoltagearc;
+void ui_event_splashScreen( lv_event_t * e);
+extern lv_obj_t *ui_splashScreen;
+void ui_event_batteryStateScreen( lv_event_t * e);
+extern lv_obj_t *ui_batteryStateScreen;
+extern lv_obj_t *ui_auxBattVoltageArc;
+extern lv_obj_t *ui_auxBattPercentageLabel;
+extern lv_obj_t *ui_warningLabel;
+extern lv_obj_t *ui_mainBatteryStateLegend;
+extern lv_obj_t *ui_auxBatteryStateLegend;
+extern lv_obj_t *ui_auxBatteryStateLegendColour;
+extern lv_obj_t *ui_mainBatteryStateLegendColour;
+extern lv_obj_t *ui_mainBattPercentageLabel;
+extern lv_obj_t *ui_mainBattVoltageArc;
+extern lv_obj_t *ui_auxCurrentBar;
+extern lv_obj_t *ui_mainCurrentBar;
+extern lv_obj_t *ui_socLabel;
+extern lv_obj_t *ui_mainBattAmpsLabel;
+extern lv_obj_t *ui_auxBattAmpsLabel;
+extern lv_obj_t *ui_auxState;
+extern lv_obj_t *ui_mainState;
+extern lv_obj_t *ui_auxBattVoltageLabel;
+extern lv_obj_t *ui_mainBattVoltageLabel;
+void ui_event_accessoryStateScreen( lv_event_t * e);
+extern lv_obj_t *ui_accessoryStateScreen;
+extern lv_obj_t *ui_io1;
+extern lv_obj_t *ui_io2;
+extern lv_obj_t *ui_io3;
+void ui_event_io4( lv_event_t * e);
+extern lv_obj_t *ui_io4;
+extern lv_obj_t *ui_ioLabel1;
+extern lv_obj_t *ui_ioLabel2;
+extern lv_obj_t *ui_ioLabel3;
+extern lv_obj_t *ui_ioLabel4;
+void ui_event_settingsStateScreen( lv_event_t * e);
+extern lv_obj_t *ui_settingsStateScreen;
+extern lv_obj_t *ui_settingsLabel;
+extern lv_obj_t *ui_brightnessLabel;
+void ui_event_brightnessBar( lv_event_t * e);
+extern lv_obj_t *ui_brightnessBar;
+extern lv_obj_t *ui_Panel2;
+extern lv_obj_t *ui_Switch1;
+extern lv_obj_t *ui_Switch2;
+extern lv_obj_t *ui_Switch3;
+extern lv_obj_t *ui_Switch4;
+extern lv_obj_t *ui_brightnessLabel1;
+extern lv_obj_t *ui_brightnessLabel2;
+extern lv_obj_t *ui_brightnessLabel3;
+extern lv_obj_t *ui_brightnessLabel4;
+extern lv_obj_t *ui_brightnessLabel5;
 extern lv_obj_t *ui____initial_actions0;
 
 
-LV_IMG_DECLARE( ui_img_pirate_camp_co_275_png);   // assets/pirate_camp_co_275.png
 LV_IMG_DECLARE( ui_img_pirate_camp_co_290_png);   // assets/pirate_camp_co_290.png
+LV_IMG_DECLARE( ui_img_pirate_camp_co_275_png);   // assets/pirate_camp_co_275.png
 
 
 

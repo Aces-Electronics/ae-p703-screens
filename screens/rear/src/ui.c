@@ -7,16 +7,55 @@
 #include "ui_helpers.h"
 
 ///////////////////// VARIABLES ////////////////////
-lv_obj_t *ui_auxbatt;
-lv_obj_t *ui_auxbattvoltagearc;
-lv_obj_t *ui_auxbattpercentagelabel;
-lv_obj_t *ui_battscreenlabel;
-lv_obj_t *ui_batteries_legend_main;
-lv_obj_t *ui_batteries_legend_aux;
-lv_obj_t *ui_batteries_legend_aux_colour;
-lv_obj_t *ui_batteries_legend_main_colour;
-lv_obj_t *ui_mainbattpercentagelabel;
-lv_obj_t *ui_mainbattvoltagearc;
+void ui_event_splashScreen( lv_event_t * e);
+lv_obj_t *ui_splashScreen;
+void ui_event_batteryStateScreen( lv_event_t * e);
+lv_obj_t *ui_batteryStateScreen;
+lv_obj_t *ui_auxBattVoltageArc;
+lv_obj_t *ui_auxBattPercentageLabel;
+lv_obj_t *ui_warningLabel;
+lv_obj_t *ui_mainBatteryStateLegend;
+lv_obj_t *ui_auxBatteryStateLegend;
+lv_obj_t *ui_auxBatteryStateLegendColour;
+lv_obj_t *ui_mainBatteryStateLegendColour;
+lv_obj_t *ui_mainBattPercentageLabel;
+lv_obj_t *ui_mainBattVoltageArc;
+lv_obj_t *ui_auxCurrentBar;
+lv_obj_t *ui_mainCurrentBar;
+lv_obj_t *ui_socLabel;
+lv_obj_t *ui_mainBattAmpsLabel;
+lv_obj_t *ui_auxBattAmpsLabel;
+lv_obj_t *ui_auxState;
+lv_obj_t *ui_mainState;
+lv_obj_t *ui_auxBattVoltageLabel;
+lv_obj_t *ui_mainBattVoltageLabel;
+void ui_event_accessoryStateScreen( lv_event_t * e);
+lv_obj_t *ui_accessoryStateScreen;
+lv_obj_t *ui_io1;
+lv_obj_t *ui_io2;
+lv_obj_t *ui_io3;
+void ui_event_io4( lv_event_t * e);
+lv_obj_t *ui_io4;
+lv_obj_t *ui_ioLabel1;
+lv_obj_t *ui_ioLabel2;
+lv_obj_t *ui_ioLabel3;
+lv_obj_t *ui_ioLabel4;
+void ui_event_settingsStateScreen( lv_event_t * e);
+lv_obj_t *ui_settingsStateScreen;
+lv_obj_t *ui_settingsLabel;
+lv_obj_t *ui_brightnessLabel;
+void ui_event_brightnessBar( lv_event_t * e);
+lv_obj_t *ui_brightnessBar;
+lv_obj_t *ui_Panel2;
+lv_obj_t *ui_Switch1;
+lv_obj_t *ui_Switch2;
+lv_obj_t *ui_Switch3;
+lv_obj_t *ui_Switch4;
+lv_obj_t *ui_brightnessLabel1;
+lv_obj_t *ui_brightnessLabel2;
+lv_obj_t *ui_brightnessLabel3;
+lv_obj_t *ui_brightnessLabel4;
+lv_obj_t *ui_brightnessLabel5;
 lv_obj_t *ui____initial_actions0;
 const lv_img_dsc_t *ui_imgset_pirate_camp_co_[2] = {&ui_img_pirate_camp_co_275_png, &ui_img_pirate_camp_co_290_png};
 
@@ -31,110 +70,504 @@ const lv_img_dsc_t *ui_imgset_pirate_camp_co_[2] = {&ui_img_pirate_camp_co_275_p
 ///////////////////// ANIMATIONS ////////////////////
 
 ///////////////////// FUNCTIONS ////////////////////
+void ui_event_splashScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_SCREEN_LOADED) {
+      _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_NONE, 500, 1000);
+}
+}
+void ui_event_batteryStateScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+      _ui_screen_change( ui_settingsStateScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 500, 0);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+      _ui_screen_change( ui_accessoryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
+}
+}
+void ui_event_accessoryStateScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+      _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 500, 0);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+      _ui_screen_change( ui_settingsStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
+}
+}
+void ui_event_io4( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      _ui_checked_set_text_value( ui_warningLabel, target, "WARNING: Strippers active! BBDA clear?", "");
+}
+}
+void ui_event_settingsStateScreen( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
+      _ui_screen_change( ui_accessoryStateScreen, LV_SCR_LOAD_ANIM_MOVE_TOP, 500, 0);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
+      _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
+}
+}
+void ui_event_brightnessBar( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_VALUE_CHANGED) {
+      set_brightness( e );
+}
+}
 
 ///////////////////// SCREENS ////////////////////
-void ui_auxbatt_screen_init(void)
+void ui_splashScreen_screen_init(void)
 {
-ui_auxbatt = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_auxbatt, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+ui_splashScreen = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_splashScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_set_style_bg_img_src( ui_splashScreen, &ui_img_pirate_camp_co_290_png, LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_img_recolor(ui_splashScreen, lv_color_hex(0xFFFFFF), LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_bg_img_recolor_opa(ui_splashScreen, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_auxbattvoltagearc = lv_arc_create(ui_auxbatt);
-lv_obj_set_width( ui_auxbattvoltagearc, 300);
-lv_obj_set_height( ui_auxbattvoltagearc, 310);
-lv_obj_set_align( ui_auxbattvoltagearc, LV_ALIGN_CENTER );
-lv_arc_set_value(ui_auxbattvoltagearc, 75);
-lv_obj_set_style_arc_width(ui_auxbattvoltagearc, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_add_event_cb(ui_splashScreen, ui_event_splashScreen, LV_EVENT_ALL, NULL);
 
-lv_obj_set_style_arc_width(ui_auxbattvoltagearc, 15, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+}
+void ui_batteryStateScreen_screen_init(void)
+{
+ui_batteryStateScreen = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_batteryStateScreen, LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
+lv_obj_set_scrollbar_mode(ui_batteryStateScreen, LV_SCROLLBAR_MODE_OFF);
 
-ui_auxbattpercentagelabel = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_auxbattpercentagelabel, LV_SIZE_CONTENT);  /// 100
-lv_obj_set_height( ui_auxbattpercentagelabel, LV_SIZE_CONTENT);   /// 100
-lv_obj_set_x( ui_auxbattpercentagelabel, 0 );
-lv_obj_set_y( ui_auxbattpercentagelabel, -30 );
-lv_obj_set_align( ui_auxbattpercentagelabel, LV_ALIGN_CENTER );
-lv_label_set_text(ui_auxbattpercentagelabel,"75 %");
-lv_obj_clear_flag( ui_auxbattpercentagelabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
-lv_obj_set_scrollbar_mode(ui_auxbattpercentagelabel, LV_SCROLLBAR_MODE_OFF);
-lv_obj_set_style_text_color(ui_auxbattpercentagelabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_auxbattpercentagelabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_auxbattpercentagelabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_auxBattVoltageArc = lv_arc_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBattVoltageArc, 300);
+lv_obj_set_height( ui_auxBattVoltageArc, 310);
+lv_obj_set_align( ui_auxBattVoltageArc, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_auxBattVoltageArc, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_arc_set_value(ui_auxBattVoltageArc, 75);
+lv_obj_set_style_arc_width(ui_auxBattVoltageArc, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_battscreenlabel = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_battscreenlabel, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_battscreenlabel, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_battscreenlabel, 0 );
-lv_obj_set_y( ui_battscreenlabel, 130 );
-lv_obj_set_align( ui_battscreenlabel, LV_ALIGN_CENTER );
-lv_label_set_text(ui_battscreenlabel,"Batteries");
-lv_obj_set_style_text_font(ui_battscreenlabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_arc_width(ui_auxBattVoltageArc, 15, LV_PART_INDICATOR| LV_STATE_DEFAULT);
 
-ui_batteries_legend_main = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_batteries_legend_main, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_batteries_legend_main, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_batteries_legend_main, 195 );
-lv_obj_set_y( ui_batteries_legend_main, -140 );
-lv_obj_set_align( ui_batteries_legend_main, LV_ALIGN_CENTER );
-lv_label_set_text(ui_batteries_legend_main,"Main");
-lv_obj_set_style_text_font(ui_batteries_legend_main, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_auxBattPercentageLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBattPercentageLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_auxBattPercentageLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_auxBattPercentageLabel, 0 );
+lv_obj_set_y( ui_auxBattPercentageLabel, -25 );
+lv_obj_set_align( ui_auxBattPercentageLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxBattPercentageLabel,"75%");
+lv_obj_clear_flag( ui_auxBattPercentageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_auxBattPercentageLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_auxBattPercentageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_auxBattPercentageLabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_batteries_legend_aux = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_batteries_legend_aux, LV_SIZE_CONTENT);  /// 1
-lv_obj_set_height( ui_batteries_legend_aux, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_batteries_legend_aux, -202 );
-lv_obj_set_y( ui_batteries_legend_aux, -140 );
-lv_obj_set_align( ui_batteries_legend_aux, LV_ALIGN_CENTER );
-lv_label_set_text(ui_batteries_legend_aux,"Aux");
-lv_obj_set_style_text_font(ui_batteries_legend_aux, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_warningLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_warningLabel, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_warningLabel, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_warningLabel, 0 );
+lv_obj_set_y( ui_warningLabel, 141 );
+lv_obj_set_align( ui_warningLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_warningLabel,"");
+lv_obj_set_style_text_color(ui_warningLabel, lv_color_hex(0xFE0303), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_warningLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_warningLabel, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_batteries_legend_aux_colour = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_batteries_legend_aux_colour, 15);
-lv_obj_set_height( ui_batteries_legend_aux_colour, 15);
-lv_obj_set_x( ui_batteries_legend_aux_colour, -155 );
-lv_obj_set_y( ui_batteries_legend_aux_colour, -136 );
-lv_obj_set_align( ui_batteries_legend_aux_colour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_batteries_legend_aux_colour,"  ");
-lv_obj_set_style_bg_color(ui_batteries_legend_aux_colour, lv_color_hex(0x4D89F0), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_batteries_legend_aux_colour, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_mainBatteryStateLegend = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBatteryStateLegend, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_mainBatteryStateLegend, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_mainBatteryStateLegend, 195 );
+lv_obj_set_y( ui_mainBatteryStateLegend, -140 );
+lv_obj_set_align( ui_mainBatteryStateLegend, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainBatteryStateLegend,"Main");
+lv_obj_clear_flag( ui_mainBatteryStateLegend, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_mainBatteryStateLegend, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_batteries_legend_main_colour = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_batteries_legend_main_colour, 15);
-lv_obj_set_height( ui_batteries_legend_main_colour, 15);
-lv_obj_set_x( ui_batteries_legend_main_colour, 139 );
-lv_obj_set_y( ui_batteries_legend_main_colour, -136 );
-lv_obj_set_align( ui_batteries_legend_main_colour, LV_ALIGN_CENTER );
-lv_label_set_text(ui_batteries_legend_main_colour,"  ");
-lv_obj_set_style_bg_color(ui_batteries_legend_main_colour, lv_color_hex(0xBAC551), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_batteries_legend_main_colour, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_auxBatteryStateLegend = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBatteryStateLegend, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_auxBatteryStateLegend, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_auxBatteryStateLegend, -202 );
+lv_obj_set_y( ui_auxBatteryStateLegend, -140 );
+lv_obj_set_align( ui_auxBatteryStateLegend, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxBatteryStateLegend,"Aux");
+lv_obj_clear_flag( ui_auxBatteryStateLegend, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_auxBatteryStateLegend, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_mainbattpercentagelabel = lv_label_create(ui_auxbatt);
-lv_obj_set_width( ui_mainbattpercentagelabel, LV_SIZE_CONTENT);  /// 100
-lv_obj_set_height( ui_mainbattpercentagelabel, LV_SIZE_CONTENT);   /// 100
-lv_obj_set_x( ui_mainbattpercentagelabel, 0 );
-lv_obj_set_y( ui_mainbattpercentagelabel, 20 );
-lv_obj_set_align( ui_mainbattpercentagelabel, LV_ALIGN_CENTER );
-lv_label_set_text(ui_mainbattpercentagelabel,"95 %");
-lv_obj_clear_flag( ui_mainbattpercentagelabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
-lv_obj_set_scrollbar_mode(ui_mainbattpercentagelabel, LV_SCROLLBAR_MODE_OFF);
-lv_obj_set_style_text_color(ui_mainbattpercentagelabel, lv_color_hex(0xCEE83B), LV_PART_MAIN | LV_STATE_DEFAULT );
-lv_obj_set_style_text_opa(ui_mainbattpercentagelabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_mainbattpercentagelabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_auxBatteryStateLegendColour = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBatteryStateLegendColour, 15);
+lv_obj_set_height( ui_auxBatteryStateLegendColour, 15);
+lv_obj_set_x( ui_auxBatteryStateLegendColour, -155 );
+lv_obj_set_y( ui_auxBatteryStateLegendColour, -138 );
+lv_obj_set_align( ui_auxBatteryStateLegendColour, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxBatteryStateLegendColour,"  ");
+lv_obj_clear_flag( ui_auxBatteryStateLegendColour, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_bg_color(ui_auxBatteryStateLegendColour, lv_color_hex(0x4D89F0), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_auxBatteryStateLegendColour, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_mainbattvoltagearc = lv_arc_create(ui_auxbatt);
-lv_obj_set_width( ui_mainbattvoltagearc, 240);
-lv_obj_set_height( ui_mainbattvoltagearc, 240);
-lv_obj_set_x( ui_mainbattvoltagearc, -1 );
-lv_obj_set_y( ui_mainbattvoltagearc, -6 );
-lv_obj_set_align( ui_mainbattvoltagearc, LV_ALIGN_CENTER );
-lv_arc_set_value(ui_mainbattvoltagearc, 95);
-lv_obj_set_style_arc_width(ui_mainbattvoltagearc, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
+ui_mainBatteryStateLegendColour = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBatteryStateLegendColour, 15);
+lv_obj_set_height( ui_mainBatteryStateLegendColour, 15);
+lv_obj_set_x( ui_mainBatteryStateLegendColour, 139 );
+lv_obj_set_y( ui_mainBatteryStateLegendColour, -138 );
+lv_obj_set_align( ui_mainBatteryStateLegendColour, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainBatteryStateLegendColour,"  ");
+lv_obj_clear_flag( ui_mainBatteryStateLegendColour, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_bg_color(ui_mainBatteryStateLegendColour, lv_color_hex(0xBAC551), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_mainBatteryStateLegendColour, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-lv_obj_set_style_arc_color(ui_mainbattvoltagearc, lv_color_hex(0xBAC551), LV_PART_INDICATOR | LV_STATE_DEFAULT );
-lv_obj_set_style_arc_opa(ui_mainbattvoltagearc, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
-lv_obj_set_style_arc_width(ui_mainbattvoltagearc, 15, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+ui_mainBattPercentageLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBattPercentageLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_mainBattPercentageLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_mainBattPercentageLabel, 0 );
+lv_obj_set_y( ui_mainBattPercentageLabel, 15 );
+lv_obj_set_align( ui_mainBattPercentageLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainBattPercentageLabel,"95%");
+lv_obj_clear_flag( ui_mainBattPercentageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_mainBattPercentageLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_mainBattPercentageLabel, lv_color_hex(0xCEE83B), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_mainBattPercentageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_mainBattPercentageLabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-lv_obj_set_style_bg_color(ui_mainbattvoltagearc, lv_color_hex(0xBAC551), LV_PART_KNOB | LV_STATE_DEFAULT );
-lv_obj_set_style_bg_opa(ui_mainbattvoltagearc, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+ui_mainBattVoltageArc = lv_arc_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBattVoltageArc, 240);
+lv_obj_set_height( ui_mainBattVoltageArc, 240);
+lv_obj_set_x( ui_mainBattVoltageArc, -1 );
+lv_obj_set_y( ui_mainBattVoltageArc, -6 );
+lv_obj_set_align( ui_mainBattVoltageArc, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_mainBattVoltageArc, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_arc_set_value(ui_mainBattVoltageArc, 95);
+lv_obj_set_style_arc_width(ui_mainBattVoltageArc, 15, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_arc_color(ui_mainBattVoltageArc, lv_color_hex(0xBAC551), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_arc_opa(ui_mainBattVoltageArc, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+lv_obj_set_style_arc_width(ui_mainBattVoltageArc, 15, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_mainBattVoltageArc, lv_color_hex(0xBAC551), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_mainBattVoltageArc, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+
+ui_auxCurrentBar = lv_bar_create(ui_batteryStateScreen);
+lv_bar_set_range(ui_auxCurrentBar, -50,50);
+lv_bar_set_value(ui_auxCurrentBar,-12,LV_ANIM_OFF);
+lv_obj_set_width( ui_auxCurrentBar, 15);
+lv_obj_set_height( ui_auxCurrentBar, 182);
+lv_obj_set_x( ui_auxCurrentBar, 40 );
+lv_obj_set_y( ui_auxCurrentBar, -23 );
+lv_obj_set_align( ui_auxCurrentBar, LV_ALIGN_LEFT_MID );
+lv_obj_clear_flag( ui_auxCurrentBar, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
+
+ui_mainCurrentBar = lv_bar_create(ui_batteryStateScreen);
+lv_bar_set_range(ui_mainCurrentBar, -50,50);
+lv_bar_set_value(ui_mainCurrentBar,5,LV_ANIM_OFF);
+lv_obj_set_width( ui_mainCurrentBar, 15);
+lv_obj_set_height( ui_mainCurrentBar, 182);
+lv_obj_set_x( ui_mainCurrentBar, 425 );
+lv_obj_set_y( ui_mainCurrentBar, -23 );
+lv_obj_set_align( ui_mainCurrentBar, LV_ALIGN_LEFT_MID );
+lv_obj_clear_flag( ui_mainCurrentBar, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE );    /// Flags
+lv_obj_set_style_bg_color(ui_mainCurrentBar, lv_color_hex(0x32371A), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_mainCurrentBar, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_mainCurrentBar, lv_color_hex(0xCEE83B), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_mainCurrentBar, 255, LV_PART_INDICATOR| LV_STATE_DEFAULT);
+
+ui_socLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_socLabel, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_socLabel, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_socLabel, -4 );
+lv_obj_set_y( ui_socLabel, -55 );
+lv_obj_set_align( ui_socLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_socLabel,"SOC");
+lv_obj_clear_flag( ui_socLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_socLabel, &lv_font_montserrat_14, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_mainBattAmpsLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBattAmpsLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_mainBattAmpsLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_mainBattAmpsLabel, 185 );
+lv_obj_set_y( ui_mainBattAmpsLabel, 94 );
+lv_obj_set_align( ui_mainBattAmpsLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainBattAmpsLabel,"2.5A");
+lv_obj_clear_flag( ui_mainBattAmpsLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_mainBattAmpsLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_mainBattAmpsLabel, lv_color_hex(0xCEE83B), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_mainBattAmpsLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_mainBattAmpsLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_auxBattAmpsLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBattAmpsLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_auxBattAmpsLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_auxBattAmpsLabel, -185 );
+lv_obj_set_y( ui_auxBattAmpsLabel, 94 );
+lv_obj_set_align( ui_auxBattAmpsLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxBattAmpsLabel,"6.6A");
+lv_obj_clear_flag( ui_auxBattAmpsLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_auxBattAmpsLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_auxBattAmpsLabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_auxBattAmpsLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_auxBattAmpsLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_auxState = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxState, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_auxState, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_auxState, -187 );
+lv_obj_set_y( ui_auxState, 118 );
+lv_obj_set_align( ui_auxState, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxState,"Discharge");
+lv_obj_clear_flag( ui_auxState, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_auxState, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_mainState = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainState, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_mainState, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_mainState, 189 );
+lv_obj_set_y( ui_mainState, 118 );
+lv_obj_set_align( ui_mainState, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainState,"Charge");
+lv_obj_clear_flag( ui_mainState, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_mainState, &lv_font_montserrat_16, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_auxBattVoltageLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_auxBattVoltageLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_auxBattVoltageLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_auxBattVoltageLabel, 0 );
+lv_obj_set_y( ui_auxBattVoltageLabel, 103 );
+lv_obj_set_align( ui_auxBattVoltageLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_auxBattVoltageLabel,"12.6V");
+lv_obj_clear_flag( ui_auxBattVoltageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_auxBattVoltageLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_auxBattVoltageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_auxBattVoltageLabel, &lv_font_montserrat_18, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_mainBattVoltageLabel = lv_label_create(ui_batteryStateScreen);
+lv_obj_set_width( ui_mainBattVoltageLabel, LV_SIZE_CONTENT);  /// 100
+lv_obj_set_height( ui_mainBattVoltageLabel, LV_SIZE_CONTENT);   /// 100
+lv_obj_set_x( ui_mainBattVoltageLabel, 0 );
+lv_obj_set_y( ui_mainBattVoltageLabel, 81 );
+lv_obj_set_align( ui_mainBattVoltageLabel, LV_ALIGN_CENTER );
+lv_label_set_text(ui_mainBattVoltageLabel,"14.2V");
+lv_obj_clear_flag( ui_mainBattVoltageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_scrollbar_mode(ui_mainBattVoltageLabel, LV_SCROLLBAR_MODE_OFF);
+lv_obj_set_style_text_color(ui_mainBattVoltageLabel, lv_color_hex(0xCEE83B), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_text_opa(ui_mainBattVoltageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_mainBattVoltageLabel, &lv_font_montserrat_18, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_batteryStateScreen, ui_event_batteryStateScreen, LV_EVENT_ALL, NULL);
+
+}
+void ui_accessoryStateScreen_screen_init(void)
+{
+ui_accessoryStateScreen = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_accessoryStateScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_io1 = lv_switch_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_io1, 150);
+lv_obj_set_height( ui_io1, 59);
+lv_obj_set_x( ui_io1, 5 );
+lv_obj_set_y( ui_io1, 7 );
+lv_obj_set_style_bg_color(ui_io1, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_io1, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io1, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+
+ui_io2 = lv_switch_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_io2, 150);
+lv_obj_set_height( ui_io2, 59);
+lv_obj_set_x( ui_io2, 5 );
+lv_obj_set_y( ui_io2, -41 );
+lv_obj_set_align( ui_io2, LV_ALIGN_LEFT_MID );
+lv_obj_set_style_bg_color(ui_io2, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_io2, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io2, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+
+ui_io3 = lv_switch_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_io3, 150);
+lv_obj_set_height( ui_io3, 59);
+lv_obj_set_x( ui_io3, 5 );
+lv_obj_set_y( ui_io3, -87 );
+lv_obj_set_align( ui_io3, LV_ALIGN_BOTTOM_LEFT );
+lv_obj_set_style_bg_color(ui_io3, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_io3, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io3, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+
+ui_io4 = lv_switch_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_io4, 150);
+lv_obj_set_height( ui_io4, 59);
+lv_obj_set_x( ui_io4, 5 );
+lv_obj_set_y( ui_io4, -7 );
+lv_obj_set_align( ui_io4, LV_ALIGN_BOTTOM_LEFT );
+lv_obj_set_style_bg_color(ui_io4, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_set_style_bg_color(ui_io4, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_io4, 255, LV_PART_KNOB| LV_STATE_DEFAULT);
+
+ui_ioLabel1 = lv_label_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_ioLabel1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_ioLabel1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_ioLabel1, 67 );
+lv_obj_set_y( ui_ioLabel1, -123 );
+lv_obj_set_align( ui_ioLabel1, LV_ALIGN_CENTER );
+lv_label_set_text(ui_ioLabel1,"Work Lights");
+lv_obj_clear_flag( ui_ioLabel1, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_ioLabel1, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_ioLabel2 = lv_label_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_ioLabel2, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_ioLabel2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_ioLabel2, 74 );
+lv_obj_set_y( ui_ioLabel2, -40 );
+lv_obj_set_align( ui_ioLabel2, LV_ALIGN_CENTER );
+lv_label_set_text(ui_ioLabel2,"Camp Lights");
+lv_obj_clear_flag( ui_ioLabel2, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_ioLabel2, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_ioLabel3 = lv_label_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_ioLabel3, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_ioLabel3, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_ioLabel3, 77 );
+lv_obj_set_y( ui_ioLabel3, 40 );
+lv_obj_set_align( ui_ioLabel3, LV_ALIGN_CENTER );
+lv_label_set_text(ui_ioLabel3,"Water Pump");
+lv_obj_clear_flag( ui_ioLabel3, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_ioLabel3, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_ioLabel4 = lv_label_create(ui_accessoryStateScreen);
+lv_obj_set_width( ui_ioLabel4, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_ioLabel4, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_ioLabel4, 43 );
+lv_obj_set_y( ui_ioLabel4, 120 );
+lv_obj_set_align( ui_ioLabel4, LV_ALIGN_CENTER );
+lv_label_set_text(ui_ioLabel4,"Strippers");
+lv_obj_clear_flag( ui_ioLabel4, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_font(ui_ioLabel4, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_io4, ui_event_io4, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_accessoryStateScreen, ui_event_accessoryStateScreen, LV_EVENT_ALL, NULL);
+
+}
+void ui_settingsStateScreen_screen_init(void)
+{
+ui_settingsStateScreen = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_settingsStateScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_settingsLabel = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_settingsLabel, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_settingsLabel, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_align( ui_settingsLabel, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_settingsLabel,"Settings");
+lv_obj_set_style_text_font(ui_settingsLabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel, 94 );
+lv_obj_set_y( ui_brightnessLabel, 265 );
+lv_obj_set_align( ui_brightnessLabel, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel,"Brightness");
+lv_obj_set_style_text_font(ui_brightnessLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessBar = lv_slider_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessBar, 183);
+lv_obj_set_height( ui_brightnessBar, 15);
+lv_obj_set_x( ui_brightnessBar, -128 );
+lv_obj_set_y( ui_brightnessBar, 122 );
+lv_obj_set_align( ui_brightnessBar, LV_ALIGN_CENTER );
+lv_obj_set_style_bg_color(ui_brightnessBar, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_brightnessBar, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Panel2 = lv_obj_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_Panel2, 191);
+lv_obj_set_height( ui_Panel2, 144);
+lv_obj_set_x( ui_Panel2, -132 );
+lv_obj_set_y( ui_Panel2, -37 );
+lv_obj_set_align( ui_Panel2, LV_ALIGN_CENTER );
+lv_obj_clear_flag( ui_Panel2, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+
+ui_Switch1 = lv_switch_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_Switch1, 50);
+lv_obj_set_height( ui_Switch1, 25);
+lv_obj_set_x( ui_Switch1, -195 );
+lv_obj_set_y( ui_Switch1, -85 );
+lv_obj_set_align( ui_Switch1, LV_ALIGN_CENTER );
+lv_obj_add_state( ui_Switch1, LV_STATE_CHECKED );     /// States
+lv_obj_set_style_bg_color(ui_Switch1, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Switch1, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Switch2 = lv_switch_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_Switch2, 50);
+lv_obj_set_height( ui_Switch2, 25);
+lv_obj_set_x( ui_Switch2, -195 );
+lv_obj_set_y( ui_Switch2, -53 );
+lv_obj_set_align( ui_Switch2, LV_ALIGN_CENTER );
+lv_obj_set_style_bg_color(ui_Switch2, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Switch2, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Switch3 = lv_switch_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_Switch3, 50);
+lv_obj_set_height( ui_Switch3, 25);
+lv_obj_set_x( ui_Switch3, -195 );
+lv_obj_set_y( ui_Switch3, -21 );
+lv_obj_set_align( ui_Switch3, LV_ALIGN_CENTER );
+lv_obj_set_style_bg_color(ui_Switch3, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Switch3, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_Switch4 = lv_switch_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_Switch4, 50);
+lv_obj_set_height( ui_Switch4, 25);
+lv_obj_set_x( ui_Switch4, -195 );
+lv_obj_set_y( ui_Switch4, 12 );
+lv_obj_set_align( ui_Switch4, LV_ALIGN_CENTER );
+lv_obj_set_style_bg_color(ui_Switch4, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
+lv_obj_set_style_bg_opa(ui_Switch4, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel1 = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel1, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel1, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel1, -108 );
+lv_obj_set_y( ui_brightnessLabel1, 65 );
+lv_obj_set_align( ui_brightnessLabel1, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel1,"LiFePO4");
+lv_obj_set_style_text_font(ui_brightnessLabel1, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel2 = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel2, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel2, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel2, 90 );
+lv_obj_set_y( ui_brightnessLabel2, 91 );
+lv_obj_set_align( ui_brightnessLabel2, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel2,"Battery \nChemistry");
+lv_obj_set_style_text_font(ui_brightnessLabel2, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel3 = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel3, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel3, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel3, -122 );
+lv_obj_set_y( ui_brightnessLabel3, 97 );
+lv_obj_set_align( ui_brightnessLabel3, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel3,"Li-ion");
+lv_obj_set_style_text_font(ui_brightnessLabel3, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel4 = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel4, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel4, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel4, -127 );
+lv_obj_set_y( ui_brightnessLabel4, 128 );
+lv_obj_set_align( ui_brightnessLabel4, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel4,"AGM");
+lv_obj_set_style_text_font(ui_brightnessLabel4, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+ui_brightnessLabel5 = lv_label_create(ui_settingsStateScreen);
+lv_obj_set_width( ui_brightnessLabel5, LV_SIZE_CONTENT);  /// 1
+lv_obj_set_height( ui_brightnessLabel5, LV_SIZE_CONTENT);   /// 1
+lv_obj_set_x( ui_brightnessLabel5, -131 );
+lv_obj_set_y( ui_brightnessLabel5, 162 );
+lv_obj_set_align( ui_brightnessLabel5, LV_ALIGN_TOP_MID );
+lv_label_set_text(ui_brightnessLabel5,"SLA");
+lv_obj_set_style_text_font(ui_brightnessLabel5, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
+
+lv_obj_add_event_cb(ui_brightnessBar, ui_event_brightnessBar, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_settingsStateScreen, ui_event_settingsStateScreen, LV_EVENT_ALL, NULL);
 
 }
 
@@ -143,7 +576,10 @@ void ui_init( void )
 lv_disp_t *dispp = lv_disp_get_default();
 lv_theme_t *theme = lv_theme_default_init(dispp, lv_palette_main(LV_PALETTE_BLUE), lv_palette_main(LV_PALETTE_RED), true, LV_FONT_DEFAULT);
 lv_disp_set_theme(dispp, theme);
-ui_auxbatt_screen_init();
+ui_splashScreen_screen_init();
+ui_batteryStateScreen_screen_init();
+ui_accessoryStateScreen_screen_init();
+ui_settingsStateScreen_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
-lv_disp_load_scr( ui_auxbatt);
+lv_disp_load_scr( ui_splashScreen);
 }
