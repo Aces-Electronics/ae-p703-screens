@@ -141,13 +141,12 @@ static lv_style_t label_style;
 static lv_obj_t *headerLabel;
 static lv_obj_t * label;
 
-
-void set_brightness(lv_event_t * e)
+void set_screen_brightness(lv_event_t * e)
 {
     lv_obj_t * slider = lv_event_get_target(e);
 
     int brightness = lv_slider_get_value(slider);
-    if (brightness < 10) brightness = 10;
+	  if (brightness < 10) brightness = 10;
     tft.setBrightness(brightness * 2.55);
 }
 
@@ -155,8 +154,8 @@ void setup() {
   Serial.begin(115200);
 
   tft.begin();
-  tft.setRotation(1);
-  tft.setBrightness(255);
+  tft.setRotation(3); // upside down
+  tft.setBrightness(255); // ToDo: make this an NVRAM setting and read it in on boot
 
   lv_init();
   lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * 10);
@@ -173,7 +172,6 @@ void setup() {
   indev_drv.read_cb = my_touch_read;
   lv_indev_drv_register(&indev_drv);
   
-  //lv_example_get_started_3();
   ui_init();
 }
 
