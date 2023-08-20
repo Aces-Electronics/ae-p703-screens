@@ -15,8 +15,7 @@
    - <a href="#reario-battery-cradle">RearIO: Battery Cradle</a>
    - <a href="#reario-basic-pcb">RearIO: Basic PCB</a>
    - <a href="#reario-pro-pcb">RearIO: Pro PCB</a>
-   - <a href="#reario-screen">RearIO: Screen</a>
-   - <a href="#frontio-screen">FrontIO: Screen/a>
+   - <a href="#frontio-screen">FrontIO: Screen</a>
 1. <a href="#android-app">Android App</a>
 1. <a href="#where-to-buy">Where to Buy</a>
 1. <a href="#support">Support</a>
@@ -35,7 +34,6 @@ Screen has been sourced and basic prototype code has been written. Seems workabl
 
 Screen (WT32-SC01 Plus):  
 ![WT32-SC01 Plus](./Rear/RearIO_Screen/screen.png)
-
 
 Buy:
 https://core-electronics.com.au/wt32-sc01-plus-esp32-development-board-with-35-inch-lcd-ips-display-touch-screen.html
