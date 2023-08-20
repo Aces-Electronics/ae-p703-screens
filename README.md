@@ -12,7 +12,7 @@
 1. <a href="#current-states">Current States</a>
    - <a href="#reario-screen">RearIO: Screen</a>
    - <a href="#reario-battery">RearIO: Battery</a>
-   - <a href="#reario-battery-cradle">RearIO: Battery Cradle</a>
+   - <a href="#reario-screen-and-battery-cradle">RearIO: Screen and Battery Cradle</a>
    - <a href="#reario-basic-pcb">RearIO: Basic PCB</a>
    - <a href="#reario-pro-pcb">RearIO: Pro PCB</a>
    - <a href="#frontio-screen">FrontIO: Screen</a>
@@ -49,8 +49,10 @@ It's a WIP, but here's a taste:
 50Ah battery has een sourced and tested.  
 ![LiFEPO4 Battery](./Rear/RearIO_Battery/battery.jpg)
 
-## RearIO Battery Cradle
-Not yet started
+## RearIO Screen and Battery Cradle
+The screen and PCB mount is complete. It has cutouts for a marine grade 12v socket + an Anderson socket, and 2 x Anderson sockets.
+![Screen Mount Front](./Rear/RearIO_Screen_and_Battery_Cradle/screen_mount.png)
+![Screen Mount Rear](./Rear/RearIO_Screen_and_Battery_Cradle/screen_mount_rear.png)
 
 ## RearIO Basic PCB
 basic io screenshot The project is currently in the prototyping phase. The PCBs have been sent to JLCPCB and should be here, along with the components, in the next couple of weeks.  

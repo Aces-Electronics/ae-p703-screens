@@ -478,7 +478,7 @@
       "idf": "",
       "netlist": "",
       "specctra_dsn": "",
-      "step": "",
+      "step": "rear_screen.step",
       "vrml": ""
     },
     "page_layout_descr_file": ""
