@@ -58,6 +58,7 @@ Not yet started
 basic io screenshot The project is currently in the prototyping phase. The PCBs have been sent to JLCPCB and should be here, along with the components, in the next couple of weeks.  
 Files: https://github.com/Aces-Electronics/ae-p703-screens/releases/tag/v0.1
 ![Basic PCB](./Rear/RearIO_Basic_PCB/render.png)
+![Basic PCB Connections](./Rear/RearIO_Basic_PCB/connections.jpg)
 
 ## RearIO Pro PCB
 The project is in the design stage, and is coming along as time allows.
