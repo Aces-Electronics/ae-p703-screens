@@ -53,6 +53,7 @@ It's a WIP, but here's a taste:
 The screen and PCB mount is complete. It has cutouts for a marine grade 12v socket + an Anderson socket, and 2 x Anderson sockets.
 ![Screen Mount Front](./Rear/RearIO_Screen_and_Battery_Cradle/screen_mount.png)
 ![Screen Mount Rear](./Rear/RearIO_Screen_and_Battery_Cradle/screen_mount_rear.png)
+![Screen Mount Iso](./Rear/RearIO_Screen_and_Battery_Cradle/screen_mount_iso.png)
 
 ## RearIO Basic PCB
 basic io screenshot The project is currently in the prototyping phase. The PCBs have been sent to JLCPCB and should be here, along with the components, in the next couple of weeks.  
