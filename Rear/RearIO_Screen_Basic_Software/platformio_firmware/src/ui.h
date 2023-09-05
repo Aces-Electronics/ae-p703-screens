@@ -36,7 +36,6 @@ extern lv_obj_t *ui_auxBattVoltageArc;
 extern lv_obj_t *ui_auxBattPercentageLabel;
 extern lv_obj_t *ui_warningLabel;
 extern lv_obj_t *ui_auxBatteryStateLegend;
-extern lv_obj_t *ui_auxBatteryStateLegendColour;
 extern lv_obj_t *ui_socLabel;
 extern lv_obj_t *ui_auxState;
 extern lv_obj_t *ui_auxBattVoltageLabel;
@@ -44,6 +43,7 @@ extern lv_obj_t *ui_socLabel1;
 extern lv_obj_t *ui_hp1Label;
 extern lv_obj_t *ui_hp1Label1;
 extern lv_obj_t *ui_lp1Label;
+void ui_event_lp2Label( lv_event_t * e);
 extern lv_obj_t *ui_lp2Label;
 // SCREEN: ui_accessoryStateScreen
 void ui_accessoryStateScreen_screen_init(void);

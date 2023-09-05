@@ -6,18 +6,8 @@
 #include "lvgl.h"
 #include "ui.h"
 
-#include "sdkconfig.h"
-#include "esp_system.h"
-#include "freertos/FreeRTOS.h" //https://www.freertos.org/a00106.html
-#include "freertos/task.h"
-#include "freertos/timers.h"
-#include "freertos/event_groups.h"
-#include <driver/adc.h>
-#include <SimpleKalmanFilter.h> //https://www.arduino.cc/reference/en/libraries/simplekalmanfilter/
-
 // GPIO definitions
-const int vin = 14; // input
-
+const int vin =14;
 const int hp1 = 10; // outputs
 const int hp2 = 11;
 const int lp1 = 12;
@@ -27,6 +17,18 @@ bool hp1IOState = 0;
 bool hp2IOState = 0;
 bool lp1IOState = 0;
 bool lp2IOState = 0;
+
+int rawValue = 0;
+float auxVoltage;
+
+const float r1 = 82000.0f; // R1 in ohm, 82k
+const float r2 = 16000.0f; // R2 in ohm, 16k
+float vRefScale = (3.3f / 4096.0f) * ((r1 + r2) / r2);
+const int numReadings  = 10;
+int readings [numReadings];
+int readIndex  = 0;
+long total  = 0;
+char vinResult[8];
 
 class LGFX : public lgfx::LGFX_Device
 {
@@ -166,48 +168,196 @@ static lv_obj_t * label;
 
 void set_screen_brightness(lv_event_t * e)
 {
-    lv_obj_t * slider = lv_event_get_target(e);
+  lv_obj_t * slider = lv_event_get_target(e);
 
-    int brightness = lv_slider_get_value(slider);
-	  if (brightness < 10) brightness = 10;
-    tft.setBrightness(brightness * 2.55);
+  int brightness = lv_slider_get_value(slider);
+  if (brightness < 10) brightness = 10;
+  tft.setBrightness(brightness * 2.55);
 }
 
-void fReadBattery( void * parameter )
+void lp2ToggleFunction(lv_event_t * e)
 {
-  int adcValue = 0;
-  //https://ohmslawcalculator.com/voltage-divider-calculator
-  const float r1 = 82000.0f; // R1 in ohm, 50K. For a LiFeP04 battery under charge
-  const float r2 = 16000.0f; // R2 in ohm, 10k, make it a habit to use a 10K for R2
-  float Vbatt = 0.0f;
-  int read_raw;
-  int printCount = 0;
-  float vRefScale = (3.0f / 4096.0f) * ((r1 + r2) / r2);
-  uint64_t TimePastKalman  = esp_timer_get_time(); // used by the Kalman filter UpdateProcessNoise, time since last kalman calculation
-  SimpleKalmanFilter KF_ADC_b( 1.0f, 1.0f, .01f );
-  TickType_t xLastWakeTime = xTaskGetTickCount();
-  const TickType_t xFrequency = 1000; //delay for mS *NON-BLOCKING DELAY *
-  for (;;)
+
+  lv_event_code_t code = lv_event_get_code(e);
+
+  Serial.println("Something...");
+  Serial.print("Code: "); Serial.println(code);
+
+  if(code == LV_EVENT_CLICKED)
   {
-    adc2_get_raw(ADC2_CHANNEL_6, ADC_WIDTH_BIT_12, &read_raw); //read and discard
-    adc2_get_raw(ADC2_CHANNEL_6, ADC_WIDTH_BIT_12, &adcValue); //take a raw ADC reading
-    KF_ADC_b.setProcessNoise( (esp_timer_get_time() - TimePastKalman) / 1000000.0f ); //get time, in microsecods, since last readings
-    adcValue = KF_ADC_b.updateEstimate( adcValue ); // apply simple Kalman filter
-    Vbatt = adcValue * vRefScale;
-    printCount++;
-    if ( printCount == 3 )
-    {
-      //log_i( "Vbatt %f", Vbatt );// you may have to edit the code to use serial print.
-      //log_i( "Vbatt_raw %f", read_raw );// you may have to edit the code to use serial print.
-      printCount = 0;
-      Serial.print("VBatt: "); Serial.println(Vbatt);
-    }
-    TimePastKalman = esp_timer_get_time(); // time of update complete
-    xLastWakeTime = xTaskGetTickCount();
-    vTaskDelayUntil( &xLastWakeTime, xFrequency );
-    //log_i( "fReadBattery %d",  uxTaskGetStackHighWaterMark( NULL ) );
+    Serial.println("Clicked");
   }
-  vTaskDelete( NULL );
+
+}
+
+void readAnalogVoltage( ) 
+{ /* function readAnalogSmooth */
+  analogRead(vin); // turn and burn
+}
+
+long smooth() 
+{ /* function smooth */
+  ////Perform average on sensor readings
+  long average;
+  // subtract the last reading:
+  total = total - readings[readIndex];
+  // read the sensor:
+  readings[readIndex] = analogRead(vin);
+  // add value to total:
+  total = total + readings[readIndex];
+  // handle index
+  readIndex = readIndex + 1;
+  if (readIndex >= numReadings) {
+    readIndex = 0;
+  }
+  // calculate the average:
+  average = total / numReadings;
+
+  return average;
+}
+
+void checkVin()
+{
+  readAnalogVoltage(); // no calibration
+  auxVoltage = smooth() * (vRefScale * 1.006);
+  dtostrf(auxVoltage, 6, 2, vinResult); // Leave room for too large numbers!
+  char tmp[2] = "V";
+  strcat(vinResult, tmp);
+  
+  lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
+  if (auxVoltage >= 14.55)
+  {
+    lv_label_set_text(ui_auxState,"Fully Charged");
+    lv_label_set_text(ui_auxBattPercentageLabel,"100%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 100);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Charging");
+  }
+  else if (auxVoltage >= 13.55)
+  {
+    lv_label_set_text(ui_auxState,"Fully Charged");
+    lv_label_set_text(ui_auxBattPercentageLabel,"100%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 100);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 13.4)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"99%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 99);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 13.3)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"90%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 90);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 13.15)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"70%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 70);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 13.1)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"40%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 40);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 13.0)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"30%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 30);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 12.9)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"20%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 20);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 12.8)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"17%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 17);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Stable");
+  }
+  else if (auxVoltage >= 12.5)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"14%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 14);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Low!");
+  }
+  else if (auxVoltage >= 12.0)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"9%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 9);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Flat!");
+  }
+  else if (auxVoltage >= 10)
+  {
+    lv_label_set_text(ui_auxState,"Discharging");
+    lv_label_set_text(ui_auxBattPercentageLabel,"0%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 0);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000 ), LV_PART_INDICATOR | LV_STATE_DEFAULT );
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
+    lv_label_set_text(ui_socLabel1,"Critical!");
+  }
+
 }
 
 void toggle_outputs()
@@ -233,13 +383,12 @@ void toggle_outputs()
 
 void setup() {
   Serial.begin(115200);
-
-  //xTaskCreatePinnedToCore( fReadBattery, "fReadBattery", 4000, NULL, 3, NULL, 1 );
   
   pinMode(hp1, OUTPUT);
   pinMode(hp2, OUTPUT);
   pinMode(lp1, OUTPUT);
   pinMode(lp2, OUTPUT);
+  pinMode(vin, INPUT);
 
   tft.begin();
   tft.setRotation(1); // 3 = upside down
@@ -266,6 +415,7 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
+  checkVin();
   //toggle_outputs();
-  delay(5);
+  delay(2000);
 }

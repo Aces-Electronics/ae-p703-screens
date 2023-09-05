@@ -10,6 +10,7 @@
 extern "C" {
 #endif
 
+void lp2ToggleFunction(lv_event_t * e);
 void set_screen_brightness(lv_event_t * e);
 
 #ifdef __cplusplus

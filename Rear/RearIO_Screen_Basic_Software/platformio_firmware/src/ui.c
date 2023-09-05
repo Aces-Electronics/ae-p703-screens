@@ -21,7 +21,6 @@ lv_obj_t *ui_auxBattVoltageArc;
 lv_obj_t *ui_auxBattPercentageLabel;
 lv_obj_t *ui_warningLabel;
 lv_obj_t *ui_auxBatteryStateLegend;
-lv_obj_t *ui_auxBatteryStateLegendColour;
 lv_obj_t *ui_socLabel;
 lv_obj_t *ui_auxState;
 lv_obj_t *ui_auxBattVoltageLabel;
@@ -29,6 +28,7 @@ lv_obj_t *ui_socLabel1;
 lv_obj_t *ui_hp1Label;
 lv_obj_t *ui_hp1Label1;
 lv_obj_t *ui_lp1Label;
+void ui_event_lp2Label( lv_event_t * e);
 lv_obj_t *ui_lp2Label;
 
 // SCREEN: ui_accessoryStateScreen
@@ -90,6 +90,12 @@ lv_indev_wait_release(lv_indev_get_act());
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_accessoryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
+}
+}
+void ui_event_lp2Label( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      lp2ToggleFunction( e );
 }
 }
 void ui_event_accessoryStateScreen( lv_event_t * e) {

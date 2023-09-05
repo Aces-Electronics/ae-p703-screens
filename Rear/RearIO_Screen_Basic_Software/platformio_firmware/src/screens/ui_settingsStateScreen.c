@@ -87,7 +87,7 @@ lv_obj_clear_flag( ui_hp1TextArea, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_E
 lv_obj_set_style_text_color(ui_hp1TextArea, lv_color_hex(0x808080), LV_PART_TEXTAREA_PLACEHOLDER | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_hp1TextArea, 255, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 lv_obj_set_style_text_align(ui_hp1TextArea, LV_TEXT_ALIGN_CENTER, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_hp1TextArea, &lv_font_montserrat_16, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_hp1TextArea, &lv_font_montserrat_20, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 
 ui_hp2TextArea = lv_textarea_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp2TextArea, 246);
@@ -105,7 +105,7 @@ lv_obj_set_style_text_align(ui_hp2TextArea, LV_TEXT_ALIGN_AUTO, LV_PART_CURSOR| 
 lv_obj_set_style_text_color(ui_hp2TextArea, lv_color_hex(0x808080), LV_PART_TEXTAREA_PLACEHOLDER | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_hp2TextArea, 255, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 lv_obj_set_style_text_align(ui_hp2TextArea, LV_TEXT_ALIGN_CENTER, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_hp2TextArea, &lv_font_montserrat_16, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_hp2TextArea, &lv_font_montserrat_20, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 
 ui_lp1TextArea = lv_textarea_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_lp1TextArea, 246);
@@ -123,7 +123,7 @@ lv_obj_set_style_text_align(ui_lp1TextArea, LV_TEXT_ALIGN_AUTO, LV_PART_CURSOR| 
 lv_obj_set_style_text_color(ui_lp1TextArea, lv_color_hex(0x808080), LV_PART_TEXTAREA_PLACEHOLDER | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_lp1TextArea, 255, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 lv_obj_set_style_text_align(ui_lp1TextArea, LV_TEXT_ALIGN_CENTER, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_lp1TextArea, &lv_font_montserrat_16, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_lp1TextArea, &lv_font_montserrat_20, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 
 ui_lp2TextArea = lv_textarea_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_lp2TextArea, 246);
@@ -141,7 +141,7 @@ lv_obj_set_style_text_align(ui_lp2TextArea, LV_TEXT_ALIGN_AUTO, LV_PART_CURSOR| 
 lv_obj_set_style_text_color(ui_lp2TextArea, lv_color_hex(0x808080), LV_PART_TEXTAREA_PLACEHOLDER | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_lp2TextArea, 255, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 lv_obj_set_style_text_align(ui_lp2TextArea, LV_TEXT_ALIGN_CENTER, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_lp2TextArea, &lv_font_montserrat_16, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_lp2TextArea, &lv_font_montserrat_20, LV_PART_TEXTAREA_PLACEHOLDER| LV_STATE_DEFAULT);
 
 ui_settingsKeyboard = lv_keyboard_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_settingsKeyboard, 454);
