@@ -135,7 +135,7 @@ lv_obj_set_style_text_font(ui_hp2Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_lp1Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_lp1Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_lp1Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_lp1Label, -68 );
+lv_obj_set_x( ui_lp1Label, -66 );
 lv_obj_set_y( ui_lp1Label, 142 );
 lv_obj_set_align( ui_lp1Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_lp1Label,"LP1");

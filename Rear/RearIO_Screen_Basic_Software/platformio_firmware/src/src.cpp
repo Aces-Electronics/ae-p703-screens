@@ -3,8 +3,11 @@
 #include <Arduino.h>
 #include <LovyanGFX.hpp>
 #include <driver/adc.h>
+#include <nvs_flash.h>
+#include <Preferences.h>
 #include "lvgl.h"
 #include "ui.h"
+
 
 // GPIO definitions
 const int vin =14;
@@ -18,10 +21,10 @@ bool hp2IOState = 0;
 bool lp1IOState = 0;
 bool lp2IOState = 0;
 
-String hp1Label;
-String hp2Label;
-String lp1Label;
-String lp2Label;
+String hp1Label = "HP1";
+String hp2Label = "HP2";
+String lp1Label = "LP1";
+String lp2Label = "LP2";
 
 int rawValue = 0;
 float auxVoltage;
@@ -34,6 +37,8 @@ int readings [numReadings];
 int readIndex  = 0;
 long total  = 0;
 char vinResult[8];
+
+Preferences preferences;
 
 class LGFX : public lgfx::LGFX_Device
 {
@@ -171,6 +176,23 @@ static lv_style_t label_style;
 static lv_obj_t *headerLabel;
 static lv_obj_t * label;
 
+void savePreferences() {
+  Serial.println("Saving preferences...");
+  preferences.begin("basic", false);
+  Serial.println(preferences.putString("hp1Label", hp1Label));
+  Serial.println(preferences.getString("hp1Label"));
+  preferences.putString("hp2Label", hp2Label);
+  preferences.putString("lp1Label", lp1Label);
+  preferences.putString("lp2Label", lp2Label);
+  
+  preferences.putBool("hp1IOState", hp1IOState);
+  preferences.putBool("hp2IOState", hp2IOState);
+  preferences.putBool("lp1IOState", lp1IOState);
+  preferences.putBool("lp2IOState", lp2IOState);
+
+  preferences.end();
+}
+
 void set_screen_brightness(lv_event_t * e)
 {
   lv_obj_t * slider = lv_event_get_target(e);
@@ -191,6 +213,8 @@ void ui_event_hp1TextArea( lv_event_t * e) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
         hp1Label = lv_textarea_get_text(ui_hp1TextArea);
         lv_label_set_text(ui_hp1Label,hp1Label.c_str());
+        lv_label_set_text(ui_ioLabel1,hp1Label.c_str());
+        savePreferences();
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_hp1TextArea);
@@ -204,6 +228,8 @@ void ui_event_hp2TextArea( lv_event_t * e) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
         hp2Label = lv_textarea_get_text(ui_hp2TextArea);
         lv_label_set_text(ui_hp2Label,hp2Label.c_str());
+        lv_label_set_text(ui_ioLabel2,hp2Label.c_str());
+        savePreferences();
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_hp2TextArea);
@@ -217,6 +243,8 @@ void ui_event_lp1TextArea( lv_event_t * e) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
         lp1Label = lv_textarea_get_text(ui_lp1TextArea);
         lv_label_set_text(ui_lp1Label,lp1Label.c_str());
+        lv_label_set_text(ui_ioLabel3,lp1Label.c_str());
+        savePreferences();
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp1TextArea);
@@ -230,6 +258,8 @@ void ui_event_lp2TextArea( lv_event_t * e) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
         lp2Label = lv_textarea_get_text(ui_lp2TextArea);
         lv_label_set_text(ui_lp2Label,lp2Label.c_str());
+        lv_label_set_text(ui_ioLabel4,lp2Label.c_str());
+        savePreferences();
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp2TextArea);
@@ -250,6 +280,7 @@ void hp1ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_add_state( ui_io1, LV_STATE_CHECKED ); 
       digitalWrite(hp1, hp1IOState);
+      savePreferences();
     } 
     else 
     {
@@ -257,6 +288,7 @@ void hp1ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_clear_state( ui_io1, LV_STATE_CHECKED ); 
       digitalWrite(hp1, hp1IOState);
+      savePreferences();
     }
   }
 }
@@ -274,6 +306,7 @@ void hp2ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_add_state( ui_io2, LV_STATE_CHECKED ); 
       digitalWrite(hp2, hp2IOState);
+      savePreferences();
     } 
     else 
     {
@@ -281,6 +314,7 @@ void hp2ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_clear_state( ui_io2, LV_STATE_CHECKED ); 
       digitalWrite(hp2, hp2IOState);
+      savePreferences();
     }
   }
 }
@@ -298,6 +332,7 @@ void lp1ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_add_state( ui_io3, LV_STATE_CHECKED ); 
       digitalWrite(lp1, lp1IOState);
+      savePreferences();
     } 
     else 
     {
@@ -305,6 +340,7 @@ void lp1ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_clear_state( ui_io3, LV_STATE_CHECKED ); 
       digitalWrite(lp1, lp1IOState);
+      savePreferences();
     }
   }
 }
@@ -322,6 +358,7 @@ void lp2ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_add_state( ui_io4, LV_STATE_CHECKED ); 
       digitalWrite(lp2, lp2IOState);
+      savePreferences();
     } 
     else 
     {
@@ -329,6 +366,7 @@ void lp2ToggleFunction(lv_event_t * e)
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
       lv_obj_clear_state( ui_io4, LV_STATE_CHECKED ); 
       digitalWrite(lp2, lp2IOState);
+      savePreferences();
     }
   }
 }
@@ -503,8 +541,113 @@ void checkVin()
 
 }
 
+void loadPreferences() {
+  if (preferences.begin("basic", false))
+  {
+    if (preferences.getString("hp1Label", "None") != "None")
+    {
+      hp1Label = preferences.getString("hp1Label");
+      lv_label_set_text(ui_hp1Label,hp1Label.c_str());
+      lv_label_set_text(ui_ioLabel1,hp1Label.c_str());
+
+      hp2Label = preferences.getString("hp2Label");
+      lv_label_set_text(ui_hp2Label,hp2Label.c_str());
+      lv_label_set_text(ui_ioLabel2,hp2Label.c_str());
+
+      lp1Label = preferences.getString("lp1Label");
+      lv_label_set_text(ui_lp1Label,lp1Label.c_str());
+      lv_label_set_text(ui_ioLabel3,lp1Label.c_str());
+
+      lp2Label = preferences.getString("lp2Label");
+      lv_label_set_text(ui_lp2Label,lp2Label.c_str());
+      lv_label_set_text(ui_ioLabel4,lp2Label.c_str());
+
+      hp1IOState = preferences.getBool("hp1IOState", false);
+      if (hp1IOState == 1) 
+      {
+        Serial.println("ON");
+        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_add_state( ui_io1, LV_STATE_CHECKED ); 
+        digitalWrite(hp1, hp1IOState);
+      } 
+      else 
+      {
+        Serial.println("OFF");
+        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_clear_state( ui_io1, LV_STATE_CHECKED ); 
+        digitalWrite(hp1, hp1IOState);
+      }
+
+      hp2IOState = preferences.getBool("hp2IOState", false);
+      if (hp2IOState == 1) 
+      {
+        Serial.println("ON");
+        lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_add_state( ui_io2, LV_STATE_CHECKED ); 
+        digitalWrite(hp2, hp2IOState);
+      } 
+      else 
+      {
+        Serial.println("OFF");
+        lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_clear_state( ui_io2, LV_STATE_CHECKED ); 
+        digitalWrite(hp2, hp2IOState);
+      }
+
+      lp1IOState = preferences.getBool("lp1IOState", false);
+      if (lp1IOState == 1) 
+      {
+        Serial.println("ON");
+        lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_add_state( ui_io3, LV_STATE_CHECKED ); 
+        digitalWrite(lp1, lp1IOState);
+      } 
+      else 
+      {
+        Serial.println("OFF");
+        lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_clear_state( ui_io3, LV_STATE_CHECKED ); 
+        digitalWrite(lp1, lp1IOState);
+      }
+
+      lp2IOState = preferences.getBool("lp2IOState", false);
+      if (lp2IOState == 1) 
+      {
+        Serial.println("ON");
+        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_add_state( ui_io4, LV_STATE_CHECKED ); 
+        digitalWrite(lp2, lp2IOState);
+      } 
+      else 
+      {
+        Serial.println("OFF");
+        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT );
+        lv_obj_clear_state( ui_io4, LV_STATE_CHECKED ); 
+        digitalWrite(lp2, lp2IOState);
+      }
+    }
+    else
+    {
+      preferences.putString("hp1Label", hp1Label);
+      preferences.putString("hp2Label", hp2Label);
+      preferences.putString("lp1Label", lp1Label);
+      preferences.putString("lp2Label", lp2Label);
+      
+      preferences.putBool("hp1IOState", hp1IOState);
+      preferences.putBool("hp2IOState", hp2IOState);
+      preferences.putBool("lp1IOState", lp1IOState);
+      preferences.putBool("lp2IOState", lp2IOState);
+    }
+  }
+  preferences.end();
+}
+
+
 void setup() {
   Serial.begin(115200);
+
+  //nvs_flash_erase(); // erase the NVS partition.
+  //nvs_flash_init(); // initialize the NVS partition.
   
   pinMode(hp1, OUTPUT);
   pinMode(hp2, OUTPUT);
@@ -532,6 +675,8 @@ void setup() {
   lv_indev_drv_register(&indev_drv);
   
   ui_init();
+
+  loadPreferences();
 }
 
 
