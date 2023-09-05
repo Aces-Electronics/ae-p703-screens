@@ -18,6 +18,11 @@ bool hp2IOState = 0;
 bool lp1IOState = 0;
 bool lp2IOState = 0;
 
+String hp1Label;
+String hp2Label;
+String lp1Label;
+String lp2Label;
+
 int rawValue = 0;
 float auxVoltage;
 
@@ -184,6 +189,8 @@ void ui_event_hp1TextArea( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
       if ( event_code == LV_EVENT_READY) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
+        hp1Label = lv_textarea_get_text(ui_hp1TextArea);
+        lv_label_set_text(ui_hp1Label,hp1Label.c_str());
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_hp1TextArea);
@@ -195,6 +202,8 @@ void ui_event_hp2TextArea( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
       if ( event_code == LV_EVENT_READY) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
+        hp2Label = lv_textarea_get_text(ui_hp2TextArea);
+        lv_label_set_text(ui_hp2Label,hp2Label.c_str());
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_hp2TextArea);
@@ -206,6 +215,8 @@ void ui_event_lp1TextArea( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
       if ( event_code == LV_EVENT_READY) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
+        lp1Label = lv_textarea_get_text(ui_lp1TextArea);
+        lv_label_set_text(ui_lp1Label,lp1Label.c_str());
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp1TextArea);
@@ -217,6 +228,8 @@ void ui_event_lp2TextArea( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
       if ( event_code == LV_EVENT_READY) {
         lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN ); 
+        lp2Label = lv_textarea_get_text(ui_lp2TextArea);
+        lv_label_set_text(ui_lp2Label,lp2Label.c_str());
       }
       if ( event_code == LV_EVENT_CLICKED) {
             _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp2TextArea);
