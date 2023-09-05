@@ -25,8 +25,11 @@ lv_obj_t *ui_socLabel;
 lv_obj_t *ui_auxState;
 lv_obj_t *ui_auxBattVoltageLabel;
 lv_obj_t *ui_socLabel1;
+void ui_event_hp1Label( lv_event_t * e);
 lv_obj_t *ui_hp1Label;
-lv_obj_t *ui_hp1Label1;
+void ui_event_hp2Label( lv_event_t * e);
+lv_obj_t *ui_hp2Label;
+void ui_event_lp1Label( lv_event_t * e);
 lv_obj_t *ui_lp1Label;
 void ui_event_lp2Label( lv_event_t * e);
 lv_obj_t *ui_lp2Label;
@@ -57,9 +60,13 @@ lv_obj_t *ui_hp1DisplayLabel;
 lv_obj_t *ui_hp1DisplayLabel1;
 lv_obj_t *ui_hp1DisplayLabel2;
 lv_obj_t *ui_hp1DisplayLabel3;
+void ui_event_hp1TextArea( lv_event_t * e);
 lv_obj_t *ui_hp1TextArea;
+void ui_event_hp2TextArea( lv_event_t * e);
 lv_obj_t *ui_hp2TextArea;
+void ui_event_lp1TextArea( lv_event_t * e);
 lv_obj_t *ui_lp1TextArea;
+void ui_event_lp2TextArea( lv_event_t * e);
 lv_obj_t *ui_lp2TextArea;
 lv_obj_t *ui_settingsKeyboard;
 lv_obj_t *ui____initial_actions0;
@@ -90,6 +97,24 @@ lv_indev_wait_release(lv_indev_get_act());
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_accessoryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
+}
+}
+void ui_event_hp1Label( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      hp1ToggleFunction( e );
+}
+}
+void ui_event_hp2Label( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      hp2ToggleFunction( e );
+}
+}
+void ui_event_lp1Label( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      lp1ToggleFunction( e );
 }
 }
 void ui_event_lp2Label( lv_event_t * e) {

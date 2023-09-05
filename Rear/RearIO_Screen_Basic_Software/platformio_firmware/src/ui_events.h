@@ -10,8 +10,15 @@
 extern "C" {
 #endif
 
+void hp1ToggleFunction(lv_event_t * e);
+void hp2ToggleFunction(lv_event_t * e);
+void lp1ToggleFunction(lv_event_t * e);
 void lp2ToggleFunction(lv_event_t * e);
 void set_screen_brightness(lv_event_t * e);
+void toggleKeyboard1(lv_event_t * e);
+void toggleKeyboard2(lv_event_t * e);
+void toggleKeyboard3(lv_event_t * e);
+void toggleKeyboard4(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

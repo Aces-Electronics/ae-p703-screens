@@ -145,13 +145,17 @@ lv_obj_set_style_text_font(ui_lp2TextArea, &lv_font_montserrat_20, LV_PART_TEXTA
 
 ui_settingsKeyboard = lv_keyboard_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_settingsKeyboard, 454);
-lv_obj_set_height( ui_settingsKeyboard, 239);
-lv_obj_set_x( ui_settingsKeyboard, -4 );
-lv_obj_set_y( ui_settingsKeyboard, 29 );
+lv_obj_set_height( ui_settingsKeyboard, 179);
+lv_obj_set_x( ui_settingsKeyboard, 1 );
+lv_obj_set_y( ui_settingsKeyboard, 57 );
 lv_obj_set_align( ui_settingsKeyboard, LV_ALIGN_CENTER );
 lv_obj_add_flag( ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN );   /// Flags
 
 lv_obj_add_event_cb(ui_brightnessBar, ui_event_brightnessBar, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_hp1TextArea, ui_event_hp1TextArea, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_hp2TextArea, ui_event_hp2TextArea, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_lp1TextArea, ui_event_lp1TextArea, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_lp2TextArea, ui_event_lp2TextArea, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_settingsStateScreen, ui_event_settingsStateScreen, LV_EVENT_ALL, NULL);
 
 }
