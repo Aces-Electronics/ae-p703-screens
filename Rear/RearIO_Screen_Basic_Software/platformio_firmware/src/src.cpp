@@ -2,8 +2,31 @@
 
 #include <Arduino.h>
 #include <LovyanGFX.hpp>
+#include <driver/adc.h>
 #include "lvgl.h"
 #include "ui.h"
+
+#include "sdkconfig.h"
+#include "esp_system.h"
+#include "freertos/FreeRTOS.h" //https://www.freertos.org/a00106.html
+#include "freertos/task.h"
+#include "freertos/timers.h"
+#include "freertos/event_groups.h"
+#include <driver/adc.h>
+#include <SimpleKalmanFilter.h> //https://www.arduino.cc/reference/en/libraries/simplekalmanfilter/
+
+// GPIO definitions
+const int vin = 14; // input
+
+const int hp1 = 10; // outputs
+const int hp2 = 11;
+const int lp1 = 12;
+const int lp2 = 13;
+
+bool hp1IOState = 0;
+bool hp2IOState = 0;
+bool lp1IOState = 0;
+bool lp2IOState = 0;
 
 class LGFX : public lgfx::LGFX_Device
 {
@@ -150,11 +173,76 @@ void set_screen_brightness(lv_event_t * e)
     tft.setBrightness(brightness * 2.55);
 }
 
+void fReadBattery( void * parameter )
+{
+  int adcValue = 0;
+  //https://ohmslawcalculator.com/voltage-divider-calculator
+  const float r1 = 82000.0f; // R1 in ohm, 50K. For a LiFeP04 battery under charge
+  const float r2 = 16000.0f; // R2 in ohm, 10k, make it a habit to use a 10K for R2
+  float Vbatt = 0.0f;
+  int read_raw;
+  int printCount = 0;
+  float vRefScale = (3.0f / 4096.0f) * ((r1 + r2) / r2);
+  uint64_t TimePastKalman  = esp_timer_get_time(); // used by the Kalman filter UpdateProcessNoise, time since last kalman calculation
+  SimpleKalmanFilter KF_ADC_b( 1.0f, 1.0f, .01f );
+  TickType_t xLastWakeTime = xTaskGetTickCount();
+  const TickType_t xFrequency = 1000; //delay for mS *NON-BLOCKING DELAY *
+  for (;;)
+  {
+    adc2_get_raw(ADC2_CHANNEL_6, ADC_WIDTH_BIT_12, &read_raw); //read and discard
+    adc2_get_raw(ADC2_CHANNEL_6, ADC_WIDTH_BIT_12, &adcValue); //take a raw ADC reading
+    KF_ADC_b.setProcessNoise( (esp_timer_get_time() - TimePastKalman) / 1000000.0f ); //get time, in microsecods, since last readings
+    adcValue = KF_ADC_b.updateEstimate( adcValue ); // apply simple Kalman filter
+    Vbatt = adcValue * vRefScale;
+    printCount++;
+    if ( printCount == 3 )
+    {
+      //log_i( "Vbatt %f", Vbatt );// you may have to edit the code to use serial print.
+      //log_i( "Vbatt_raw %f", read_raw );// you may have to edit the code to use serial print.
+      printCount = 0;
+      Serial.print("VBatt: "); Serial.println(Vbatt);
+    }
+    TimePastKalman = esp_timer_get_time(); // time of update complete
+    xLastWakeTime = xTaskGetTickCount();
+    vTaskDelayUntil( &xLastWakeTime, xFrequency );
+    //log_i( "fReadBattery %d",  uxTaskGetStackHighWaterMark( NULL ) );
+  }
+  vTaskDelete( NULL );
+}
+
+void toggle_outputs()
+{
+  if (hp1IOState) {
+    digitalWrite(hp1, LOW);
+    digitalWrite(hp2, LOW);
+    digitalWrite(lp1, LOW);
+    digitalWrite(lp2, LOW);
+    Serial.println("LOW");
+  }
+  else 
+  {
+    digitalWrite(hp1, HIGH);
+    digitalWrite(hp2, HIGH);
+    digitalWrite(lp1, HIGH);
+    digitalWrite(lp2, HIGH);
+    Serial.println("HIGH");
+  }
+  hp1IOState = !hp1IOState;
+  delay(2000);
+}
+
 void setup() {
   Serial.begin(115200);
 
+  //xTaskCreatePinnedToCore( fReadBattery, "fReadBattery", 4000, NULL, 3, NULL, 1 );
+  
+  pinMode(hp1, OUTPUT);
+  pinMode(hp2, OUTPUT);
+  pinMode(lp1, OUTPUT);
+  pinMode(lp2, OUTPUT);
+
   tft.begin();
-  tft.setRotation(3); // upside down
+  tft.setRotation(1); // 3 = upside down
   tft.setBrightness(255); // ToDo: make this an NVRAM setting and read it in on boot
 
   lv_init();
@@ -178,5 +266,6 @@ void setup() {
 
 void loop() {
   lv_timer_handler();
+  //toggle_outputs();
   delay(5);
 }
