@@ -656,7 +656,7 @@ void setup() {
   pinMode(vin, INPUT);
 
   tft.begin();
-  tft.setRotation(1); // 3 = upside down
+  tft.setRotation(3); // 3 = upside down
   tft.setBrightness(255); // ToDo: make this an NVRAM setting and read it in on boot
 
   lv_init();

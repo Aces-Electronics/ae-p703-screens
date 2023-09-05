@@ -109,7 +109,7 @@ lv_obj_set_style_text_font(ui_socLabel1, &lv_font_montserrat_20, LV_PART_MAIN| L
 ui_hp1Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_hp1Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp1Label, 187 );
+lv_obj_set_x( ui_hp1Label, -182 );
 lv_obj_set_y( ui_hp1Label, 142 );
 lv_obj_set_align( ui_hp1Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_hp1Label,"HP1");
@@ -122,7 +122,7 @@ lv_obj_set_style_text_font(ui_hp1Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_hp2Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_hp2Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp2Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp2Label, 62 );
+lv_obj_set_x( ui_hp2Label, -66 );
 lv_obj_set_y( ui_hp2Label, 142 );
 lv_obj_set_align( ui_hp2Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_hp2Label,"HP2");
@@ -135,7 +135,7 @@ lv_obj_set_style_text_font(ui_hp2Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_lp1Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_lp1Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_lp1Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_lp1Label, -66 );
+lv_obj_set_x( ui_lp1Label, 62 );
 lv_obj_set_y( ui_lp1Label, 142 );
 lv_obj_set_align( ui_lp1Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_lp1Label,"LP1");
@@ -148,7 +148,7 @@ lv_obj_set_style_text_font(ui_lp1Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_lp2Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_lp2Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_lp2Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_lp2Label, -184 );
+lv_obj_set_x( ui_lp2Label, 171 );
 lv_obj_set_y( ui_lp2Label, 142 );
 lv_obj_set_align( ui_lp2Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_lp2Label,"LP2");
