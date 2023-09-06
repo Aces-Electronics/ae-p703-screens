@@ -481,11 +481,11 @@ void checkVin()
 
     if (buffer.size() > 499)
     {
-      if (avg > lastReading)
+      if ((avg / lastReading < 0.98) && (auxVoltage > 13.3))
       {
         batteryState = "Charging";
       }
-      else if (avg < lastReading)
+      else if (avg / lastReading > 1.02)
       {
         batteryState = "Discharging";
       }
