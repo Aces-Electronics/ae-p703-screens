@@ -25,6 +25,11 @@ String hp2Label = "HP2";
 String lp1Label = "LP1";
 String lp2Label = "LP2";
 
+bool hp1Changed = 0;
+bool hp2Changed = 0;
+bool lp1Changed = 0;
+bool lp2Changed = 0;
+
 int rawValue = 0;
 float auxVoltage;
 
@@ -182,10 +187,8 @@ static lv_obj_t *label;
 
 void savePreferences()
 {
-  Serial.println("Saving preferences...");
   preferences.begin("basic", false);
-  Serial.println(preferences.putString("hp1Label", hp1Label));
-  Serial.println(preferences.getString("hp1Label"));
+  preferences.putString("hp1Label", hp1Label);
   preferences.putString("hp2Label", hp2Label);
   preferences.putString("lp1Label", lp1Label);
   preferences.putString("lp2Label", lp2Label);
@@ -217,10 +220,14 @@ void ui_event_hp1TextArea(lv_event_t *e)
 {
   lv_event_code_t event_code = lv_event_get_code(e);
   lv_obj_t *target = lv_event_get_target(e);
+  if (event_code == LV_EVENT_VALUE_CHANGED)
+  {
+    hp1Changed = true;
+  }
   if (event_code == LV_EVENT_READY)
   {
     lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-    if (lv_textarea_get_text(ui_hp1TextArea) != 0)
+    if (hp1Changed)
     {
       hp1Label = lv_textarea_get_text(ui_hp1TextArea);
       lv_label_set_text(ui_hp1Label, hp1Label.c_str());
@@ -233,16 +240,21 @@ void ui_event_hp1TextArea(lv_event_t *e)
     _ui_keyboard_set_target(ui_settingsKeyboard, ui_hp1TextArea);
     toggleKeyboard(e);
   }
+  hp1Changed = false;
 }
 
 void ui_event_hp2TextArea(lv_event_t *e)
 {
   lv_event_code_t event_code = lv_event_get_code(e);
   lv_obj_t *target = lv_event_get_target(e);
+  if (event_code == LV_EVENT_VALUE_CHANGED)
+  {
+    hp2Changed = true;
+  }
   if (event_code == LV_EVENT_READY)
   {
     lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-    if (lv_textarea_get_text(ui_hp2TextArea) != 0)
+    if (hp2Changed)
     {
       hp2Label = lv_textarea_get_text(ui_hp2TextArea);
       lv_label_set_text(ui_hp2Label, hp2Label.c_str());
@@ -255,16 +267,21 @@ void ui_event_hp2TextArea(lv_event_t *e)
     _ui_keyboard_set_target(ui_settingsKeyboard, ui_hp2TextArea);
     toggleKeyboard(e);
   }
+  hp2Changed = false;
 }
 
 void ui_event_lp1TextArea(lv_event_t *e)
 {
   lv_event_code_t event_code = lv_event_get_code(e);
   lv_obj_t *target = lv_event_get_target(e);
+  if (event_code == LV_EVENT_VALUE_CHANGED)
+  {
+    lp1Changed = true;
+  }
   if (event_code == LV_EVENT_READY)
   {
     lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-    if (lv_textarea_get_text(ui_lp1TextArea) != 0)
+    if (lp1Changed)
     {
       lp1Label = lv_textarea_get_text(ui_lp1TextArea);
       lv_label_set_text(ui_lp1Label, lp1Label.c_str());
@@ -277,16 +294,21 @@ void ui_event_lp1TextArea(lv_event_t *e)
     _ui_keyboard_set_target(ui_settingsKeyboard, ui_lp1TextArea);
     toggleKeyboard(e);
   }
+  lp1Changed = false;
 }
 
 void ui_event_lp2TextArea(lv_event_t *e)
 {
   lv_event_code_t event_code = lv_event_get_code(e);
   lv_obj_t *target = lv_event_get_target(e);
+  if (event_code == LV_EVENT_VALUE_CHANGED)
+  {
+    lp2Changed = true;
+  }
   if (event_code == LV_EVENT_READY)
   {
     lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-    if (lv_textarea_get_text(ui_lp2TextArea) != 0)
+    if (lp2Changed)
     {
       lp2Label = lv_textarea_get_text(ui_lp2TextArea);
       lv_label_set_text(ui_lp2Label, lp2Label.c_str());
@@ -299,6 +321,7 @@ void ui_event_lp2TextArea(lv_event_t *e)
     _ui_keyboard_set_target(ui_settingsKeyboard, ui_lp2TextArea);
     toggleKeyboard(e);
   }
+  lp2Changed = false;
 }
 
 void hp1ToggleFunction(lv_event_t *e)
@@ -307,10 +330,8 @@ void hp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     hp1IOState = !hp1IOState;
-    Serial.print("Toggling HP1: ");
     if (hp1IOState == 1)
     {
-      Serial.println("ON");
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
       digitalWrite(hp1, hp1IOState);
@@ -318,7 +339,6 @@ void hp1ToggleFunction(lv_event_t *e)
     }
     else
     {
-      Serial.println("OFF");
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
       digitalWrite(hp1, hp1IOState);
@@ -333,10 +353,8 @@ void hp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     hp2IOState = !hp2IOState;
-    Serial.print("Toggling HP2: ");
     if (hp2IOState == 1)
     {
-      Serial.println("ON");
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
       digitalWrite(hp2, hp2IOState);
@@ -344,7 +362,6 @@ void hp2ToggleFunction(lv_event_t *e)
     }
     else
     {
-      Serial.println("OFF");
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
       digitalWrite(hp2, hp2IOState);
@@ -359,10 +376,8 @@ void lp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     lp1IOState = !lp1IOState;
-    Serial.print("Toggling LP1: ");
     if (lp1IOState == 1)
     {
-      Serial.println("ON");
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
       digitalWrite(lp1, lp1IOState);
@@ -370,7 +385,6 @@ void lp1ToggleFunction(lv_event_t *e)
     }
     else
     {
-      Serial.println("OFF");
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
       digitalWrite(lp1, lp1IOState);
@@ -385,10 +399,8 @@ void lp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     lp2IOState = !lp2IOState;
-    Serial.print("Toggling LP2: ");
     if (lp2IOState == 1)
     {
-      Serial.println("ON");
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
       digitalWrite(lp2, lp2IOState);
@@ -396,7 +408,6 @@ void lp2ToggleFunction(lv_event_t *e)
     }
     else
     {
-      Serial.println("OFF");
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
       digitalWrite(lp2, lp2IOState);
@@ -596,14 +607,12 @@ void loadPreferences()
       hp1IOState = preferences.getBool("hp1IOState", false);
       if (hp1IOState == 1)
       {
-        Serial.println("ON");
         lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
         digitalWrite(hp1, hp1IOState);
       }
       else
       {
-        Serial.println("OFF");
         lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
         digitalWrite(hp1, hp1IOState);
@@ -612,14 +621,12 @@ void loadPreferences()
       hp2IOState = preferences.getBool("hp2IOState", false);
       if (hp2IOState == 1)
       {
-        Serial.println("ON");
         lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
         digitalWrite(hp2, hp2IOState);
       }
       else
       {
-        Serial.println("OFF");
         lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
         digitalWrite(hp2, hp2IOState);
@@ -628,14 +635,12 @@ void loadPreferences()
       lp1IOState = preferences.getBool("lp1IOState", false);
       if (lp1IOState == 1)
       {
-        Serial.println("ON");
         lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
         digitalWrite(lp1, lp1IOState);
       }
       else
       {
-        Serial.println("OFF");
         lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
         digitalWrite(lp1, lp1IOState);
@@ -644,14 +649,12 @@ void loadPreferences()
       lp2IOState = preferences.getBool("lp2IOState", false);
       if (lp2IOState == 1)
       {
-        Serial.println("ON");
         lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
         digitalWrite(lp2, lp2IOState);
       }
       else
       {
-        Serial.println("OFF");
         lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
         digitalWrite(lp2, lp2IOState);
