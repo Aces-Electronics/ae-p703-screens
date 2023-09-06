@@ -499,6 +499,7 @@ void checkVin()
       batteryState = "Checking...";
     }
     lv_label_set_text(ui_auxState, batteryState.c_str());
+    lastReading = avg;
 	}
 
   lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
