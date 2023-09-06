@@ -85,9 +85,10 @@ extern lv_obj_t *ui_lp1TextArea;
 void ui_event_lp2TextArea( lv_event_t * e);
 extern lv_obj_t *ui_lp2TextArea;
 extern lv_obj_t *ui_settingsKeyboard;
-// SCREEN: ui_Factory_Reset
-void ui_Factory_Reset_screen_init(void);
-extern lv_obj_t *ui_Factory_Reset;
+// SCREEN: ui_factoryResetScreen
+void ui_factoryResetScreen_screen_init(void);
+void ui_event_factoryResetScreen( lv_event_t * e);
+extern lv_obj_t *ui_factoryResetScreen;
 extern lv_obj_t *ui_factoryResetText;
 extern lv_obj_t *ui_factoryResetButton;
 void ui_event_resetLabel( lv_event_t * e);

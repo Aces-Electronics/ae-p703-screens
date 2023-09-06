@@ -5,12 +5,12 @@
 
 #include "../ui.h"
 
-void ui_Factory_Reset_screen_init(void)
+void ui_factoryResetScreen_screen_init(void)
 {
-ui_Factory_Reset = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_Factory_Reset, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+ui_factoryResetScreen = lv_obj_create(NULL);
+lv_obj_clear_flag( ui_factoryResetScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 
-ui_factoryResetText = lv_label_create(ui_Factory_Reset);
+ui_factoryResetText = lv_label_create(ui_factoryResetScreen);
 lv_obj_set_width( ui_factoryResetText, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_factoryResetText, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_factoryResetText, 2 );
@@ -21,7 +21,7 @@ lv_obj_clear_flag( ui_factoryResetText, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLI
 lv_obj_set_style_text_align(ui_factoryResetText, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_factoryResetText, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_factoryResetButton = lv_btn_create(ui_Factory_Reset);
+ui_factoryResetButton = lv_btn_create(ui_factoryResetScreen);
 lv_obj_set_width( ui_factoryResetButton, 157);
 lv_obj_set_height( ui_factoryResetButton, 77);
 lv_obj_set_x( ui_factoryResetButton, -1 );
@@ -31,7 +31,7 @@ lv_obj_clear_flag( ui_factoryResetButton, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_PR
 lv_obj_set_style_bg_color(ui_factoryResetButton, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_factoryResetButton, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 
-ui_resetLabel = lv_label_create(ui_Factory_Reset);
+ui_resetLabel = lv_label_create(ui_factoryResetScreen);
 lv_obj_set_width( ui_resetLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_resetLabel, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_resetLabel, 0 );
@@ -43,5 +43,6 @@ lv_obj_clear_flag( ui_resetLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOC
 lv_obj_set_style_text_font(ui_resetLabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 lv_obj_add_event_cb(ui_resetLabel, ui_event_resetLabel, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_factoryResetScreen, ui_event_factoryResetScreen, LV_EVENT_ALL, NULL);
 
 }
