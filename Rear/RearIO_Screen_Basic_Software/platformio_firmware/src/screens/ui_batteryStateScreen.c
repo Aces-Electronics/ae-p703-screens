@@ -12,10 +12,10 @@ lv_obj_clear_flag( ui_batteryStateScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
 lv_obj_set_scrollbar_mode(ui_batteryStateScreen, LV_SCROLLBAR_MODE_OFF);
 
 ui_auxBattVoltageArc = lv_arc_create(ui_batteryStateScreen);
-lv_obj_set_width( ui_auxBattVoltageArc, 300);
-lv_obj_set_height( ui_auxBattVoltageArc, 294);
-lv_obj_set_x( ui_auxBattVoltageArc, 1 );
-lv_obj_set_y( ui_auxBattVoltageArc, 15 );
+lv_obj_set_width( ui_auxBattVoltageArc, 315);
+lv_obj_set_height( ui_auxBattVoltageArc, 315);
+lv_obj_set_x( ui_auxBattVoltageArc, -2 );
+lv_obj_set_y( ui_auxBattVoltageArc, 11 );
 lv_obj_set_align( ui_auxBattVoltageArc, LV_ALIGN_CENTER );
 lv_obj_clear_flag( ui_auxBattVoltageArc, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
 lv_arc_set_value(ui_auxBattVoltageArc, 75);
@@ -32,7 +32,7 @@ ui_auxBattPercentageLabel = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_auxBattPercentageLabel, LV_SIZE_CONTENT);  /// 100
 lv_obj_set_height( ui_auxBattPercentageLabel, LV_SIZE_CONTENT);   /// 100
 lv_obj_set_x( ui_auxBattPercentageLabel, 2 );
-lv_obj_set_y( ui_auxBattPercentageLabel, -23 );
+lv_obj_set_y( ui_auxBattPercentageLabel, -41 );
 lv_obj_set_align( ui_auxBattPercentageLabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_auxBattPercentageLabel,"75%");
 lv_obj_clear_flag( ui_auxBattPercentageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
@@ -67,17 +67,17 @@ ui_socLabel = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_socLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_socLabel, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_socLabel, -1 );
-lv_obj_set_y( ui_socLabel, -54 );
+lv_obj_set_y( ui_socLabel, -74 );
 lv_obj_set_align( ui_socLabel, LV_ALIGN_CENTER );
-lv_label_set_text(ui_socLabel,"SOC");
+lv_label_set_text(ui_socLabel,"SOC:");
 lv_obj_clear_flag( ui_socLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
-lv_obj_set_style_text_font(ui_socLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_socLabel, &lv_font_montserrat_20, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_auxBattVoltageLabel = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_auxBattVoltageLabel, LV_SIZE_CONTENT);  /// 100
 lv_obj_set_height( ui_auxBattVoltageLabel, LV_SIZE_CONTENT);   /// 100
-lv_obj_set_x( ui_auxBattVoltageLabel, 1 );
-lv_obj_set_y( ui_auxBattVoltageLabel, 35 );
+lv_obj_set_x( ui_auxBattVoltageLabel, -1 );
+lv_obj_set_y( ui_auxBattVoltageLabel, 22 );
 lv_obj_set_align( ui_auxBattVoltageLabel, LV_ALIGN_CENTER );
 lv_label_set_text(ui_auxBattVoltageLabel,"12.60V");
 lv_obj_clear_flag( ui_auxBattVoltageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
@@ -113,7 +113,7 @@ lv_obj_set_style_text_font(ui_hp1Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_hp2Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_hp2Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp2Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp2Label, -66 );
+lv_obj_set_x( ui_hp2Label, -60 );
 lv_obj_set_y( ui_hp2Label, 142 );
 lv_obj_set_align( ui_hp2Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_hp2Label,"HP2");
@@ -139,8 +139,8 @@ lv_obj_set_style_text_font(ui_lp1Label, &lv_font_montserrat_30, LV_PART_MAIN| LV
 ui_lp2Label = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_lp2Label, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_lp2Label, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_lp2Label, 171 );
-lv_obj_set_y( ui_lp2Label, 142 );
+lv_obj_set_x( ui_lp2Label, 176 );
+lv_obj_set_y( ui_lp2Label, 141 );
 lv_obj_set_align( ui_lp2Label, LV_ALIGN_CENTER );
 lv_label_set_text(ui_lp2Label,"LP2");
 lv_obj_add_flag( ui_lp2Label, LV_OBJ_FLAG_CLICKABLE );   /// Flags
