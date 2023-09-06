@@ -33,6 +33,7 @@ lv_obj_t *ui_lp1Label;
 void ui_event_lp2Label( lv_event_t * e);
 lv_obj_t *ui_lp2Label;
 lv_obj_t *ui_auxBatteryStateLegend1;
+lv_obj_t *ui_auxState1;
 
 // SCREEN: ui_accessoryStateScreen
 void ui_accessoryStateScreen_screen_init(void);
