@@ -22,9 +22,8 @@ lv_obj_t *ui_auxBattPercentageLabel;
 lv_obj_t *ui_warningLabel;
 lv_obj_t *ui_auxBatteryStateLegend;
 lv_obj_t *ui_socLabel;
-lv_obj_t *ui_auxState;
 lv_obj_t *ui_auxBattVoltageLabel;
-lv_obj_t *ui_socLabel1;
+lv_obj_t *ui_auxState;
 void ui_event_hp1Label( lv_event_t * e);
 lv_obj_t *ui_hp1Label;
 void ui_event_hp2Label( lv_event_t * e);
@@ -33,13 +32,17 @@ void ui_event_lp1Label( lv_event_t * e);
 lv_obj_t *ui_lp1Label;
 void ui_event_lp2Label( lv_event_t * e);
 lv_obj_t *ui_lp2Label;
+lv_obj_t *ui_auxBatteryStateLegend1;
 
 // SCREEN: ui_accessoryStateScreen
 void ui_accessoryStateScreen_screen_init(void);
 void ui_event_accessoryStateScreen( lv_event_t * e);
 lv_obj_t *ui_accessoryStateScreen;
+void ui_event_io1( lv_event_t * e);
 lv_obj_t *ui_io1;
+void ui_event_io2( lv_event_t * e);
 lv_obj_t *ui_io2;
+void ui_event_io3( lv_event_t * e);
 lv_obj_t *ui_io3;
 void ui_event_io4( lv_event_t * e);
 lv_obj_t *ui_io4;
@@ -69,8 +72,16 @@ lv_obj_t *ui_lp1TextArea;
 void ui_event_lp2TextArea( lv_event_t * e);
 lv_obj_t *ui_lp2TextArea;
 lv_obj_t *ui_settingsKeyboard;
-lv_obj_t *ui____initial_actions0;
 
+// SCREEN: ui_Factory_Reset
+void ui_Factory_Reset_screen_init(void);
+lv_obj_t *ui_Factory_Reset;
+lv_obj_t *ui_factoryResetText;
+lv_obj_t *ui_factoryResetButton;
+void ui_event_resetLabel( lv_event_t * e);
+lv_obj_t *ui_resetLabel;
+lv_obj_t *ui____initial_actions0;
+void factoryReset(lv_event_t * e);
 ///////////////////// TEST LVGL SETTINGS ////////////////////
 #if LV_COLOR_DEPTH != 16
     #error "LV_COLOR_DEPTH should be 16bit to match SquareLine Studio's settings"
@@ -134,10 +145,28 @@ lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_settingsStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
 }
 }
+void ui_event_io1( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      hp1ToggleFunction( e );
+}
+}
+void ui_event_io2( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      hp2ToggleFunction( e );
+}
+}
+void ui_event_io3( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_CLICKED) {
+      lp1ToggleFunction( e );
+}
+}
 void ui_event_io4( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
-      _ui_checked_set_text_value( ui_warningLabel, target, "WARNING: Strippers active! BBDA clear?", "");
+      lp2ToggleFunction( e );
 }
 }
 void ui_event_settingsStateScreen( lv_event_t * e) {
@@ -157,6 +186,12 @@ if ( event_code == LV_EVENT_VALUE_CHANGED) {
       set_screen_brightness( e );
 }
 }
+void ui_event_resetLabel( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_LONG_PRESSED) {
+      factoryReset( e );
+}
+}
 
 ///////////////////// SCREENS ////////////////////
 
@@ -169,6 +204,7 @@ ui_splashScreen_screen_init();
 ui_batteryStateScreen_screen_init();
 ui_accessoryStateScreen_screen_init();
 ui_settingsStateScreen_screen_init();
+ui_Factory_Reset_screen_init();
 ui____initial_actions0 = lv_obj_create(NULL);
 lv_disp_load_scr( ui_splashScreen);
 }

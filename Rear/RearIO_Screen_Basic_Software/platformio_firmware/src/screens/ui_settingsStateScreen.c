@@ -21,7 +21,7 @@ ui_brightnessLabel = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_brightnessLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_brightnessLabel, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_brightnessLabel, -145 );
-lv_obj_set_y( ui_brightnessLabel, 263 );
+lv_obj_set_y( ui_brightnessLabel, 267 );
 lv_obj_set_align( ui_brightnessLabel, LV_ALIGN_TOP_MID );
 lv_label_set_text(ui_brightnessLabel,"Brightness");
 lv_obj_set_style_text_font(ui_brightnessLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -32,7 +32,7 @@ if (lv_slider_get_mode(ui_brightnessBar)==LV_SLIDER_MODE_RANGE ) lv_slider_set_l
 lv_obj_set_width( ui_brightnessBar, 237);
 lv_obj_set_height( ui_brightnessBar, 15);
 lv_obj_set_x( ui_brightnessBar, 80 );
-lv_obj_set_y( ui_brightnessBar, 119 );
+lv_obj_set_y( ui_brightnessBar, 124 );
 lv_obj_set_align( ui_brightnessBar, LV_ALIGN_CENTER );
 lv_obj_set_style_bg_color(ui_brightnessBar, lv_color_hex(0x666666), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_bg_opa(ui_brightnessBar, 255, LV_PART_MAIN| LV_STATE_DEFAULT);

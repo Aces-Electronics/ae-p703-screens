@@ -37,9 +37,8 @@ extern lv_obj_t *ui_auxBattPercentageLabel;
 extern lv_obj_t *ui_warningLabel;
 extern lv_obj_t *ui_auxBatteryStateLegend;
 extern lv_obj_t *ui_socLabel;
-extern lv_obj_t *ui_auxState;
 extern lv_obj_t *ui_auxBattVoltageLabel;
-extern lv_obj_t *ui_socLabel1;
+extern lv_obj_t *ui_auxState;
 void ui_event_hp1Label( lv_event_t * e);
 extern lv_obj_t *ui_hp1Label;
 void ui_event_hp2Label( lv_event_t * e);
@@ -48,12 +47,16 @@ void ui_event_lp1Label( lv_event_t * e);
 extern lv_obj_t *ui_lp1Label;
 void ui_event_lp2Label( lv_event_t * e);
 extern lv_obj_t *ui_lp2Label;
+extern lv_obj_t *ui_auxBatteryStateLegend1;
 // SCREEN: ui_accessoryStateScreen
 void ui_accessoryStateScreen_screen_init(void);
 void ui_event_accessoryStateScreen( lv_event_t * e);
 extern lv_obj_t *ui_accessoryStateScreen;
+void ui_event_io1( lv_event_t * e);
 extern lv_obj_t *ui_io1;
+void ui_event_io2( lv_event_t * e);
 extern lv_obj_t *ui_io2;
+void ui_event_io3( lv_event_t * e);
 extern lv_obj_t *ui_io3;
 void ui_event_io4( lv_event_t * e);
 extern lv_obj_t *ui_io4;
@@ -82,6 +85,13 @@ extern lv_obj_t *ui_lp1TextArea;
 void ui_event_lp2TextArea( lv_event_t * e);
 extern lv_obj_t *ui_lp2TextArea;
 extern lv_obj_t *ui_settingsKeyboard;
+// SCREEN: ui_Factory_Reset
+void ui_Factory_Reset_screen_init(void);
+extern lv_obj_t *ui_Factory_Reset;
+extern lv_obj_t *ui_factoryResetText;
+extern lv_obj_t *ui_factoryResetButton;
+void ui_event_resetLabel( lv_event_t * e);
+extern lv_obj_t *ui_resetLabel;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_ae_red_290_nobg_png);   // assets/ae_red_290_nobg.png

@@ -97,6 +97,9 @@ lv_label_set_text(ui_ioLabel4,"LP2");
 lv_obj_clear_flag( ui_ioLabel4, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
 lv_obj_set_style_text_font(ui_ioLabel4, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
 
+lv_obj_add_event_cb(ui_io1, ui_event_io1, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_io2, ui_event_io2, LV_EVENT_ALL, NULL);
+lv_obj_add_event_cb(ui_io3, ui_event_io3, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_io4, ui_event_io4, LV_EVENT_ALL, NULL);
 lv_obj_add_event_cb(ui_accessoryStateScreen, ui_event_accessoryStateScreen, LV_EVENT_ALL, NULL);
 
