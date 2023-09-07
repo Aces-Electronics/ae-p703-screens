@@ -481,13 +481,13 @@ void checkVin()
 
     if (buffer.size() > 499)
     {
-      if ((avg / lastReading < 0.98) && (auxVoltage > 13.3))
-      {
-        batteryState = "Charging";
-      }
-      else if (avg / lastReading > 1.02)
+      if (avg / lastReading <= 0.99995)
       {
         batteryState = "Discharging";
+      }
+      else if (avg / lastReading >= 1.00005)
+      {
+        batteryState = "Charging";
       }
       else
       {
@@ -498,6 +498,7 @@ void checkVin()
     {
       batteryState = "Checking...";
     }
+    Serial.print("voltage change: "); Serial.println(avg / lastReading, 5); // 4 decimal places
     lv_label_set_text(ui_auxState, batteryState.c_str());
     lastReading = avg;
 	}
