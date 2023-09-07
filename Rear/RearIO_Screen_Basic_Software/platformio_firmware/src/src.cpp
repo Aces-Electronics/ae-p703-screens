@@ -498,7 +498,6 @@ void checkVin()
     {
       batteryState = "Checking...";
     }
-    Serial.print("voltage change: "); Serial.println(avg / lastReading, 5); // 4 decimal places
     lv_label_set_text(ui_auxState, batteryState.c_str());
     lastReading = avg;
 	}
