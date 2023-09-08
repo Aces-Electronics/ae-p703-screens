@@ -1,561 +1,911 @@
-135095759070243
-LED_SMD
-LED-APA102-2020
-http://www.led-color.com/upload/201604/APA102-2020%20SMD%20LED.pdf
-LED RGB SPI
-0
-8
-6
-LED_SMD
-LED-L1T2_LUMILEDS
-http://www.lumileds.com/uploads/438/DS133-pdf
-LUMILEDS LUXEON TX L1T2 LED
-0
-3
-3
-LED_SMD
-LED_1W_3W_R8
-https://www.gme.cz/data/attachments/dsh.518-234.1.pdf
-LED 1W 3W 5W
-0
-3
-3
-LED_SMD
-LED_0201_0603Metric
-LED SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
-LED
-0
-4
-2
-LED_SMD
-LED_0201_0603Metric_Pad0.64x0.40mm_HandSolder
-LED SMD 0201 (0603 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.vishay.com/docs/20052/crcw0201e3.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-4
-2
-LED_SMD
-LED_0402_1005Metric
-LED SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_0402_1005Metric_Pad0.77x0.64mm_HandSolder
-LED SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_0603_1608Metric
-LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_0603_1608Metric_Pad1.05x0.95mm_HandSolder
-LED SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_0805_2012Metric
-LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_0805_2012Metric_Pad1.15x1.40mm_HandSolder
-LED SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_1206_3216Metric
-LED SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_1206_3216Metric_Pad1.42x1.75mm_HandSolder
-LED SMD 1206 (3216 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_1206_3216Metric_ReverseMount_Hole1.8x2.4mm
-LED SMD 1206 (3216 Metric), reverse mount, square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-diode reverse
-0
-2
-2
-LED_SMD
-LED_1210_3225Metric
-LED SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_1210_3225Metric_Pad1.42x2.65mm_HandSolder
-LED SMD 1210 (3225 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_1812_4532Metric
-LED SMD 1812 (4532 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.nikhef.nl/pub/departments/mt/projects/detectorR_D/dtddice/ERJ2G.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_1812_4532Metric_Pad1.30x3.40mm_HandSolder
-LED SMD 1812 (4532 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: https://www.nikhef.nl/pub/departments/mt/projects/detectorR_D/dtddice/ERJ2G.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_2010_5025Metric
-LED SMD 2010 (5025 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_2010_5025Metric_Pad1.52x2.65mm_HandSolder
-LED SMD 2010 (5025 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_2512_6332Metric
-LED SMD 2512 (6332 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED
-0
-2
-2
-LED_SMD
-LED_2512_6332Metric_Pad1.52x3.35mm_HandSolder
-LED SMD 2512 (6332 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf), generated with kicad-footprint-generator
-LED handsolder
-0
-2
-2
-LED_SMD
-LED_ASMB-KTF0-0A306
-2220 Tricolor PLCC-4 LED, https://docs.broadcom.com/docs/ASMB-KTF0-0A306-DS100
-Tricolor LED
-0
-4
-4
-LED_SMD
-LED_Avago_PLCC4_3.2x2.8mm_CW
-https://docs.broadcom.com/docs/AV02-4186EN
-LED Avago PLCC-4 ASMB-MTB0-0A3A2
-0
-4
-4
-LED_SMD
-LED_Avago_PLCC6_3x2.8mm
-https://docs.broadcom.com/docs/AV02-3793EN
-LED Avago PLCC-6 ASMT-YTB7-0AA02
-0
-6
-6
-LED_SMD
-LED_CSP_Samsung_LH181B_2.36x2.36mm
-High Power CSP LED, 2.36mm x 2.36mm, 1.4A max, https://cdn.samsung.com/led/file/resource/2021/01/Data_Sheet_LH181B_Rev.4.0.pdf
-LED Samsung LH181B
-0
-2
-2
-LED_SMD
-LED_Cree-PLCC4_2x2mm_CW
-2.0mm x 2.0mm PLCC4 LED, http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/HB/Data-Sheets/CLMVBFKA.pdf
-LED Cree PLCC-4
-0
-4
-4
-LED_SMD
-LED_Cree-PLCC4_3.2x2.8mm_CCW
-3.2mm x 2.8mm PLCC4 LED, http://www.cree.com/led-components/media/documents/CLV1AFKB(874).pdf
-LED Cree PLCC-4
-0
-4
-4
-LED_SMD
-LED_Cree-PLCC4_5x5mm_CW
-5.0mm x 5.0mm PLCC4 LED
-LED Cree PLCC-4
-0
-4
-4
-LED_SMD
-LED_Cree-PLCC6_4.7x1.5mm
-4.7mm x 1.5mm PLCC6 LED, http://www.cree.com/led-components/media/documents/1381-QLS6AFKW.pdf
-LED Cree PLCC-6
-0
-6
-6
-LED_SMD
-LED_Cree-XB
-http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/XLampXBD.pdf
-LED Cree XB
+214148049530319
+Acea
+20x20_fan
+
+
 0
 5
+5
+Acea
+54
+86-3
+Connector
+0
 3
-LED_SMD
-LED_Cree-XH
-http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/ds-XHB.pdf
-LED Cree XH
+1
+Acea
+57TR
+57TR-2
+Battery
+0
+2
+2
+Acea
+86
+86-3
+Connector
+0
+3
+3
+Acea
+1223124GR
+122-3124-GR-1
+Undefined or Miscellaneous
+0
+2
+2
+Acea
+AMASS_XT60PW-F
+
+
+0
+4
+4
+Acea
+AMASS_XT60PW-F_1x02_P7.20mm_Horizontal
+Connector XT60 Horizontal PCB Female, https://www.tme.eu/en/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf
+RC Connector XT60
+0
+4
+2
+Acea
+AMASS_XT60PW-M
+
+
+0
+4
+4
+Acea
+AMASS_XT60PW-M_1x02_P7.20mm_Horizontal
+Connector XT60 Horizontal PCB Female, https://www.tme.eu/en/Document/9b8d0c5eb7094295f3d3112c214d3ade/XT60PW%20SPEC.pdf
+RC Connector XT60
+0
+4
+2
+Acea
+AMASS_XT90-F_1x02_P11mm_Vertical
+AMASS female XT60, through hole, vertical, https://www.tme.eu/Document/2d152ced3b7a446066e6c419d84bb460/XT60%20SPEC.pdf
+XT60 female vertical
+0
+2
+2
+Acea
+AMASS_XT90PW-F
+
+
+0
+4
+4
+Acea
+AMASS_XT90PW-M
+
+
+0
+4
+4
+Acea
+BM840-1-BM840
+
+
+0
+68
+68
+Acea
+BOOMELE-Boom-Precision-Elec-C53040_C53040
+JST GH series connector, BM08B-GHS-TBT (http://www.jst-mfg.com/product/pdf/eng/eGH.pdf), generated with kicad-footprint-generator
+connector JST GH side entry
+0
+10
+9
+Acea
+BT832X-BT832X
+
+
+0
+44
+44
+Acea
+BT840-BT840XE
+
+
+0
+65
+65
+Acea
+BatteryHolder_Keystone_82_1xAAA_Single_Clip
+https://www.keyelco.com/product-pdf.cfm?p=827
+Keystone type 82 battery clip
+0
+2
+1
+Acea
+BatteryHolder_MPD_BH-14500-PC2
+18650 Battery Holder (http://www.memoryprotectiondevices.com/datasheets/BK-18650-PC2-datasheet.pdf)
+18650 Battery Holder
+0
+2
+2
+Acea
+Bosch_BME280
+Bosch  LGA, 8 Pin (https://ae-bst.resource.bosch.com/media/_tech/media/datasheets/BST-BME680-DS001-00.pdf#page=44), generated with kicad-footprint-generator ipc_noLead_generator.py
+Bosch LGA NoLead
 0
 8
-2
-LED_SMD
-LED_Cree-XHP35
-http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/ds--XHP35.pdf
-LED Cree XHP35
+8
+Acea
+C146060_1x04-1MP_P2.00mm_Horizontal
+JST PH series connector, S4B-PH-SM4-TB (http://www.jst-mfg.com/product/pdf/eng/ePH.pdf), generated with kicad-footprint-generator
+connector JST PH top entry
 0
 6
-3
-LED_SMD
-LED_Cree-XHP50_6V
-Cree XHP50, 6V footprint, http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/ds%20XHP50.pdf
-LED Cree XHP50
+5
+Acea
+C239527_A1002WR-S-9P_SMDx1.00mm_Angled
+http://www.jst-mfg.com/product/pdf/eng/eSH.pdf
+connector jst sh
 0
-15
-3
-LED_SMD
-LED_Cree-XHP50_12V
-Cree XHP50, 12V footprint, http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/ds%20XHP50.pdf
-LED XHP50 Cree
+11
+9
+Acea
+C397437_X8821WVS-02-9TSNx2.5mm_straight
+JST ZE series connector, SM02B-ZESS-TB, 1.50mm pitch, side entry surface mount
+connector jst ze top horizontal angled smt surface mount
 0
-15
-3
-LED_SMD
-LED_Cree-XHP70_6V
-Cree XHP70 LED, 6V version, http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/ds%20XHP70.pdf
-LED Cree XHP70
-0
-15
-3
-LED_SMD
-LED_Cree-XHP70_12V
-Cree XHP70 LED, 12V version, http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/ds%20XHP70.pdf
-LED Cree XHP70
-0
-15
-3
-LED_SMD
-LED_Cree-XP
-LED Cree-XP http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/XLampXPE2.pdf
-LED Cree XP
-0
-6
-3
-LED_SMD
-LED_Cree-XP-G
-LED Cree-XP-G http://www.cree.com/~/media/Files/Cree/LED%20Components%20and%20Modules/XLamp/Data%20and%20Binning/XLampXPG.pdf
-LED Cree XP-G
-0
-6
-3
-LED_SMD
-LED_Cree-XQ
-LED Cree-XQ http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/ds-XQB.pdf
-LED Cree XQ
+4
+2
+Acea
+CAPAE1350X1400N
+EEETKV471UAQ
+Capacitor
 0
 2
 2
-LED_SMD
-LED_Cree-XQ_HandSoldering
-LED Cree-XQ handsoldering pads http://www.cree.com/~/media/Files/Cree/LED-Components-and-Modules/XLamp/Data-and-Binning/ds-XQB.pdf
-LED Cree XQ
+Acea
+COMTECH_C-OBD-II-16M
+
+
+0
+16
+16
+Acea
+CP_Elec_16x16.5
+SMD capacitor, aluminum electrolytic, Vishay 1616, 16.0x17.5mm, http://www.vishay.com/docs/28395/150crz.pdf
+capacitor electrolytic
 0
 2
 2
-LED_SMD
-LED_Dialight_591
-LED SMD 3mm Right Angle series (http://www.dialightsignalsandcomponents.com/Assets/Drawings/2D_Drawings_DrawingDetailedSpec/C17354.pdf)
-LED Dialight 591
+Acea
+DFN-TRANS_AONR21321
+
+
+0
+11
+3
+Acea
+DO-220AA
+
+
 0
 2
 2
-LED_SMD
-LED_Inolux_IN-PI554FCH_PLCC4_5.0x5.0mm_P3.2mm
-http://www.inolux-corp.com/datasheet/SMDLED/Addressable%20LED/IN-PI554FCH.pdf
-RGB LED NeoPixel addressable
+Acea
+DS75LVU
+
+
+0
+8
+8
+Acea
+FTP_LARGE
+
+
+0
+0
+0
+Acea
+FTP_SMALL
+
+
+0
+0
+0
+Acea
+FiPy_with_headers
+
+
+0
+28
+28
+Acea
+G-Switch GT-TS171E-H014-L1
+https://katalog.we-online.com/em/datasheet/434133025816.pdf
+tactile switch Wurth Wuerth
+0
+4
+2
+Acea
+G6L-1F-DC5
+G6L-1F-DC5
+Relay or Contactor
 0
 4
 4
-LED_SMD
-LED_Kingbright_AAA3528ESGCT
-Kingbright, dual LED, 3.5 x 2.8 mm Surface Mount LED Lamp (http://www.kingbrightusa.com/images/catalog/SPEC/AAA3528ESGCT.pdf)
+Acea
+GCT_SIM7100-6-1-15-00-A_REVC
+
+
+0
+11
+11
+Acea
+GPy_with_headers
+
+
+0
+28
+28
+Acea
+GT-TS171X-H014
+
+
+0
+4
+4
+Acea
+HANRUN_HR911105A
+
+
+0
+14
+14
+Acea
+HF46F
+HF46F
+Relay or Contactor
+0
+4
+4
+Acea
+HFD2005SL2D
+HFD2/005-S-L2-D-3
+Relay or Contactor
+0
+10
+10
+Acea
+HopeRF_RFM95W
+
+
+0
+16
+16
+Acea
+JFH-9813M
+http://www.phychips.com/wp-content/uploads/2018/04/1.-PR9200-Specification.pdf
+R9200
+0
+16
+16
+Acea
+JST_ZH_1-5mm
+B3B-ZR
+Connector
+0
+3
+3
+Acea
+Jumper_Small_Open_RoundedPad0.5x1mm
+SMD Solder Jumper, 1x1.5mm, rounded Pads, 0.3mm gap, open
+solder jumper open
+0
+2
+2
+Acea
+KXOB25-14X1F
+
+
+0
+2
+2
+Acea
+LED_RGB_MHPA3528RGBCT
+SMD,3.5x2.8mm Light Emitting Diodes (LED) RoHS
 dual led smd
 0
 4
 4
-LED_SMD
-LED_Kingbright_APDA3020VBCD
-LED, SMD, APDA3020VBC/D, https://www.kingbrightusa.com/images/catalog/SPEC/APDA3020VBC-D.pdf
-LED APDA3020VBC/D Kingbright 
+Acea
+LIC
+
+
+0
+0
+0
+Acea
+LTC1157CS8
+
+
+0
+8
+8
+Acea
+LTC4367HDD-PBF
+
+
+0
+9
+9
+Acea
+LTC4367IMS8_MSOP-8_3x3mm_P0.65mm
+MSOP, 8 Pin (https://www.jedec.org/system/files/docs/mo-187F.pdf variant AA), generated with kicad-footprint-generator ipc_gullwing_generator.py
+MSOP SO
+0
+8
+8
+Acea
+L_10.4x10.4_H4.8_TracBox
+Choke, SMD, 10.4x10.4mm 4.8mm height
+Choke SMD
 0
 2
 2
-LED_SMD
-LED_Kingbright_APFA3010_3x1.5mm_Horizontal
-LED RGB, APFA3010, http://www.kingbrightusa.com/images/catalog/SPEC/APFA3010LSEEZGKQBKC.pdf
-LED RGB APFA3010 KINGBRIGHT 3x1.5mm
+Acea
+MAX17260SE
+
+
 0
-4
-4
-LED_SMD
-LED_Kingbright_APHBM2012_2x1.25mm
-Dual LED SMD https://www.kingbrightusa.com/KCpack.asp?txtPack=APHBM2012
-LED Kingbright APHM2012
+15
+15
+Acea
+MCP3204-CI_SL
+
+
 0
-4
-4
-LED_SMD
-LED_Kingbright_KPBD-3224
-Kingbright, dual LED, red-green, dome lens, 3.2 x 2.4 mm Surface Mount LED Lamp (https://www.kingbright.com/attachments/file/psearch/000/00/00/KPBD-3224SURKCGKC(Ver.20A).pdf)
-Kingbright dual LED KPBD-3224
-0
-4
-4
-LED_SMD
-LED_LiteOn_LTST-C19HE1WT
-LiteOn RGB LED; https://optoelectronics.liteon.com/upload/download/DS22-2008-0044/LTST-C19HE1WT.pdf
-LED RGB Chip SMD
-0
-4
-4
-LED_SMD
-LED_LiteOn_LTST-C295K_1.6x0.8mm
-Topview dual http://optoelectronics.liteon.com/upload/download/DS22-2009-0072/LTST-C295KGKRKT.PDF
-SMD Top view Dual colour
-0
-4
-4
-LED_SMD
-LED_LiteOn_LTST-S326
-http://optoelectronics.liteon.com/upload/download/DS22-2000-287/LTST-S326KGJRKT.PDF
-LED SMD right angle  CCA
-0
-3
-3
-LED_SMD
-LED_Lumex_SML-LX0303SIUPGUSB
-Lumex RGB LED, clear, SMD, https://www.lumex.com/spec/SML-LX0303SIUPGUSB.pdf
-LED RGB
-0
-4
-4
-LED_SMD
-LED_Lumex_SML-LX0404SIUPGUSB
-Lumex RGB LED, clear, SMD, https://www.lumex.com/spec/SML-LX0404SIUPGUSB.pdf
-LED RGB
-0
-4
-4
-LED_SMD
-LED_Luminus_MP-3030-1100_3.0x3.0mm
-Mid Power LED, Luminus MP-3030-1100, 3.0x3.0mm, 816mW, https://download.luminus.com/datasheets/Luminus_MP3030_1100_Datasheet.pdf
-LED Luminus MP-3030-1100
+14
+14
+Acea
+MCP3221A5T-I_OT
+
+
 0
 5
-2
-LED_SMD
-LED_Osram_Lx_P47F_D2mm_ReverseMount
-OSRAM, reverse-mount LED, SMD, 2mm diameter, http://www.farnell.com/datasheets/2711587.pdf
-LED ReverseMount Reverse
+5
+Acea
+MDBT42Q512KV2
+MDBT42Q-512KV2-1
+Integrated Circuit
 0
-4
-2
-LED_SMD
-LED_PLCC-2_3.4x3.0mm_AK
-LED PLCC-2 SMD package, orientation marker at anode, https://dammedia.osram.info/media/resource/hires/osram-dam-5824137/SFH%204257_EN.pdf
-LED PLCC-2 SMD TOPLED
+41
+41
+Acea
+MODULE_BG77LA-64-SGNS
+
+
 0
-2
-2
-LED_SMD
-LED_PLCC-2_3.4x3.0mm_KA
-LED PLCC-2 SMD package, orientation marker at cathode, https://dammedia.osram.info/media/resource/hires/osram-dam-6035009/SFH%204253_EN.pdf
-LED PLCC-2 SMD TOPLED
-0
-2
-2
-LED_SMD
-LED_PLCC-2_3x2mm_AK
-LED, SMD, PLCC-2, 3.0 x 2.0mm, orientation marker at anode, https://media.digikey.com/pdf/Data%20Sheets/CREE%20Power/CLM3A-BKW,GKW.pdf
-LED PLCC-2 SMD
+94
+94
+Acea
+MS621FE-FL11E
+
+
 0
 2
 2
-LED_SMD
-LED_PLCC-2_3x2mm_KA
-LED, SMD, PLCC-2, 3.0 x 2.0mm, orientation marker at cathode, https://optoelectronics.liteon.com/upload/download/DS22-2009-0099/LTW-M670ZVS-M5_0906.pdf
-LED PLCC-2 SMD
+Acea
+MWSA1206S-680MT
+Bourns SRR1260 series SMD inductor http://www.bourns.com/docs/Product-Datasheets/SRR1260.pdf
+Bourns SRR1260 SMD inductor
 0
 2
 2
-LED_SMD
-LED_PLCC_2835
-https://www.luckylight.cn/media/component/data-sheet/R2835BC-B2M-M10.pdf
-LED
+Acea
+NavSparkMini
+
+
 0
-2
-2
-LED_SMD
-LED_PLCC_2835_Handsoldering
-https://www.luckylight.cn/media/component/data-sheet/R2835BC-B2M-M10.pdf
-LED
+24
+12
+Acea
+PQFN50P200X200X80-10N
+
+
 0
-2
-2
-LED_SMD
-LED_RGB_1210
-RGB LED 3.2x2.7mm http://www.avagotech.com/docs/AV02-0610EN
-LED 3227
+10
+10
+Acea
+PinSocket_2x05_P1.27mm_Vertical
+Through hole straight socket strip, 2x05, 1.27mm pitch, double cols (from Kicad 4.0.7), script generated
+Through hole socket strip THT 2x05 1.27mm double row
 0
-4
-4
-LED_SMD
-LED_RGB_5050-6
-http://cdn.sparkfun.com/datasheets/Components/LED/5060BRG4.pdf
-RGB LED 5050-6
+10
+10
+Acea
+QFN40P600X600X90-49N
+
+
+0
+49
+49
+Acea
+QFN50P350X350X100-17N-D
+RVA (S-PVQFN-N16)_A
+Integrated Circuit
+0
+17
+17
+Acea
+QFN50P400X500X80-29N-D
+UFD Package 28-Lead Plastic QFN (4mm × 5mm) (Reference LTC DWG # 05-08-1712 Rev C)
+Integrated Circuit
+0
+29
+29
+Acea
+QFP50P900X900X160-48N
+
+
+0
+48
+48
+Acea
+QUECTEL_L80-M39
+
+
+0
+12
+12
+Acea
+R6GHBHC-M01
+
+
 0
 6
 6
-LED_SMD
-LED_RGB_Cree-PLCC-6_6x5mm_P2.1mm
-http://www.farnell.com/datasheets/2003905.pdf
-LED RGB PLCC-6 CLP6C-FBK
+Acea
+RAYTAC_MDBT42Q-512KV2
+
+
+0
+41
+41
+Acea
+RELAY_SRD-05VDC-SL-C
+
+
+0
+5
+5
+Acea
+RF220UF1
+
+
+0
+24
+24
+Acea
+RN2483
+
+
+0
+47
+47
+Acea
+Raytac-MDBT42V-512KV2-0-0-MFG
+
+
+0
+29
+29
+Acea
+Relay_SPST_NO_HFV7-P-012-HST
+Relay SPST-NO Omron Serie G5Q, http://omronfs.omron.com/en_US/ecb/products/pdf/en-g5q.pdf
+Relay SPST-NO Omron Serie G5Q
+0
+8
+4
+Acea
+Rivneut_M6_Via
+Mounting Hole 3.2mm, M3
+mounting hole 3.2mm m3
+0
+9
+1
+Acea
+SDS0402
+
+
+0
+2
+2
+Acea
+SHDRRA9W85P0X381_1X9_3517X915X720P
+WJ15EDGRC-3.81-9P
+Connector
+0
+9
+9
+Acea
+SIM-002-A6
+
+
+0
+10
+6
+Acea
+SLO1365H680MTT
+
+
+0
+2
+2
+Acea
+SOD1608D
+
+
+0
+2
+2
+Acea
+SOIC127P599X173-8N
+MIC5239-3.3YM
+Integrated Circuit
+0
+8
+8
+Acea
+SOIC127P600X165-9N
+ESOIC8
+Integrated Circuit
+0
+9
+9
+Acea
+SOIC127P600X175-8N
+FDS3992FDS3992
+Integrated Circuit
+0
+8
+8
+Acea
+SON50P200X200X80-9N
+TPS22965DSGR_
+Integrated Circuit
+0
+9
+9
+Acea
+SOP50P600X148-17N
+
+
+0
+17
+17
+Acea
+SOP65P490X110-8N
+
+
+0
+8
+8
+Acea
+SOP65P777X199-20N
+
+
+0
+20
+20
+Acea
+SOT95P280X145-5N
+
+
+0
+5
+5
+Acea
+STMicroelectronics-SOT23-6L-0-0-IPC_A
+
+
 0
 6
 6
-LED_SMD
-LED_RGB_Everlight_EASV3015RGBA0_Horizontal
-LED, RGB, right-angle, clear, https://everlightamericas.com/index.php?controller=attachment&id_attachment=3220
-LED RGB right-angle
-0
-4
-4
-LED_SMD
-LED_RGB_Getian_GT-P6PRGB4303
-https://www.gme.sk/img/cache/doc/518/177/vykonova-led-getian-gt-p6prgb4303-datasheet-1.pdf
-LED RGB 
+Acea
+SW-SS-3292S-L2-B
+Ultraminiature Surface Mount Slide Switch, right-angle, https://www.ckswitches.com/media/1424/pcm.pdf
+
 0
 7
-7
-LED_SMD
-LED_RGB_PLCC-6
-RGB LED PLCC-6
-RGB LED PLCC-6
-0
-6
-6
-LED_SMD
-LED_RGB_Wuerth-PLCC4_3.2x2.8mm_150141M173100
-3.2mm x 2.8mm PLCC4 LED, https://www.we-online.de/katalog/datasheet/150141M173100.pdf
-LED RGB Wurth PLCC-4
+3
+Acea
+SW_Push_1P1T_NO_Vertical_GT-TS171E-H014-L1
+https://katalog.we-online.com/em/datasheet/434133025816.pdf
+tactile switch Wurth Wuerth
 0
 4
-4
-LED_SMD
-LED_ROHM_SMLVN6
-https://www.rohm.com/datasheet/SMLVN6RGB1U
-LED ROHM SMLVN6
+2
+Acea
+TE_T4142412051-000
+
+
 0
-6
-6
-LED_SMD
-LED_SK6805_PLCC4_2.4x2.7mm_P1.3mm
-https://cdn-shop.adafruit.com/product-files/3484/3484_Datasheet.pdf
-LED RGB NeoPixel Nano
-0
-4
-4
-LED_SMD
-LED_SK6812MINI_PLCC4_3.5x3.5mm_P1.75mm
-https://cdn-shop.adafruit.com/product-files/2686/SK6812MINI_REV.01-1-2.pdf
-LED RGB NeoPixel Mini
-0
-4
-4
-LED_SMD
-LED_SK6812_EC15_1.5x1.5mm
-http://www.newstar-ledstrip.com/product/20181119172602110.pdf
-LED RGB NeoPixel
-0
-4
-4
-LED_SMD
-LED_SK6812_PLCC4_5.0x5.0mm_P3.2mm
-https://cdn-shop.adafruit.com/product-files/1138/SK6812+LED+datasheet+.pdf
-LED RGB NeoPixel
-0
-4
-4
-LED_SMD
-LED_WS2812B-2020_PLCC4_2.0x2.0mm
-Addressable RGB LED NeoPixel Nano, 12 mA, https://cdn-shop.adafruit.com/product-files/4684/4684_WS2812B-2020_V1.3_EN.pdf
-LED RGB NeoPixel Nano 2020
-0
-4
-4
-LED_SMD
-LED_WS2812B_PLCC4_5.0x5.0mm_P3.2mm
-https://cdn-shop.adafruit.com/datasheets/WS2812B.pdf
-LED RGB NeoPixel
-0
-4
-4
-LED_SMD
-LED_WS2812_PLCC6_5.0x5.0mm_P1.6mm
-https://cdn-shop.adafruit.com/datasheets/WS2812.pdf
-LED RGB NeoPixel
-0
-6
-6
-LED_SMD
-LED_Wurth_150044M155260
-Wurth Common anode RGB LED, SMD, 0404, 1x1x1.65mm, https://www.we-online.com/catalog/datasheet/150044M155260.pdf
-LED RGB ARGB 
-0
-4
-4
-LED_SMD
-LED_Yuji_5730
-LED,Yuji,5730,https://cdn.shopify.com/s/files/1/0344/6401/files/YJWJ014-1.1_YJ-BC-5730L-G02.pdf
-LED Yuji 5730
+5
+5
+Acea
+TO-92
+<b>TO 92</b>
+
 0
 3
+3
+Acea
+TP4056_SOP-8-PP
+8-Lead Plastic SOP-8-PP
+SSOP 0.50 exposed pad
+0
+9
+9
+Acea
+TQ2SAL23VZ
+TQ2SA_L2
+Relay or Contactor
+0
+10
+10
+Acea
+TRANS_FDMC8327L
+
+
+0
+9
+9
+Acea
+TS4550TP
+Light Touch Switch
+
+0
+4
 2
-LED_SMD
-LED_miniPLCC_2315
-https://docs.broadcom.com/cs/Satellite?blobcol=urldata&blobheader=application%2Fpdf&blobheadername1=Content-Disposition&blobheadername2=Content-Type&blobheadername3=MDT-Type&blobheadervalue1=attachment%3Bfilename%3DAV02-2205EN_DS_ASMT-TxBM_2014-05-09.pdf&blobheadervalue2=application%2Fx-download&blobheadervalue3=abinary%253B%2Bcharset%253DUTF-8&blobkey=id&blobnocache=true&blobtable=MungoBlobs&blobwhere=1430858274704&ssbinary=true
-LED
+Acea
+TerminalBlock_MetzConnect_Type086_RT03402HBLC_1x02_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03402HBLC, 2 pins, pitch 3.81mm, size 7.51x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03402HBLC pitch 3.81mm size 7.51x7.3mm^2 drill 0.7mm pad 1.4mm
 0
 2
 2
-LED_SMD
-LED_miniPLCC_2315_Handsoldering
-https://docs.broadcom.com/cs/Satellite?blobcol=urldata&blobheader=application%2Fpdf&blobheadername1=Content-Disposition&blobheadername2=Content-Type&blobheadername3=MDT-Type&blobheadervalue1=attachment%3Bfilename%3DAV02-2205EN_DS_ASMT-TxBM_2014-05-09.pdf&blobheadervalue2=application%2Fx-download&blobheadervalue3=abinary%253B%2Bcharset%253DUTF-8&blobkey=id&blobnocache=true&blobtable=MungoBlobs&blobwhere=1430858274704&ssbinary=true
-LED
+Acea
+TerminalBlock_MetzConnect_Type086_RT03403HBLC_1x03_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03403HBLC, 3 pins, pitch 3.81mm, size 11.3x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03403HBLC pitch 3.81mm size 11.3x7.3mm^2 drill 0.7mm pad 1.4mm
+0
+3
+3
+Acea
+TerminalBlock_MetzConnect_Type086_RT03404HBLC_1x04_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03404HBLC, 4 pins, pitch 3.81mm, size 15.1x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03404HBLC pitch 3.81mm size 15.1x7.3mm^2 drill 0.7mm pad 1.4mm
+0
+4
+4
+Acea
+TerminalBlock_MetzConnect_Type086_RT03405HBLC_1x05_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03405HBLC, 5 pins, pitch 3.81mm, size 18.9x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03405HBLC pitch 3.81mm size 18.9x7.3mm^2 drill 0.7mm pad 1.4mm
+0
+5
+5
+Acea
+TerminalBlock_MetzConnect_Type086_RT03406HBLC_1x06_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03406HBLC, 6 pins, pitch 3.81mm, size 22.8x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03406HBLC pitch 3.81mm size 22.8x7.3mm^2 drill 0.7mm pad 1.4mm
+0
+6
+6
+Acea
+TerminalBlock_MetzConnect_Type086_RT03406HBLC_1x09_P3.81mm_Horizontal
+terminal block Metz Connect Type086_RT03406HBLC, 6 pins, pitch 3.81mm, size 22.8x7.3mm^2, drill diamater 0.7mm, pad diameter 1.4mm, see http://www.metz-connect.com/de/system/files/productfiles/Datenblatt_310861_RT034xxHBLC_OFF-026114K.pdf, script-generated using https://github.com/pointhi/kicad-footprint-generator/scripts/TerminalBlock_MetzConnect
+THT terminal block Metz Connect Type086_RT03406HBLC pitch 3.81mm size 22.8x7.3mm^2 drill 0.7mm pad 1.4mm
+0
+9
+9
+Acea
+U.FL-R-SMT
+
+
+0
+3
+3
+Acea
+USB_A_BOOMELE-Boom-Precision-Elec-C32896_Horizontal
+http://cnctech.us/pdfs/1001-011-01101.pdf
+USB-A
+0
+6
+5
+Acea
+USB_A_China_Horizontal
+http://cnctech.us/pdfs/1001-011-01101.pdf
+USB-A
+0
+6
+5
+Acea
+USB_A_Jing_Extension_C9739_Horizontal
+http://cnctech.us/pdfs/1001-011-01101.pdf
+USB-A
+0
+6
+5
+Acea
+USB_A_Jing_Extension_of_the_Electronic_Co_C2341_Horizontal
+http://cnctech.us/pdfs/1001-011-01101.pdf
+USB-A
+0
+12
+5
+Acea
+USB_Micro-B_C2681556
+Micro usb 5s B Type Smt (https://raw.githubusercontent.com/choryuidentify/USB-Micro-B-Unknown-5s-SMT/master/datasheet.pdf)
+Micro B USB SMD
+0
+9
+5
+Acea
+USB_Micro-B_XKB_4BH89_SMT
+Micro usb 5s B Type Smt (https://raw.githubusercontent.com/choryuidentify/USB-Micro-B-Unknown-5s-SMT/master/datasheet.pdf)
+Micro B USB SMD
+0
+11
+6
+Acea
+USB_Micro_SHOU-HAN-MicroXNJ_C404969_Horizontal
+USB Micro-B receptacle, horizontal, SMD, 10118194, https://cdn.amphenol-icc.com/media/wysiwyg/files/drawing/10118194.pdf
+USB Micro B horizontal SMD
+0
+15
+5
+Acea
+VL-3032-HF5N
+122-3124-GR-1
+Undefined or Miscellaneous
 0
 2
 2
+Acea
+XBee_Pro_S3B
+
+
+0
+20
+20
+Acea
+XCVR_L76-L
+
+
+0
+18
+18
+Acea
+XCVR_L89
+
+
+0
+16
+16
+Acea
+XCVR_L96-M33
+
+
+0
+31
+31
+Acea
+XCVR_NRF5340-QKAA-AB0-R
+Original name <b>AQFN40P700X700X85_HS-99N</b><p>
+
+0
+115
+115
+Acea
+XDCR_W3011
+
+
+0
+3
+3
+Acea
+XTAL_ABLS-8.000MHZ-B2-T
+
+
+0
+2
+2
+Acea
+aces_electronics_micro
+
+
+0
+0
+0
+Acea
+aces_electronics_small
+
+
+0
+0
+0
+Acea
+ae_3-5mm
+
+
+0
+0
+0
+Acea
+ae_4mm
+
+
+0
+0
+0
+Acea
+ae_5mm
+
+
+0
+0
+0
+Acea
+ae_10mm
+
+
+0
+0
+0
+Acea
+ae_15mm
+
+
+0
+0
+0
+Acea
+ae_20mm
+
+
+0
+0
+0
+Acea
+ae_40mm
+
+
+0
+0
+0
+Acea
+esp8285-m3
+
+
+0
+12
+12
+Acea
+keystone_82_1xAAA_doube
+https://www.keyelco.com/product-pdf.cfm?p=827
+Keystone type 82 battery clip
+0
+4
+2
+Acea
+touch_pad
+<b>TO 92</b>
+
+0
+2
+2
+Acea
+ublox_SAM-M8Q
+GPS Module, 15.5x15.5x6.3mm, https://www.u-blox.com/sites/default/files/SAM-M8Q_HardwareIntegrationManual_%28UBX-16018358%29.pdf
+ublox SAM-M8Q
+0
+100
+20
