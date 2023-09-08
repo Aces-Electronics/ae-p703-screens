@@ -8625,7 +8625,6 @@
               },
               {
                 "nid": -110445605,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -8751,7 +8750,6 @@
               },
               {
                 "nid": -346743338,
-                "flags": 1048576,
                 "strtype": "OBJECT/States",
                 "InheritedType": 1
               },
@@ -8915,7 +8913,6 @@
               },
               {
                 "nid": 755699272,
-                "flags": 1048576,
                 "strtype": "OBJECT/Flags",
                 "InheritedType": 1
               },
@@ -12034,7 +12031,6 @@
           },
           {
             "nid": -209605223,
-            "flags": 1048576,
             "strtype": "OBJECT/States",
             "InheritedType": 1
           },
@@ -12252,7 +12248,7 @@
             "disabled": false,
             "nid": -572446675,
             "strtype": "SCREEN/EventHandler",
-            "strval": "GESTURE_RIGHT(GESTURE)",
+            "strval": "GESTURE_LEFT(GESTURE)",
             "childs": [
               {
                 "nid": -1089087059,
@@ -12304,7 +12300,7 @@
                   {
                     "nid": 1478477843,
                     "strtype": "CHANGE SCREEN/Fade_mode",
-                    "strval": "MOVE_RIGHT",
+                    "strval": "MOVE_LEFT",
                     "InheritedType": 3
                   },
                   {
@@ -12315,6 +12311,82 @@
                   },
                   {
                     "nid": -1643653041,
+                    "strtype": "CHANGE SCREEN/Delay",
+                    "InheritedType": 6
+                  }
+                ],
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 4
+          },
+          {
+            "disabled": false,
+            "nid": 1655897624,
+            "strtype": "SCREEN/EventHandler",
+            "strval": "GESTURE_RIGHT(GESTURE)",
+            "childs": [
+              {
+                "nid": 521687025,
+                "strtype": "_custom/name",
+                "strval": "Event16",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1316145170,
+                "strtype": "_custom/condition_C",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 89526828,
+                "strtype": "_custom/condition_P",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1050016060,
+                "strtype": "_custom/action",
+                "strval": "CHANGE SCREEN",
+                "childs": [
+                  {
+                    "nid": 1795045967,
+                    "strtype": "CHANGE SCREEN/Name",
+                    "strval": "CHANGE SCREEN",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -2077708666,
+                    "strtype": "CHANGE SCREEN/Call",
+                    "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1276578444,
+                    "strtype": "CHANGE SCREEN/CallC",
+                    "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 582325283,
+                    "strtype": "CHANGE SCREEN/Screen_to",
+                    "strval": "GUID23444677-544698S4732249",
+                    "InheritedType": 9
+                  },
+                  {
+                    "nid": -27971833,
+                    "strtype": "CHANGE SCREEN/Fade_mode",
+                    "strval": "MOVE_RIGHT",
+                    "InheritedType": 3
+                  },
+                  {
+                    "nid": 1256887590,
+                    "strtype": "CHANGE SCREEN/Speed",
+                    "integer": 500,
+                    "InheritedType": 6
+                  },
+                  {
+                    "nid": -1716807406,
                     "strtype": "CHANGE SCREEN/Delay",
                     "InheritedType": 6
                   }
@@ -12370,7 +12442,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  2,
+                  4,
                   -64
                 ],
                 "InheritedType": 7
@@ -12620,82 +12692,6 @@
                 "strtype": "LABEL/Recolor",
                 "strval": "False",
                 "InheritedType": 2
-              },
-              {
-                "disabled": false,
-                "nid": -1161073989,
-                "strtype": "LABEL/EventHandler",
-                "strval": "GESTURE_LEFT(GESTURE)",
-                "childs": [
-                  {
-                    "nid": -613706416,
-                    "strtype": "_custom/name",
-                    "strval": "Event15",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 624492931,
-                    "strtype": "_custom/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1500670679,
-                    "strtype": "_custom/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 696379757,
-                    "strtype": "_custom/action",
-                    "strval": "CHANGE SCREEN",
-                    "childs": [
-                      {
-                        "nid": -1263733679,
-                        "strtype": "CHANGE SCREEN/Name",
-                        "strval": "CHANGE SCREEN",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1698846570,
-                        "strtype": "CHANGE SCREEN/Call",
-                        "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1979009111,
-                        "strtype": "CHANGE SCREEN/CallC",
-                        "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1293927892,
-                        "strtype": "CHANGE SCREEN/Screen_to",
-                        "strval": "GUID8868678-465399S3802106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": -1635534681,
-                        "strtype": "CHANGE SCREEN/Fade_mode",
-                        "strval": "MOVE_LEFT",
-                        "InheritedType": 3
-                      },
-                      {
-                        "nid": -908985983,
-                        "strtype": "CHANGE SCREEN/Speed",
-                        "integer": 500,
-                        "InheritedType": 6
-                      },
-                      {
-                        "nid": -1499722176,
-                        "strtype": "CHANGE SCREEN/Delay",
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "LABEL"
@@ -13356,7 +13352,6 @@
           },
           {
             "nid": -1837846908,
-            "flags": 1048576,
             "strtype": "OBJECT/Flags",
             "InheritedType": 1
           },
@@ -13440,7 +13435,6 @@
           },
           {
             "nid": 2132934661,
-            "flags": 1048576,
             "strtype": "OBJECT/States",
             "InheritedType": 1
           },
@@ -13506,7 +13500,7 @@
             "disabled": false,
             "nid": 221004044,
             "strtype": "SCREEN/EventHandler",
-            "strval": "GESTURE_DOWN(GESTURE)",
+            "strval": "GESTURE_LEFT(GESTURE)",
             "childs": [
               {
                 "nid": -989710737,
@@ -13558,7 +13552,7 @@
                   {
                     "nid": 2063623052,
                     "strtype": "CHANGE SCREEN/Fade_mode",
-                    "strval": "MOVE_BOTTOM",
+                    "strval": "MOVE_LEFT",
                     "InheritedType": 3
                   },
                   {
@@ -13569,6 +13563,82 @@
                   },
                   {
                     "nid": -47753762,
+                    "strtype": "CHANGE SCREEN/Delay",
+                    "InheritedType": 6
+                  }
+                ],
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 4
+          },
+          {
+            "disabled": false,
+            "nid": -669475752,
+            "strtype": "SCREEN/EventHandler",
+            "strval": "GESTURE_RIGHT(GESTURE)",
+            "childs": [
+              {
+                "nid": 2006856114,
+                "strtype": "_custom/name",
+                "strval": "Event15",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1404227212,
+                "strtype": "_custom/condition_C",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1757936581,
+                "strtype": "_custom/condition_P",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": -1672024308,
+                "strtype": "_custom/action",
+                "strval": "CHANGE SCREEN",
+                "childs": [
+                  {
+                    "nid": 651417580,
+                    "strtype": "CHANGE SCREEN/Name",
+                    "strval": "CHANGE SCREEN",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -10303344,
+                    "strtype": "CHANGE SCREEN/Call",
+                    "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1436706215,
+                    "strtype": "CHANGE SCREEN/CallC",
+                    "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1131910454,
+                    "strtype": "CHANGE SCREEN/Screen_to",
+                    "strval": "GUID8868678-465399S3802106",
+                    "InheritedType": 9
+                  },
+                  {
+                    "nid": -1587600832,
+                    "strtype": "CHANGE SCREEN/Fade_mode",
+                    "strval": "MOVE_RIGHT",
+                    "InheritedType": 3
+                  },
+                  {
+                    "nid": 234372974,
+                    "strtype": "CHANGE SCREEN/Speed",
+                    "integer": 500,
+                    "InheritedType": 6
+                  },
+                  {
+                    "nid": 880477839,
                     "strtype": "CHANGE SCREEN/Delay",
                     "InheritedType": 6
                   }
@@ -13617,7 +13687,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 1927,
+    "backup_cnt": 1934,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.4",
     "callfuncsexport": "DONT_EXPORT",

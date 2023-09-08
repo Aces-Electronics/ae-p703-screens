@@ -78,7 +78,6 @@ lv_obj_t *ui_settingsKeyboard;
 void ui_factoryResetScreen_screen_init(void);
 void ui_event_factoryResetScreen( lv_event_t * e);
 lv_obj_t *ui_factoryResetScreen;
-void ui_event_factoryResetText( lv_event_t * e);
 lv_obj_t *ui_factoryResetText;
 lv_obj_t *ui_factoryResetButton;
 void ui_event_resetLabel( lv_event_t * e);
@@ -182,6 +181,10 @@ if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_ac
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
 }
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( ui_factoryResetScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+}
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
 lv_indev_wait_release(lv_indev_get_act());
       _ui_screen_change( ui_factoryResetScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
@@ -195,16 +198,13 @@ if ( event_code == LV_EVENT_VALUE_CHANGED) {
 }
 void ui_event_factoryResetScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_BOTTOM  ) {
-lv_indev_wait_release(lv_indev_get_act());
-      _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_MOVE_BOTTOM, 500, 0);
-}
-}
-void ui_event_factoryResetText( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_LEFT  ) {
 lv_indev_wait_release(lv_indev_get_act());
-      _ui_screen_change( ui_settingsStateScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+      _ui_screen_change( ui_batteryStateScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
+}
+if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_RIGHT  ) {
+lv_indev_wait_release(lv_indev_get_act());
+      _ui_screen_change( ui_settingsStateScreen, LV_SCR_LOAD_ANIM_MOVE_RIGHT, 500, 0);
 }
 }
 void ui_event_resetLabel( lv_event_t * e) {
