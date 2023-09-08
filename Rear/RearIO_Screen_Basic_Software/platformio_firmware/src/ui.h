@@ -90,6 +90,7 @@ extern lv_obj_t *ui_settingsKeyboard;
 void ui_factoryResetScreen_screen_init(void);
 void ui_event_factoryResetScreen( lv_event_t * e);
 extern lv_obj_t *ui_factoryResetScreen;
+void ui_event_factoryResetText( lv_event_t * e);
 extern lv_obj_t *ui_factoryResetText;
 extern lv_obj_t *ui_factoryResetButton;
 void ui_event_resetLabel( lv_event_t * e);

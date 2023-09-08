@@ -164,7 +164,7 @@ ui_auxState1 = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_auxState1, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_auxState1, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_auxState1, -1 );
-lv_obj_set_y( ui_auxState1, 84 );
+lv_obj_set_y( ui_auxState1, 85 );
 lv_obj_set_align( ui_auxState1, LV_ALIGN_CENTER );
 lv_label_set_text(ui_auxState1,"State:");
 lv_obj_clear_flag( ui_auxState1, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags

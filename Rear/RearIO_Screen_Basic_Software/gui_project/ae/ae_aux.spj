@@ -4230,7 +4230,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -1,
-                  87
+                  85
                 ],
                 "InheritedType": 7
               },
@@ -4855,8 +4855,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  5,
-                  7
+                  238,
+                  9
                 ],
                 "InheritedType": 7
               },
@@ -5182,8 +5182,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  5,
-                  -42
+                  238,
+                  -43
                 ],
                 "InheritedType": 7
               },
@@ -5509,8 +5509,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  5,
-                  -89
+                  238,
+                  -93
                 ],
                 "InheritedType": 7
               },
@@ -5836,8 +5836,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  5,
-                  -7
+                  238,
+                  -13
                 ],
                 "InheritedType": 7
               },
@@ -6163,8 +6163,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  110,
-                  -124
+                  -163,
+                  -117
                 ],
                 "InheritedType": 7
               },
@@ -6389,6 +6389,12 @@
                     "strval": "DEFAULT",
                     "childs": [
                       {
+                        "nid": 355671053,
+                        "strtype": "_style/Text_Align",
+                        "strval": "LEFT",
+                        "InheritedType": 3
+                      },
+                      {
                         "nid": -2056348308,
                         "strtype": "_style/Text_Font",
                         "strval": "montserrat_42",
@@ -6452,8 +6458,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  110,
-                  -43
+                  -163,
+                  -38
                 ],
                 "InheritedType": 7
               },
@@ -6678,6 +6684,12 @@
                     "strval": "DEFAULT",
                     "childs": [
                       {
+                        "nid": 310513486,
+                        "strtype": "_style/Text_Align",
+                        "strval": "LEFT",
+                        "InheritedType": 3
+                      },
+                      {
                         "nid": 712847612,
                         "strtype": "_style/Text_Font",
                         "strval": "montserrat_42",
@@ -6741,8 +6753,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  110,
-                  42
+                  -168,
+                  38
                 ],
                 "InheritedType": 7
               },
@@ -6967,6 +6979,12 @@
                     "strval": "DEFAULT",
                     "childs": [
                       {
+                        "nid": 104541248,
+                        "strtype": "_style/Text_Align",
+                        "strval": "LEFT",
+                        "InheritedType": 3
+                      },
+                      {
                         "nid": -1468924961,
                         "strtype": "_style/Text_Font",
                         "strval": "montserrat_42",
@@ -7030,7 +7048,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  110,
+                  -168,
                   120
                 ],
                 "InheritedType": 7
@@ -7255,6 +7273,12 @@
                     "strtype": "_style/StyleState",
                     "strval": "DEFAULT",
                     "childs": [
+                      {
+                        "nid": 57353123,
+                        "strtype": "_style/Text_Align",
+                        "strval": "LEFT",
+                        "InheritedType": 3
+                      },
                       {
                         "nid": -38566474,
                         "strtype": "_style/Text_Font",
@@ -8579,7 +8603,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -163,
-                  59
+                  57
                 ],
                 "InheritedType": 7
               },
@@ -8869,7 +8893,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   -160,
-                  109
+                  108
                 ],
                 "InheritedType": 7
               },
@@ -12198,7 +12222,7 @@
                   {
                     "nid": -1323779525,
                     "strtype": "CHANGE SCREEN/Screen_to",
-                    "strval": "GUID23444677-544698S4732249",
+                    "strval": "GUID19797261-556994S6152105",
                     "InheritedType": 9
                   },
                   {
@@ -12215,6 +12239,82 @@
                   },
                   {
                     "nid": -298284722,
+                    "strtype": "CHANGE SCREEN/Delay",
+                    "InheritedType": 6
+                  }
+                ],
+                "InheritedType": 10
+              }
+            ],
+            "InheritedType": 4
+          },
+          {
+            "disabled": false,
+            "nid": -572446675,
+            "strtype": "SCREEN/EventHandler",
+            "strval": "GESTURE_RIGHT(GESTURE)",
+            "childs": [
+              {
+                "nid": -1089087059,
+                "strtype": "_custom/name",
+                "strval": "Event14",
+                "InheritedType": 10
+              },
+              {
+                "nid": -767546361,
+                "strtype": "_custom/condition_C",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1803949624,
+                "strtype": "_custom/condition_P",
+                "strval": "",
+                "InheritedType": 10
+              },
+              {
+                "nid": 1619774787,
+                "strtype": "_custom/action",
+                "strval": "CHANGE SCREEN",
+                "childs": [
+                  {
+                    "nid": -256485347,
+                    "strtype": "CHANGE SCREEN/Name",
+                    "strval": "CHANGE SCREEN",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1268430763,
+                    "strtype": "CHANGE SCREEN/Call",
+                    "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -880604056,
+                    "strtype": "CHANGE SCREEN/CallC",
+                    "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1875199753,
+                    "strtype": "CHANGE SCREEN/Screen_to",
+                    "strval": "GUID23444677-544698S4732249",
+                    "InheritedType": 9
+                  },
+                  {
+                    "nid": 1478477843,
+                    "strtype": "CHANGE SCREEN/Fade_mode",
+                    "strval": "MOVE_RIGHT",
+                    "InheritedType": 3
+                  },
+                  {
+                    "nid": 628476375,
+                    "strtype": "CHANGE SCREEN/Speed",
+                    "integer": 500,
+                    "InheritedType": 6
+                  },
+                  {
+                    "nid": -1643653041,
                     "strtype": "CHANGE SCREEN/Delay",
                     "InheritedType": 6
                   }
@@ -12520,6 +12620,82 @@
                 "strtype": "LABEL/Recolor",
                 "strval": "False",
                 "InheritedType": 2
+              },
+              {
+                "disabled": false,
+                "nid": -1161073989,
+                "strtype": "LABEL/EventHandler",
+                "strval": "GESTURE_LEFT(GESTURE)",
+                "childs": [
+                  {
+                    "nid": -613706416,
+                    "strtype": "_custom/name",
+                    "strval": "Event15",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 624492931,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1500670679,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 696379757,
+                    "strtype": "_custom/action",
+                    "strval": "CHANGE SCREEN",
+                    "childs": [
+                      {
+                        "nid": -1263733679,
+                        "strtype": "CHANGE SCREEN/Name",
+                        "strval": "CHANGE SCREEN",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1698846570,
+                        "strtype": "CHANGE SCREEN/Call",
+                        "strval": "ChangeScreen( <{Screen_to}>, lv.SCR_LOAD_ANIM.<{Fade_mode}>, <{Speed}>, <{Delay}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1979009111,
+                        "strtype": "CHANGE SCREEN/CallC",
+                        "strval": "_ui_screen_change( <{Screen_to}>, LV_SCR_LOAD_ANIM_<{Fade_mode}>, <{Speed}>, <{Delay}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1293927892,
+                        "strtype": "CHANGE SCREEN/Screen_to",
+                        "strval": "GUID8868678-465399S3802106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1635534681,
+                        "strtype": "CHANGE SCREEN/Fade_mode",
+                        "strval": "MOVE_LEFT",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -908985983,
+                        "strtype": "CHANGE SCREEN/Speed",
+                        "integer": 500,
+                        "InheritedType": 6
+                      },
+                      {
+                        "nid": -1499722176,
+                        "strtype": "CHANGE SCREEN/Delay",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "LABEL"
@@ -13441,7 +13617,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 1543,
+    "backup_cnt": 1927,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.4",
     "callfuncsexport": "DONT_EXPORT",

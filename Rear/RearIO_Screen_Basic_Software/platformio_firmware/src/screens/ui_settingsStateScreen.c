@@ -41,7 +41,7 @@ ui_hp1DisplayLabel = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_hp1DisplayLabel, -163 );
-lv_obj_set_y( ui_hp1DisplayLabel, 59 );
+lv_obj_set_y( ui_hp1DisplayLabel, 57 );
 lv_obj_set_align( ui_hp1DisplayLabel, LV_ALIGN_TOP_MID );
 lv_label_set_text(ui_hp1DisplayLabel,"HP1 Text");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
@@ -50,7 +50,7 @@ ui_hp1DisplayLabel1 = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel1, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel1, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_hp1DisplayLabel1, -160 );
-lv_obj_set_y( ui_hp1DisplayLabel1, 109 );
+lv_obj_set_y( ui_hp1DisplayLabel1, 108 );
 lv_obj_set_align( ui_hp1DisplayLabel1, LV_ALIGN_TOP_MID );
 lv_label_set_text(ui_hp1DisplayLabel1,"HP2 Text");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel1, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
