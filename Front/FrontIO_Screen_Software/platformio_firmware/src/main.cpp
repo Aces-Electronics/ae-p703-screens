@@ -608,12 +608,6 @@ void setup()
     gfx->begin();
     gfx->setRotation(1);
 
-    String LVGL_Arduino = "Hello Arduino! ";
-    LVGL_Arduino += String('V') + lv_version_major() + "." + lv_version_minor() + "." + lv_version_patch();
-
-    Serial.println(LVGL_Arduino);
-    Serial.println("I am LVGL_Arduino");
-
     lv_init();
     lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
