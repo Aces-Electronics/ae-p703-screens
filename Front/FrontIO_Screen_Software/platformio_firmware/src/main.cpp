@@ -8,6 +8,8 @@
 #include "ui.h"
 #include <Arduino_GFX_Library.h>
 #include <TouchLib.h>
+#include <esp_now.h>
+#include <WiFi.h>
 
 #include "pin_config.h"
 
@@ -49,6 +51,197 @@ Preferences preferences;
 
 CircularBuffer<float, 500> buffer;
 
+// REPLACE WITH THE MAC Address of your receiver 
+uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+
+// Variable to store if sending data was successful
+String success;
+
+//Structure example to send data
+//Must match the receiver structure
+typedef struct struct_message_in0 {
+  int messageID = 0;
+  int incomingio1 = -1; // rear: basic/pro io1
+  char incomingio1Name[7];
+  int incomingio2 = -1; // rear: basic/pro io2
+  char incomingio2Name[7];
+  int incomingio3 = -1; // rear: basic/pro io3
+  char incomingio3Name[7];
+  int incomingio4 = -1; // rear: basic/pro io4
+  char incomingio4Name[7];
+  int incomingio5 = -1; // rear: pro io5
+  char incomingio5Name[7];
+  int incomingio6 = -1; // rear: pro io6
+  char incomingio6Name[7];
+  int incomingio7 = -1; // rear: pro io7
+  char incomingio7Name[7];
+  int incomingio8 = -1; // rear: pro io8
+  char incomingio8Name[7];
+  int incomingio9 = -1; // rear: pro io9
+  char incomingio9Name[7];
+  int incomingio10 = -1; // rear: pro io10
+  char incomingio10Name[7];
+  int incomingio11 = -1; // aux: io11
+  char incomingio11Name[7];
+  int incomingio12 = -1; // aux: io12
+  char incomingio12Name[7];
+  int incomingio13 = -1; // aux: io13
+  char incomingio13Name[7];
+  int incomingio14 = -1; // aux: io14
+  char incomingio14Name[7];
+  int incomingio15 = -1; // aux: io15
+  char incomingio15Name[7];
+  int incomingio16 = -1; // aux: io16
+  char incomingio16Name[7];
+  int incomingio17 = -1; // aux: io17
+  char incomingio17Name[7];
+  int incomingio18 = -1; // aux: io18
+  char incomingio18Name[7];
+  int incomingio19 = -1; // aux: io19
+  char incomingio19Name[7];
+} struct_message_in0;
+
+typedef struct struct_message_in1 {
+  int messageID = 1;
+  int incomingio20 = -1; // aux: io20
+  char incomingio20Name[7];
+  int incomingio21 = -1; // front: basic/pro io1
+  char incomingio21Name[7];
+  int incomingio22 = -1; // front: basic/pro io2
+  char incomingio22Name[7];
+  int incomingio23 = -1; // front: basic/pro io3
+  char incomingio23Name[7];
+  int incomingio24 = -1; // front: basic/pro io4
+  char incomingio24Name[7];
+  int incomingio25 = -1; // front: pro io5
+  char incomingio25Name[7];
+  int incomingio26 = -1; // front: pro io6
+  char incomingio26Name[7];
+  int incomingio27 = -1; // front: pro io7
+  char incomingio28Name[7];
+  int incomingio28 = -1; // front: pro io8
+  char incomingio29Name[7];
+  int incomingio29 = -1; // front: pro io9
+  char incomingio30Name[7];
+  int incomingio30 = -1; // front: pro io10
+  float incomingFrontMainBatt1V = -1;
+  float incomingFrontAuxBatt1V = -1;
+  float incomingRearMainBatt1V = -1;
+  float incomingrearAuxBatt1V = -1;
+  float incomingFrontMainBatt1I = -1;
+  float incomingFrontAuxBatt1I = -1;
+  float incomingRearMainBatt1I = -1;
+  float incomingrearAuxBatt1I = -1; 
+} struct_message_in1;
+
+// Create a struct_message called localReadings to hold sensor readings
+struct_message_in0 localReadings0;
+struct_message_in1 localReadings1;
+
+// Create a struct_message to hold incoming sensor readings
+struct_message_in0 remoteReadings0;
+struct_message_in1 remoteReadings1;
+
+esp_now_peer_info_t peerInfo;
+
+// Callback when data is sent
+void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
+  Serial.print("\r\nLast Packet Send Status:\t");
+  Serial.println(status == ESP_NOW_SEND_SUCCESS ? "Delivery Success" : "Delivery Fail");
+  if (status ==0){
+    success = "Delivery Success :)";
+  }
+  else{
+    success = "Delivery Fail :(";
+  }
+}
+
+// Callback when data is received
+void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
+
+  uint8_t type = incomingData[0]; 
+
+  Serial.println(type);
+
+  switch (type) {
+  case 0 : 
+    memcpy(&remoteReadings0, incomingData, sizeof(remoteReadings0));
+    Serial.print("0 Bytes received: ");
+    Serial.println(len);
+    localReadings0.incomingio1 = remoteReadings0.incomingio1; // rear: basic/pro io1
+    localReadings0.incomingio1Name[0] = remoteReadings0.incomingio1Name[0];
+    localReadings0.incomingio2 = remoteReadings0.incomingio2; // rear: basic/pro io2
+    localReadings0.incomingio2Name[0] = remoteReadings0.incomingio2Name[0];
+    localReadings0.incomingio3 = remoteReadings0.incomingio3; // rear: basic/pro io3
+    localReadings0.incomingio3Name[0] = remoteReadings0.incomingio3Name[0];
+    localReadings0.incomingio4 = remoteReadings0.incomingio4; // rear: basic/pro io4
+    localReadings0.incomingio4Name[0] = remoteReadings0.incomingio4Name[0];
+    localReadings0.incomingio5 = remoteReadings0.incomingio5; // rear: pro io5
+    localReadings0.incomingio5Name[0] = remoteReadings0.incomingio5Name[0];
+    localReadings0.incomingio6 = remoteReadings0.incomingio6; // rear: pro io6
+    localReadings0.incomingio6Name[0] = remoteReadings0.incomingio6Name[0];
+    localReadings0.incomingio7 = remoteReadings0.incomingio7; // rear: pro io7
+    localReadings0.incomingio7Name[0] = remoteReadings0.incomingio7Name[0];
+    localReadings0.incomingio8 = remoteReadings0.incomingio8; // rear: pro io8
+    localReadings0.incomingio8Name[0] = remoteReadings0.incomingio8Name[0];
+    localReadings0.incomingio9 = remoteReadings0.incomingio9; // rear: pro io9
+    localReadings0.incomingio9Name[0] = remoteReadings0.incomingio9Name[0];
+    localReadings0.incomingio10 = remoteReadings0.incomingio10; // rear: pro io10
+    localReadings0.incomingio10Name[0] = remoteReadings0.incomingio10Name[0];
+    localReadings0.incomingio11 = remoteReadings0.incomingio11; // aux: io11
+    localReadings0.incomingio11Name[0] = remoteReadings0.incomingio11Name[0];
+    localReadings0.incomingio12 = remoteReadings0.incomingio12; // aux: io12
+    localReadings0.incomingio12Name[0] = remoteReadings0.incomingio12Name[0];
+    localReadings0.incomingio13 = remoteReadings0.incomingio13; // aux: io13
+    localReadings0.incomingio13Name[0] = remoteReadings0.incomingio13Name[0];
+    localReadings0.incomingio14 = remoteReadings0.incomingio14; // aux: io14
+    localReadings0.incomingio14Name[0] = remoteReadings0.incomingio14Name[0];
+    localReadings0.incomingio15 = remoteReadings0.incomingio15; // aux: io15
+    localReadings0.incomingio15Name[0] = remoteReadings0.incomingio15Name[0];
+    localReadings0.incomingio16 = remoteReadings0.incomingio16; // aux: io16
+    localReadings0.incomingio16Name[0] = remoteReadings0.incomingio16Name[0];
+    localReadings0.incomingio17 = remoteReadings0.incomingio17; // aux: io17
+    localReadings0.incomingio17Name[0] = remoteReadings0.incomingio17Name[0];
+    localReadings0.incomingio18 = remoteReadings0.incomingio18; // aux: io18
+    localReadings0.incomingio18Name[0] = remoteReadings0.incomingio18Name[0];
+    localReadings0.incomingio19 = remoteReadings0.incomingio19; // aux: io19
+    localReadings0.incomingio19Name[0] = remoteReadings0.incomingio19Name[0];
+    break;
+
+  case 1 :
+    memcpy(&remoteReadings1, incomingData, sizeof(remoteReadings1));
+    Serial.print("1 Bytes received: ");
+    Serial.println(len);
+    localReadings1.incomingio20 = remoteReadings1.incomingio20; // aux: io20
+    localReadings1.incomingio21 = remoteReadings1.incomingio21; // front: basic/pro io1
+    localReadings1.incomingio22 = remoteReadings1.incomingio22; // front: basic/pro io2
+    localReadings1.incomingio23 = remoteReadings1.incomingio23; // front: basic/pro io3
+    localReadings1.incomingio24 = remoteReadings1.incomingio24; // front: basic/pro io4
+    localReadings1.incomingio25 = remoteReadings1.incomingio25; // front: pro io5
+    localReadings1.incomingio26 = remoteReadings1.incomingio26; // front: pro io6
+    localReadings1.incomingio27 = remoteReadings1.incomingio27; // front: pro io7
+    localReadings1.incomingio28 = remoteReadings1.incomingio28; // front: pro io8
+    localReadings1.incomingio29 = remoteReadings1.incomingio29; // front: pro io9
+    localReadings1.incomingio30 = remoteReadings1.incomingio30; // front: pro io10
+    localReadings1.incomingFrontMainBatt1V = remoteReadings1.incomingFrontMainBatt1V;
+    localReadings1.incomingFrontAuxBatt1V = remoteReadings1.incomingFrontAuxBatt1V;
+    localReadings1.incomingRearMainBatt1V = remoteReadings1.incomingRearMainBatt1V;
+    localReadings1.incomingrearAuxBatt1V = remoteReadings1.incomingrearAuxBatt1V;
+    localReadings1.incomingFrontMainBatt1I = remoteReadings1.incomingFrontMainBatt1I;
+    localReadings1.incomingFrontAuxBatt1I = remoteReadings1.incomingFrontAuxBatt1I;
+    localReadings1.incomingRearMainBatt1I = remoteReadings1.incomingRearMainBatt1I;
+    localReadings1.incomingrearAuxBatt1I = remoteReadings1.incomingrearAuxBatt1I;
+
+    auxVoltage = localReadings1.incomingrearAuxBatt1V;
+    Serial.println(auxVoltage);
+    dtostrf(localReadings1.incomingrearAuxBatt1V, 6, 2, vinResult);
+    char tmp[2] = "V";
+    strcat(vinResult, tmp);
+    lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
+    break;
+  }
+}
+
 static const uint16_t screenWidth = 320;
 static const uint16_t screenHeight = 170;
 
@@ -65,7 +258,6 @@ TouchLib touch(Wire, PIN_IIC_SDA, PIN_IIC_SCL, CTS820_SLAVE_ADDRESS, PIN_TOUCH_R
 
 int left_num = 0;
 int right_num = 0;
-
 
 /* Display flushing */
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
@@ -263,57 +455,28 @@ long smooth()
   return average;
 }
 
+void sendMessage ()
+{
+  // Send message via ESP-NOW
+  esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings0, sizeof(localReadings0));
+  if (result0 == ESP_OK) {
+    Serial.println("Sent with success");
+  }
+  else {
+    Serial.println("Error sending the data");
+  }
+  delay(200);
+  esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings1, sizeof(localReadings1));
+  if (result1 == ESP_OK) {
+    Serial.println("Sent with success");
+  }
+  else {
+    Serial.println("Error sending the data");
+  }
+}
+
 void checkVin()
 {
-  readAnalogVoltage(); // no calibration
-  float tempAuxVoltage = smooth() * (vRefScale * 1.006);
-  buffer.push(tempAuxVoltage); // fill the circular buffer for super smooth values
-
-  if (millis() - newtime >= 500)
-  {
-    newtime = millis();
-    float avg = 0.0;
-    // the following ensures using the right type for the index variable
-    using index_t = decltype(buffer)::index_t;
-    for (index_t i = 0; i < buffer.size(); i++)
-    {
-      avg += buffer[i] / buffer.size();
-    }
-    auxVoltage = avg;
-    dtostrf(auxVoltage, 6, 2, vinResult);
-    char tmp[2] = "V";
-    strcat(vinResult, tmp);
-
-    if (auxVoltage <= 16.00)
-    {
-      if (buffer.size() > 499)
-      {
-        if (avg / lastReading <= 0.99995)
-        {
-          batteryState = "Discharging";
-        }
-        else if (avg / lastReading >= 1.00005)
-        {
-          batteryState = "Charging";
-        }
-        else
-        {
-          batteryState = "Stable";
-        }
-      }
-      else
-      {
-        batteryState = "Checking...";
-      }
-      lastReading = avg;
-    }
-    else
-    {
-      batteryState = "Error!!!";
-    }
-    lv_label_set_text(ui_auxState, batteryState.c_str());
-  }
-
   lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
   if (auxVoltage < 11)
   {
@@ -633,13 +796,43 @@ void setup()
     loadPreferences();
     newtime = millis();
 
+    WiFi.mode(WIFI_MODE_STA);
+    Serial.println(WiFi.macAddress());
+
+    // Init ESP-NOW
+    if (esp_now_init() != ESP_OK) {
+      Serial.println("Error initializing ESP-NOW");
+      return;
+    }
+
+    esp_now_register_send_cb(OnDataSent);
+
+    // Register peer
+    memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+    peerInfo.channel = 0;  
+    peerInfo.encrypt = false;
+
+    // Add peer        
+    if (esp_now_add_peer(&peerInfo) != ESP_OK){
+      Serial.println("Failed to add peer");
+      return;
+    }
+
+    // Register for a callback function that will be called when data is received
+    esp_now_register_recv_cb(OnDataRecv);
+
     Serial.println("Setup done");
 }
-
+   
 void loop()
 {
     lv_timer_handler(); /* let the GUI do its work */
-    //checkVin();
+    checkVin();
+    if (millis() - newtime >= 2000)
+  {
+    newtime = millis();
+    //sendMessage();
+  }
     delay(5);
 }
 
