@@ -945,7 +945,7 @@
                       {
                         "nid": -2058531537,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_28",
+                        "strval": "montserrat_32",
                         "InheritedType": 3
                       }
                     ],
@@ -1841,7 +1841,7 @@
                       {
                         "nid": -1792152356,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_30",
+                        "strval": "montserrat_34",
                         "InheritedType": 3
                       }
                     ],
@@ -7105,7 +7105,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/gui_project/ae",
-    "backup_cnt": 2420,
+    "backup_cnt": 2421,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.4",
     "callfuncsexport": "DONT_EXPORT",

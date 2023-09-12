@@ -40,7 +40,7 @@ lv_obj_clear_flag( ui_auxBattPercentageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FL
 lv_obj_set_scrollbar_mode(ui_auxBattPercentageLabel, LV_SCROLLBAR_MODE_OFF);
 lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_auxBattPercentageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_auxBattPercentageLabel, &lv_font_montserrat_28, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_auxBattPercentageLabel, &lv_font_montserrat_32, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_warningLabel = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_warningLabel, LV_SIZE_CONTENT);  /// 1
@@ -75,7 +75,7 @@ lv_obj_clear_flag( ui_auxBattVoltageLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_
 lv_obj_set_scrollbar_mode(ui_auxBattVoltageLabel, LV_SCROLLBAR_MODE_OFF);
 lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x3B8CE8), LV_PART_MAIN | LV_STATE_DEFAULT );
 lv_obj_set_style_text_opa(ui_auxBattVoltageLabel, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
-lv_obj_set_style_text_font(ui_auxBattVoltageLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_auxBattVoltageLabel, &lv_font_montserrat_34, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_auxState = lv_label_create(ui_batteryStateScreen);
 lv_obj_set_width( ui_auxState, LV_SIZE_CONTENT);  /// 1
