@@ -32,7 +32,10 @@ String batteryState = "Stable";
 
 int rawValue = 0;
 float auxVoltage;
+float oldAuxVoltage;
 float lastReading;
+
+int loopCounter;
 
 const float r1 = 82000.0f; // R1 in ohm, 82k
 const float r2 = 16000.0f; // R2 in ohm, 16k
@@ -125,11 +128,11 @@ typedef struct struct_message_in1 {
   float incomingFrontMainBatt1V = -1;
   float incomingFrontAuxBatt1V = -1;
   float incomingRearMainBatt1V = -1;
-  float incomingrearAuxBatt1V = -1;
+  float incomingRearAuxBatt1V = -1;
   float incomingFrontMainBatt1I = -1;
   float incomingFrontAuxBatt1I = -1;
   float incomingRearMainBatt1I = -1;
-  float incomingrearAuxBatt1I = -1; 
+  float incomingRearAuxBatt1I = -1; 
 } struct_message_in1;
 
 // Create a struct_message called localReadings to hold sensor readings
@@ -222,18 +225,17 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
     localReadings1.incomingFrontMainBatt1V = remoteReadings1.incomingFrontMainBatt1V;
     localReadings1.incomingFrontAuxBatt1V = remoteReadings1.incomingFrontAuxBatt1V;
     localReadings1.incomingRearMainBatt1V = remoteReadings1.incomingRearMainBatt1V;
-    localReadings1.incomingrearAuxBatt1V = remoteReadings1.incomingrearAuxBatt1V;
+    localReadings1.incomingRearAuxBatt1V = remoteReadings1.incomingRearAuxBatt1V;
     localReadings1.incomingFrontMainBatt1I = remoteReadings1.incomingFrontMainBatt1I;
     localReadings1.incomingFrontAuxBatt1I = remoteReadings1.incomingFrontAuxBatt1I;
     localReadings1.incomingRearMainBatt1I = remoteReadings1.incomingRearMainBatt1I;
-    localReadings1.incomingrearAuxBatt1I = remoteReadings1.incomingrearAuxBatt1I;
+    localReadings1.incomingRearAuxBatt1I = remoteReadings1.incomingRearAuxBatt1I;
     break;
   }
 }
 
 class LGFX : public lgfx::LGFX_Device
 {
-
   lgfx::Panel_ST7796 _panel_instance;
   lgfx::Bus_Parallel8 _bus_instance; // 8ビットパラレルバスのインスタンス (ESP32のみ)
   lgfx::Light_PWM _light_instance;
@@ -621,6 +623,10 @@ long smooth()
 
 void sendMessage ()
 {
+  // create the data
+  localReadings1.incomingRearAuxBatt1V = auxVoltage;
+  localReadings0.incomingio1Name[0] = 'Test';
+
   // Send message via ESP-NOW
   esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings0, sizeof(localReadings0));
   if (result0 == ESP_OK) {
@@ -630,7 +636,6 @@ void sendMessage ()
     Serial.println("Error sending the data");
   }
   delay(200);
-  Serial.println(localReadings1.incomingrearAuxBatt1V);
   esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings1, sizeof(localReadings1));
   if (result1 == ESP_OK) {
     Serial.println("Sent with success");
@@ -643,8 +648,7 @@ void sendMessage ()
 void checkVin()
 {
   readAnalogVoltage(); // no calibration
-  float tempAuxVoltage = smooth() * (vRefScale * 1.006);
-  buffer.push(tempAuxVoltage); // fill the circular buffer for super smooth values
+  buffer.push(smooth() * (vRefScale * 1.006)); // fill the circular buffer for super smooth values
 
   if (millis() - newtime >= 1000)
   {
@@ -657,7 +661,6 @@ void checkVin()
       avg += buffer[i] / buffer.size();
     }
     auxVoltage = avg;
-    localReadings1.incomingrearAuxBatt1V = auxVoltage;
     dtostrf(auxVoltage, 6, 2, vinResult);
     char tmp[2] = "V";
     strcat(vinResult, tmp);
@@ -690,7 +693,15 @@ void checkVin()
       batteryState = "Error!!!";
     }
     lv_label_set_text(ui_auxState, batteryState.c_str());
-    sendMessage();
+
+    float temp = abs(oldAuxVoltage-auxVoltage);
+    if ((abs(oldAuxVoltage-auxVoltage) > 0.002) || ((abs(oldAuxVoltage-auxVoltage) < -0.002)))
+    {
+      Serial.print("temp: "); Serial.println(temp);
+      sendMessage();
+     
+    }
+    oldAuxVoltage = auxVoltage;
   }
 
   lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
@@ -856,12 +867,12 @@ void checkVin()
     }
     if (lp2IOState)
     {
-      digitalWrite(lp1, 1);
+      digitalWrite(lp2, 1);
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(lp1, 0);
+      digitalWrite(lp2, 0);
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
   }
@@ -1028,4 +1039,12 @@ void loop()
   lv_timer_handler();
   checkVin();
   delay(5);
+
+  if (loopCounter % 910 == 0) // ~60 secs
+  {
+    Serial.println("Sending sync message!");
+    sendMessage();
+    loopCounter = 0;
+  }
+  loopCounter++;
 }

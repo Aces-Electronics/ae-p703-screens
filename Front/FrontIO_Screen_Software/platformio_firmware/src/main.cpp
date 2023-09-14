@@ -43,7 +43,7 @@ const int numReadings = 100;
 int readings[numReadings];
 int readIndex = 0;
 long total = 0;
-char vinResult[8];
+char vinResult[8] = "WAIT!";
 
 unsigned long newtime = 0;
 
@@ -161,13 +161,12 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
   uint8_t type = incomingData[0]; 
 
-  Serial.println(type);
-
   switch (type) {
   case 0 : 
     memcpy(&remoteReadings0, incomingData, sizeof(remoteReadings0));
     Serial.print("0 Bytes received: ");
     Serial.println(len);
+    Serial.println(remoteReadings0.incomingio1);
     localReadings0.incomingio1 = remoteReadings0.incomingio1; // rear: basic/pro io1
     localReadings0.incomingio1Name[0] = remoteReadings0.incomingio1Name[0];
     localReadings0.incomingio2 = remoteReadings0.incomingio2; // rear: basic/pro io2
@@ -234,10 +233,9 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
     auxVoltage = localReadings1.incomingrearAuxBatt1V;
     Serial.println(auxVoltage);
-    dtostrf(localReadings1.incomingrearAuxBatt1V, 6, 2, vinResult);
+    dtostrf(auxVoltage, 6, 2, vinResult);
     char tmp[2] = "V";
     strcat(vinResult, tmp);
-    lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
     break;
   }
 }
