@@ -1088,5 +1088,5 @@ void loop()
     loopCounter = 0;
   }
   loopCounter++;
-
+  delay(5);
 }
