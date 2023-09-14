@@ -987,7 +987,7 @@ void loadPreferences()
       {
         lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-        digitalWrite(lp2, lp2IOState);
+        digitalWrite(lp2, localReadings0Struct.incomingio4);
       }
     }
     else

@@ -30,8 +30,9 @@ String lp2Label = "LP2";
 String frontDeviceState = "Stable";
 
 int rawValue = 0;
-float auxVoltage;
 float lastReading;
+
+int loopCounter;
 
 const float r1 = 82000.0f; // R1 in ohm, 82k
 const float r2 = 16000.0f; // R2 in ohm, 16k
@@ -207,13 +208,14 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
   switch (type) {
     case 0 : // message ID 0
+    {
       memcpy(&remoteReadings0Struct, incomingData, sizeof(remoteReadings0Struct));
       Serial.print("0: Bytes received: "); Serial.println(len);
       if (remoteReadings0Struct.incomingio1 != -1)
       {
         localReadings0Struct.incomingio1 = remoteReadings0Struct.incomingio1; // rear: basic/pro io1
-      }
-
+      } 
+      
       localReadings0Struct.incomingio1Name[0] = remoteReadings0Struct.incomingio1Name[0];
       localReadings0Struct.incomingio2 = remoteReadings0Struct.incomingio2; // rear: basic/pro io2
       localReadings0Struct.incomingio2Name[0] = remoteReadings0Struct.incomingio2Name[0];
@@ -251,9 +253,11 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       localReadings0Struct.incomingio18Name[0] = remoteReadings0Struct.incomingio18Name[0];
       localReadings0Struct.incomingio19 = remoteReadings0Struct.incomingio19; // aux: io19
       localReadings0Struct.incomingio19Name[0] = remoteReadings0Struct.incomingio19Name[0];
-      break;
+    }
+    break;
 
-    case 1 :
+    case 1 : // message ID 1
+    {
       memcpy(&remoteReadings1Struct, incomingData, sizeof(remoteReadings1Struct));
       Serial.print("1: Bytes received: "); Serial.println(len);
       localReadings1Struct.incomingio20 = remoteReadings1Struct.incomingio20; // aux: io20
@@ -278,15 +282,18 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       localReadings1Struct.rearDeviceState = remoteReadings1Struct.rearDeviceState;
       lv_label_set_text(ui_auxState, localReadings1Struct.rearDeviceState.c_str());
 
-      auxVoltage = localReadings1Struct.incomingrearAuxBatt1V;
-      dtostrf(auxVoltage, 6, 2, vinResult);
+      dtostrf(localReadings1Struct.incomingRearAuxBatt1V, 6, 2, vinResult);
       char tmp[2] = "V";
       strcat(vinResult, tmp);
-      break;
+      }
+    break;
+    
 
-      case 255 : // message ID 255: means that a device has rebooted and needs data outside the sync window
+    case 255 : // message ID 255: means that a device has rebooted and needs data outside the sync window
+    {
       sendMessage();
-      break;
+    }
+    break;
   }
 }
 
@@ -480,7 +487,7 @@ long smooth()
 void checkData()
 {
   lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
-  if (auxVoltage < 11)
+  if (localReadings1Struct.incomingRearAuxBatt1V < 11)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "FLAT!");
     lv_arc_set_value(ui_auxBattVoltageArc, 5);
@@ -489,7 +496,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.0)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 12.0)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "9%");
     lv_arc_set_value(ui_auxBattVoltageArc, 9);
@@ -498,7 +505,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.5)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 12.5)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "14%");
     lv_arc_set_value(ui_auxBattVoltageArc, 14);
@@ -507,7 +514,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.8)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 12.8)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "17%");
     lv_arc_set_value(ui_auxBattVoltageArc, 17);
@@ -516,7 +523,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.9)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 12.9)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "20%");
     lv_arc_set_value(ui_auxBattVoltageArc, 20);
@@ -525,7 +532,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.0)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.0)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "30%");
     lv_arc_set_value(ui_auxBattVoltageArc, 30);
@@ -534,7 +541,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.1)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.1)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "40%");
     lv_arc_set_value(ui_auxBattVoltageArc, 40);
@@ -543,7 +550,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.15)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.15)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "70%");
     lv_arc_set_value(ui_auxBattVoltageArc, 70);
@@ -552,7 +559,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.3)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.3)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "90%");
     lv_arc_set_value(ui_auxBattVoltageArc, 90);
@@ -561,7 +568,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.4)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.4)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "99%");
     lv_arc_set_value(ui_auxBattVoltageArc, 99);
@@ -570,7 +577,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.55)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 13.55)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "100%");
     lv_arc_set_value(ui_auxBattVoltageArc, 100);
@@ -579,7 +586,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 16.00)
+  else if (localReadings1Struct.incomingRearAuxBatt1V <= 16.00)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "100%");
     lv_arc_set_value(ui_auxBattVoltageArc, 100);
@@ -599,7 +606,7 @@ void checkData()
   }
   
   
-  if (auxVoltage < 11.00)
+  if (localReadings1Struct.incomingRearAuxBatt1V < 11.00)
   {
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -748,6 +755,7 @@ void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
   checkData();
+  
   if (loopCounter % 910 == 0) // ~60 secs
   {
     Serial.println("Sending sync message!");
