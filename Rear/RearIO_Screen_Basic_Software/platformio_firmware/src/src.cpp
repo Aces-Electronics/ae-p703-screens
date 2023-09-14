@@ -832,6 +832,7 @@ void checkData()
   }
   
   String ui_auxBattVoltageLabelText = String(localVoltage0Struct.rearAuxBatt1V);
+  ui_auxBattVoltageLabelText.concat("V");
   lv_label_set_text(ui_auxBattVoltageLabel, ui_auxBattVoltageLabelText.c_str());
   if (localVoltage0Struct.rearAuxBatt1V < 11)
   {

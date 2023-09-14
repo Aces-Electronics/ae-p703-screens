@@ -239,6 +239,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       if (remoteRear0Struct.rearIO1Name != "-1")
       {
         localRear0Struct.rearIO1Name = remoteRear0Struct.rearIO1Name;
+        lv_label_set_text(ui_hp1Label, localRear0Struct.rearIO1Name.c_str());
       } 
 
       if (remoteRear0Struct.rearIO2 != -1)
@@ -249,6 +250,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       if (remoteRear0Struct.rearIO2Name != "-1")
       {
         localRear0Struct.rearIO2Name = remoteRear0Struct.rearIO2Name;
+        lv_label_set_text(ui_hp2Label, localRear0Struct.rearIO2Name.c_str());
       } 
        
       if (remoteRear0Struct.rearIO3 != -1)
@@ -259,6 +261,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       if (remoteRear0Struct.rearIO3Name != "-1")
       {
         localRear0Struct.rearIO3Name = remoteRear0Struct.rearIO3Name;
+        lv_label_set_text(ui_lp1Label, localRear0Struct.rearIO3Name.c_str());
       } 
 
       if (remoteRear0Struct.rearIO4 != -1)
@@ -269,6 +272,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
       if (remoteRear0Struct.rearIO4Name != "-1")
       {
         localRear0Struct.rearIO4Name = remoteRear0Struct.rearIO4Name;
+        lv_label_set_text(ui_lp2Label, localRear0Struct.rearIO4Name.c_str());
       } 
 
       if (remoteRear0Struct.rearIO5 != -1)
@@ -578,6 +582,7 @@ long smooth()
 void checkData()
 {
   String ui_auxBattVoltageLabelText = String(localVoltage0Struct.rearAuxBatt1V);
+  ui_auxBattVoltageLabelText.concat("V");
   lv_label_set_text(ui_auxBattVoltageLabel, ui_auxBattVoltageLabelText.c_str());
   if (localVoltage0Struct.rearAuxBatt1V < 11)
   {
