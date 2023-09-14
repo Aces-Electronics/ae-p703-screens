@@ -676,7 +676,7 @@ long smooth()
   return average;
 }
 
-void checkVin()
+void checkData()
 {
   readAnalogVoltage(); // no calibration
   buffer.push(smooth() * (vRefScale * 1.006)); // fill the circular buffer for super smooth values
@@ -1079,7 +1079,7 @@ void setup()
 void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
-  checkVin();
+  checkData();
 
   if (loopCounter % 910 == 0) // ~60 secs
   {
