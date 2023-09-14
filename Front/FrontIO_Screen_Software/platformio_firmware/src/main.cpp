@@ -1,3 +1,5 @@
+// FRONT IO Basic
+
 #define TOUCH_MODULES_CST_SELF
 #include <Arduino.h>
 #include <lvgl.h>
@@ -20,17 +22,12 @@ const int hp2 = 11;
 const int lp1 = 12;
 const int lp2 = 13;
 
-bool hp1IOState = 0;
-bool hp2IOState = 0;
-bool lp1IOState = 0;
-bool lp2IOState = 0;
-
 String hp1Label = "HP1";
 String hp2Label = "HP2";
 String lp1Label = "LP1";
 String lp2Label = "LP2";
 
-String batteryState = "Stable";
+String frontDeviceState = "Stable";
 
 int rawValue = 0;
 float auxVoltage;
@@ -133,11 +130,12 @@ typedef struct struct_message_in1 {
   float incomingFrontMainBatt1V = -1;
   float incomingFrontAuxBatt1V = -1;
   float incomingRearMainBatt1V = -1;
-  float incomingrearAuxBatt1V = -1;
+  float incomingRearAuxBatt1V = -1;
   float incomingFrontMainBatt1I = -1;
   float incomingFrontAuxBatt1I = -1;
   float incomingRearMainBatt1I = -1;
-  float incomingrearAuxBatt1I = -1; 
+  float incomingRearAuxBatt1I = -1; 
+  String rearDeviceState = "WAIT!";
 } struct_message_in1;
 
 struct_message_priority priorityMessageStruct;
@@ -208,95 +206,87 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
   uint8_t type = incomingData[0]; 
 
   switch (type) {
-  case 0 : 
-    memcpy(&remoteReadings0Struct, incomingData, sizeof(remoteReadings0Struct));
-    Serial.print("0: Bytes received: "); Serial.println(len);
-    Serial.println(remoteReadings0Struct.incomingio1);
-
-    if ((remoteReadings0Struct.incomingio1 != -1) || (remoteReadings0Struct.incomingio1 != localReadings0Struct.incomingio1))
-    {
-      localReadings0Struct.incomingio1 = remoteReadings0Struct.incomingio1; // rear: basic/pro io1
-      if (localReadings0Struct.incomingio1 == 1)
+    case 0 : // message ID 0
+      memcpy(&remoteReadings0Struct, incomingData, sizeof(remoteReadings0Struct));
+      Serial.print("0: Bytes received: "); Serial.println(len);
+      if (remoteReadings0Struct.incomingio1 != -1)
       {
-        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, localReadings0Struct.incomingio1);
+        localReadings0Struct.incomingio1 = remoteReadings0Struct.incomingio1; // rear: basic/pro io1
       }
-      else
-      {
-        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, localReadings0Struct.incomingio1);
-      }
-    }
-    localReadings0Struct.incomingio1Name[0] = remoteReadings0Struct.incomingio1Name[0];
-    localReadings0Struct.incomingio2 = remoteReadings0Struct.incomingio2; // rear: basic/pro io2
-    localReadings0Struct.incomingio2Name[0] = remoteReadings0Struct.incomingio2Name[0];
-    localReadings0Struct.incomingio3 = remoteReadings0Struct.incomingio3; // rear: basic/pro io3
-    localReadings0Struct.incomingio3Name[0] = remoteReadings0Struct.incomingio3Name[0];
-    localReadings0Struct.incomingio4 = remoteReadings0Struct.incomingio4; // rear: basic/pro io4
-    localReadings0Struct.incomingio4Name[0] = remoteReadings0Struct.incomingio4Name[0];
-    localReadings0Struct.incomingio5 = remoteReadings0Struct.incomingio5; // rear: pro io5
-    localReadings0Struct.incomingio5Name[0] = remoteReadings0Struct.incomingio5Name[0];
-    localReadings0Struct.incomingio6 = remoteReadings0Struct.incomingio6; // rear: pro io6
-    localReadings0Struct.incomingio6Name[0] = remoteReadings0Struct.incomingio6Name[0];
-    localReadings0Struct.incomingio7 = remoteReadings0Struct.incomingio7; // rear: pro io7
-    localReadings0Struct.incomingio7Name[0] = remoteReadings0Struct.incomingio7Name[0];
-    localReadings0Struct.incomingio8 = remoteReadings0Struct.incomingio8; // rear: pro io8
-    localReadings0Struct.incomingio8Name[0] = remoteReadings0Struct.incomingio8Name[0];
-    localReadings0Struct.incomingio9 = remoteReadings0Struct.incomingio9; // rear: pro io9
-    localReadings0Struct.incomingio9Name[0] = remoteReadings0Struct.incomingio9Name[0];
-    localReadings0Struct.incomingio10 = remoteReadings0Struct.incomingio10; // rear: pro io10
-    localReadings0Struct.incomingio10Name[0] = remoteReadings0Struct.incomingio10Name[0];
-    localReadings0Struct.incomingio11 = remoteReadings0Struct.incomingio11; // aux: io11
-    localReadings0Struct.incomingio11Name[0] = remoteReadings0Struct.incomingio11Name[0];
-    localReadings0Struct.incomingio12 = remoteReadings0Struct.incomingio12; // aux: io12
-    localReadings0Struct.incomingio12Name[0] = remoteReadings0Struct.incomingio12Name[0];
-    localReadings0Struct.incomingio13 = remoteReadings0Struct.incomingio13; // aux: io13
-    localReadings0Struct.incomingio13Name[0] = remoteReadings0Struct.incomingio13Name[0];
-    localReadings0Struct.incomingio14 = remoteReadings0Struct.incomingio14; // aux: io14
-    localReadings0Struct.incomingio14Name[0] = remoteReadings0Struct.incomingio14Name[0];
-    localReadings0Struct.incomingio15 = remoteReadings0Struct.incomingio15; // aux: io15
-    localReadings0Struct.incomingio15Name[0] = remoteReadings0Struct.incomingio15Name[0];
-    localReadings0Struct.incomingio16 = remoteReadings0Struct.incomingio16; // aux: io16
-    localReadings0Struct.incomingio16Name[0] = remoteReadings0Struct.incomingio16Name[0];
-    localReadings0Struct.incomingio17 = remoteReadings0Struct.incomingio17; // aux: io17
-    localReadings0Struct.incomingio17Name[0] = remoteReadings0Struct.incomingio17Name[0];
-    localReadings0Struct.incomingio18 = remoteReadings0Struct.incomingio18; // aux: io18
-    localReadings0Struct.incomingio18Name[0] = remoteReadings0Struct.incomingio18Name[0];
-    localReadings0Struct.incomingio19 = remoteReadings0Struct.incomingio19; // aux: io19
-    localReadings0Struct.incomingio19Name[0] = remoteReadings0Struct.incomingio19Name[0];
-    break;
 
-  case 1 :
-    memcpy(&remoteReadings1Struct, incomingData, sizeof(remoteReadings1Struct));
-    Serial.print("1: Bytes received: "); Serial.println(len);
-    localReadings1Struct.incomingio20 = remoteReadings1Struct.incomingio20; // aux: io20
-    localReadings1Struct.incomingio21 = remoteReadings1Struct.incomingio21; // front: basic/pro io1
-    localReadings1Struct.incomingio22 = remoteReadings1Struct.incomingio22; // front: basic/pro io2
-    localReadings1Struct.incomingio23 = remoteReadings1Struct.incomingio23; // front: basic/pro io3
-    localReadings1Struct.incomingio24 = remoteReadings1Struct.incomingio24; // front: basic/pro io4
-    localReadings1Struct.incomingio25 = remoteReadings1Struct.incomingio25; // front: pro io5
-    localReadings1Struct.incomingio26 = remoteReadings1Struct.incomingio26; // front: pro io6
-    localReadings1Struct.incomingio27 = remoteReadings1Struct.incomingio27; // front: pro io7
-    localReadings1Struct.incomingio28 = remoteReadings1Struct.incomingio28; // front: pro io8
-    localReadings1Struct.incomingio29 = remoteReadings1Struct.incomingio29; // front: pro io9
-    localReadings1Struct.incomingio30 = remoteReadings1Struct.incomingio30; // front: pro io10
-    localReadings1Struct.incomingFrontMainBatt1V = remoteReadings1Struct.incomingFrontMainBatt1V;
-    localReadings1Struct.incomingFrontAuxBatt1V = remoteReadings1Struct.incomingFrontAuxBatt1V;
-    localReadings1Struct.incomingRearMainBatt1V = remoteReadings1Struct.incomingRearMainBatt1V;
-    localReadings1Struct.incomingrearAuxBatt1V = remoteReadings1Struct.incomingrearAuxBatt1V;
-    localReadings1Struct.incomingFrontMainBatt1I = remoteReadings1Struct.incomingFrontMainBatt1I;
-    localReadings1Struct.incomingFrontAuxBatt1I = remoteReadings1Struct.incomingFrontAuxBatt1I;
-    localReadings1Struct.incomingRearMainBatt1I = remoteReadings1Struct.incomingRearMainBatt1I;
-    localReadings1Struct.incomingrearAuxBatt1I = remoteReadings1Struct.incomingrearAuxBatt1I;
+      localReadings0Struct.incomingio1Name[0] = remoteReadings0Struct.incomingio1Name[0];
+      localReadings0Struct.incomingio2 = remoteReadings0Struct.incomingio2; // rear: basic/pro io2
+      localReadings0Struct.incomingio2Name[0] = remoteReadings0Struct.incomingio2Name[0];
+      localReadings0Struct.incomingio3 = remoteReadings0Struct.incomingio3; // rear: basic/pro io3
+      localReadings0Struct.incomingio3Name[0] = remoteReadings0Struct.incomingio3Name[0];
+      localReadings0Struct.incomingio4 = remoteReadings0Struct.incomingio4; // rear: basic/pro io4
+      localReadings0Struct.incomingio4Name[0] = remoteReadings0Struct.incomingio4Name[0];
+      localReadings0Struct.incomingio5 = remoteReadings0Struct.incomingio5; // rear: pro io5
+      localReadings0Struct.incomingio5Name[0] = remoteReadings0Struct.incomingio5Name[0];
+      localReadings0Struct.incomingio6 = remoteReadings0Struct.incomingio6; // rear: pro io6
+      localReadings0Struct.incomingio6Name[0] = remoteReadings0Struct.incomingio6Name[0];
+      localReadings0Struct.incomingio7 = remoteReadings0Struct.incomingio7; // rear: pro io7
+      localReadings0Struct.incomingio7Name[0] = remoteReadings0Struct.incomingio7Name[0];
+      localReadings0Struct.incomingio8 = remoteReadings0Struct.incomingio8; // rear: pro io8
+      localReadings0Struct.incomingio8Name[0] = remoteReadings0Struct.incomingio8Name[0];
+      localReadings0Struct.incomingio9 = remoteReadings0Struct.incomingio9; // rear: pro io9
+      localReadings0Struct.incomingio9Name[0] = remoteReadings0Struct.incomingio9Name[0];
+      localReadings0Struct.incomingio10 = remoteReadings0Struct.incomingio10; // rear: pro io10
+      localReadings0Struct.incomingio10Name[0] = remoteReadings0Struct.incomingio10Name[0];
+      localReadings0Struct.incomingio11 = remoteReadings0Struct.incomingio11; // aux: io11
+      localReadings0Struct.incomingio11Name[0] = remoteReadings0Struct.incomingio11Name[0];
+      localReadings0Struct.incomingio12 = remoteReadings0Struct.incomingio12; // aux: io12
+      localReadings0Struct.incomingio12Name[0] = remoteReadings0Struct.incomingio12Name[0];
+      localReadings0Struct.incomingio13 = remoteReadings0Struct.incomingio13; // aux: io13
+      localReadings0Struct.incomingio13Name[0] = remoteReadings0Struct.incomingio13Name[0];
+      localReadings0Struct.incomingio14 = remoteReadings0Struct.incomingio14; // aux: io14
+      localReadings0Struct.incomingio14Name[0] = remoteReadings0Struct.incomingio14Name[0];
+      localReadings0Struct.incomingio15 = remoteReadings0Struct.incomingio15; // aux: io15
+      localReadings0Struct.incomingio15Name[0] = remoteReadings0Struct.incomingio15Name[0];
+      localReadings0Struct.incomingio16 = remoteReadings0Struct.incomingio16; // aux: io16
+      localReadings0Struct.incomingio16Name[0] = remoteReadings0Struct.incomingio16Name[0];
+      localReadings0Struct.incomingio17 = remoteReadings0Struct.incomingio17; // aux: io17
+      localReadings0Struct.incomingio17Name[0] = remoteReadings0Struct.incomingio17Name[0];
+      localReadings0Struct.incomingio18 = remoteReadings0Struct.incomingio18; // aux: io18
+      localReadings0Struct.incomingio18Name[0] = remoteReadings0Struct.incomingio18Name[0];
+      localReadings0Struct.incomingio19 = remoteReadings0Struct.incomingio19; // aux: io19
+      localReadings0Struct.incomingio19Name[0] = remoteReadings0Struct.incomingio19Name[0];
+      break;
 
-    auxVoltage = localReadings1Struct.incomingrearAuxBatt1V;
-    Serial.println(auxVoltage);
-    dtostrf(auxVoltage, 6, 2, vinResult);
-    char tmp[2] = "V";
-    strcat(vinResult, tmp);
-    break;
+    case 1 :
+      memcpy(&remoteReadings1Struct, incomingData, sizeof(remoteReadings1Struct));
+      Serial.print("1: Bytes received: "); Serial.println(len);
+      localReadings1Struct.incomingio20 = remoteReadings1Struct.incomingio20; // aux: io20
+      localReadings1Struct.incomingio21 = remoteReadings1Struct.incomingio21; // front: basic/pro io1
+      localReadings1Struct.incomingio22 = remoteReadings1Struct.incomingio22; // front: basic/pro io2
+      localReadings1Struct.incomingio23 = remoteReadings1Struct.incomingio23; // front: basic/pro io3
+      localReadings1Struct.incomingio24 = remoteReadings1Struct.incomingio24; // front: basic/pro io4
+      localReadings1Struct.incomingio25 = remoteReadings1Struct.incomingio25; // front: pro io5
+      localReadings1Struct.incomingio26 = remoteReadings1Struct.incomingio26; // front: pro io6
+      localReadings1Struct.incomingio27 = remoteReadings1Struct.incomingio27; // front: pro io7
+      localReadings1Struct.incomingio28 = remoteReadings1Struct.incomingio28; // front: pro io8
+      localReadings1Struct.incomingio29 = remoteReadings1Struct.incomingio29; // front: pro io9
+      localReadings1Struct.incomingio30 = remoteReadings1Struct.incomingio30; // front: pro io10
+      localReadings1Struct.incomingFrontMainBatt1V = remoteReadings1Struct.incomingFrontMainBatt1V;
+      localReadings1Struct.incomingFrontAuxBatt1V = remoteReadings1Struct.incomingFrontAuxBatt1V;
+      localReadings1Struct.incomingRearMainBatt1V = remoteReadings1Struct.incomingRearMainBatt1V;
+      localReadings1Struct.incomingRearAuxBatt1V = remoteReadings1Struct.incomingRearAuxBatt1V;
+      localReadings1Struct.incomingFrontMainBatt1I = remoteReadings1Struct.incomingFrontMainBatt1I;
+      localReadings1Struct.incomingFrontAuxBatt1I = remoteReadings1Struct.incomingFrontAuxBatt1I;
+      localReadings1Struct.incomingRearMainBatt1I = remoteReadings1Struct.incomingRearMainBatt1I;
+      localReadings1Struct.incomingRearAuxBatt1I = remoteReadings1Struct.incomingRearAuxBatt1I;
+      localReadings1Struct.rearDeviceState = remoteReadings1Struct.rearDeviceState;
+      lv_label_set_text(ui_auxState, localReadings1Struct.rearDeviceState.c_str());
+
+      auxVoltage = localReadings1Struct.incomingrearAuxBatt1V;
+      dtostrf(auxVoltage, 6, 2, vinResult);
+      char tmp[2] = "V";
+      strcat(vinResult, tmp);
+      break;
+
+      case 255 : // message ID 255: means that a device has rebooted and needs data outside the sync window
+      sendMessage();
+      break;
   }
 }
 
@@ -363,16 +353,6 @@ void savePreferences()
 {
   Serial.println("saving to flash");
   preferences.begin("basic", false);
-  preferences.putString("hp1Label", hp1Label);
-  preferences.putString("hp2Label", hp2Label);
-  preferences.putString("lp1Label", lp1Label);
-  preferences.putString("lp2Label", lp2Label);
-
-  preferences.putBool("hp1IOState", hp1IOState);
-  preferences.putBool("hp2IOState", hp2IOState);
-  preferences.putBool("lp1IOState", lp1IOState);
-  preferences.putBool("lp2IOState", lp2IOState);
-
   preferences.end();
 }
 
@@ -391,20 +371,16 @@ void hp1ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    hp1IOState = !hp1IOState;
-    if (hp1IOState == 1)
+    localReadings0Struct.incomingio1 = !localReadings0Struct.incomingio1; // ToDo: check this logic
+    if (localReadings0Struct.incomingio1 == 1)
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
-      digitalWrite(hp1, hp1IOState);
-      savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
-      digitalWrite(hp1, hp1IOState);
-      savePreferences();
     }
   }
 }
@@ -414,20 +390,16 @@ void hp2ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    hp2IOState = !hp2IOState;
-    if (hp2IOState == 1)
+    localReadings0Struct.incomingio2 = !localReadings0Struct.incomingio2;
+    if (localReadings0Struct.incomingio2 == 1)
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
-      digitalWrite(hp2, hp2IOState);
-      savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
-      digitalWrite(hp2, hp2IOState);
-      savePreferences();
     }
   }
 }
@@ -437,20 +409,16 @@ void lp1ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    lp1IOState = !lp1IOState;
-    if (lp1IOState == 1)
+    localReadings0Struct.incomingio3 = !localReadings0Struct.incomingio3;
+    if (localReadings0Struct.incomingio3 == 1)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp1, lp1IOState);
-      savePreferences();
+      lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
     }
     else
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp1, lp1IOState);
-      savePreferences();
+      lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
     }
   }
 }
@@ -460,20 +428,16 @@ void lp2ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    lp2IOState = !lp2IOState;
-    if (lp2IOState == 1)
+    localReadings0Struct.incomingio4 = !localReadings0Struct.incomingio4;
+    if (localReadings0Struct.incomingio4 == 1)
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp2, lp2IOState);
-      savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp2, lp2IOState);
-      savePreferences();
     }
   }
 }
@@ -513,7 +477,7 @@ long smooth()
   return average;
 }
 
-void checkVin()
+void checkData()
 {
   lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
   if (auxVoltage < 11)
@@ -633,58 +597,59 @@ void checkVin()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
+  
+  
   if (auxVoltage < 11.00)
   {
-    digitalWrite(hp1, 0);
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(hp2, 0);
     lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(lp1, 0);
     lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(lp2, 0);
     lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   else 
   {
-    if (hp1IOState)
+    if (localReadings0Struct.incomingio1  == 1)
     {
-      digitalWrite(hp1, 1);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
     }
     else
     {
-      digitalWrite(hp1, 0);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
     }
-    if (hp2IOState)
+
+    if (localReadings0Struct.incomingio2 == 1)
     {
-      digitalWrite(hp2, 1);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
     }
     else
     {
-      digitalWrite(hp2, 0);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
     }
-    if (lp1IOState)
+
+    if (localReadings0Struct.incomingio3 == 1)
     {
-      digitalWrite(lp1, 1);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
     }
     else
     {
-      digitalWrite(lp1, 0);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
     }
-    if (lp2IOState)
+
+    if (localReadings0Struct.incomingio4 == 1)
     {
-      digitalWrite(lp1, 1);
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
     }
     else
     {
-      digitalWrite(lp1, 0);
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+      lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
     }
   }
 }
@@ -693,187 +658,104 @@ void loadPreferences()
 {
   if (preferences.begin("basic", false))
   {
-    if (preferences.getString("hp1Label", "None") != "None")
-    {
-      hp1Label = preferences.getString("hp1Label");
-      lv_label_set_text(ui_hp1Label, hp1Label.c_str());
-      lv_label_set_text(ui_ioLabel1, hp1Label.c_str());
-
-      hp2Label = preferences.getString("hp2Label");
-      lv_label_set_text(ui_hp2Label, hp2Label.c_str());
-      lv_label_set_text(ui_ioLabel2, hp2Label.c_str());
-
-      lp1Label = preferences.getString("lp1Label");
-      lv_label_set_text(ui_lp1Label, lp1Label.c_str());
-      lv_label_set_text(ui_ioLabel3, lp1Label.c_str());
-
-      lp2Label = preferences.getString("lp2Label");
-      lv_label_set_text(ui_lp2Label, lp2Label.c_str());
-      lv_label_set_text(ui_ioLabel4, lp2Label.c_str());
-
-      hp1IOState = preferences.getBool("hp1IOState", false);
-      if (hp1IOState == 1)
-      {
-        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, hp1IOState);
-      }
-      else
-      {
-        lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, hp1IOState);
-      }
-
-      hp2IOState = preferences.getBool("hp2IOState", false);
-      if (hp2IOState == 1)
-      {
-        lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
-        digitalWrite(hp2, hp2IOState);
-      }
-      else
-      {
-        lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
-        digitalWrite(hp2, hp2IOState);
-      }
-
-      lp1IOState = preferences.getBool("lp1IOState", false);
-      if (lp1IOState == 1)
-      {
-        lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
-        digitalWrite(lp1, lp1IOState);
-      }
-      else
-      {
-        lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
-        digitalWrite(lp1, lp1IOState);
-      }
-
-      lp2IOState = preferences.getBool("lp2IOState", false);
-      if (lp2IOState == 1)
-      {
-        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-        digitalWrite(lp2, lp2IOState);
-      }
-      else
-      {
-        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-        digitalWrite(lp2, lp2IOState);
-      }
-    }
-    else
-    {
-      preferences.putString("hp1Label", hp1Label);
-      preferences.putString("hp2Label", hp2Label);
-      preferences.putString("lp1Label", lp1Label);
-      preferences.putString("lp2Label", lp2Label);
-
-      preferences.putBool("hp1IOState", hp1IOState);
-      preferences.putBool("hp2IOState", hp2IOState);
-      preferences.putBool("lp1IOState", lp1IOState);
-      preferences.putBool("lp2IOState", lp2IOState);
-    }
+    Serial.println("Pref load");
   }
+
   preferences.end();
 }
 
 void setup()
 {
-    Serial.begin(115200); /* prepare for possible serial debug */
+  Serial.begin(115200); /* prepare for possible serial debug */
 
-    pinMode(PIN_LCD_BL, OUTPUT);
-    digitalWrite(PIN_LCD_BL, HIGH);
+  pinMode(PIN_LCD_BL, OUTPUT);
+  digitalWrite(PIN_LCD_BL, HIGH);
 
-    pinMode(PIN_LCD_RST, OUTPUT);
-    digitalWrite(PIN_LCD_RST, HIGH);
+  pinMode(PIN_LCD_RST, OUTPUT);
+  digitalWrite(PIN_LCD_RST, HIGH);
 
-    pinMode(PIN_TOUCH_RES, OUTPUT);
-    digitalWrite(PIN_TOUCH_RES, LOW);
-    delay(500);
-    digitalWrite(PIN_TOUCH_RES, HIGH);
+  pinMode(PIN_TOUCH_RES, OUTPUT);
+  digitalWrite(PIN_TOUCH_RES, LOW);
+  delay(500);
+  digitalWrite(PIN_TOUCH_RES, HIGH);
 
-    ledcSetup(0, 2000, 8);
-    ledcAttachPin(PIN_LCD_BL, 0);
-    ledcWrite(0, 255);
+  ledcSetup(0, 2000, 8);
+  ledcAttachPin(PIN_LCD_BL, 0);
+  ledcWrite(0, 255);
 
-    Wire.begin(PIN_IIC_SDA, PIN_IIC_SCL);
-    touch.init();
+  Wire.begin(PIN_IIC_SDA, PIN_IIC_SCL);
+  touch.init();
 
-    SPI.begin(SD_SCK, SD_MISO, SD_MOSI);
-    gfx->begin();
-    gfx->setRotation(1);
+  SPI.begin(SD_SCK, SD_MISO, SD_MOSI);
+  gfx->begin();
+  gfx->setRotation(1);
 
-    lv_init();
-    lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
+  lv_init();
+  lv_disp_draw_buf_init(&draw_buf, buf, NULL, screenWidth * screenHeight / 10);
 
-    /*Initialize the display*/
-    static lv_disp_drv_t disp_drv;
-    lv_disp_drv_init(&disp_drv);
-    /*Change the following line to your display resolution*/
-    disp_drv.hor_res = screenWidth;
-    disp_drv.ver_res = screenHeight;
-    disp_drv.flush_cb = my_disp_flush;
-    disp_drv.draw_buf = &draw_buf;
-    lv_disp_drv_register(&disp_drv);
+  /*Initialize the display*/
+  static lv_disp_drv_t disp_drv;
+  lv_disp_drv_init(&disp_drv);
+  disp_drv.hor_res = screenWidth;
+  disp_drv.ver_res = screenHeight;
+  disp_drv.flush_cb = my_disp_flush;
+  disp_drv.draw_buf = &draw_buf;
+  lv_disp_drv_register(&disp_drv);
 
-    /*Initialize the (dummy) input device driver*/
-    static lv_indev_drv_t indev_drv;
-    lv_indev_drv_init(&indev_drv);
-    indev_drv.type = LV_INDEV_TYPE_POINTER;
-    indev_drv.read_cb = my_touchpad_read;
-    lv_indev_drv_register(&indev_drv);
+  /*Initialize the (dummy) input device driver*/
+  static lv_indev_drv_t indev_drv;
+  lv_indev_drv_init(&indev_drv);
+  indev_drv.type = LV_INDEV_TYPE_POINTER;
+  indev_drv.read_cb = my_touchpad_read;
+  lv_indev_drv_register(&indev_drv);
 
-    ui_init();
-    
-    loadPreferences();
-    newtime = millis();
+  ui_init();
+  
+  //loadPreferences();
+  newtime = millis();
 
-    WiFi.mode(WIFI_MODE_STA);
-    Serial.println(WiFi.macAddress());
+  WiFi.mode(WIFI_MODE_STA);
+  Serial.println(WiFi.macAddress());
 
-    // Init ESP-NOW
-    if (esp_now_init() != ESP_OK) {
-      Serial.println("Error initializing ESP-NOW");
-      return;
-    }
+  // Init ESP-NOW
+  if (esp_now_init() != ESP_OK) {
+    Serial.println("Error initializing ESP-NOW");
+    return;
+  }
 
-    esp_now_register_send_cb(OnDataSent);
+  esp_now_register_send_cb(OnDataSent);
 
-    // Register peer
-    memcpy(peerInfo.peer_addr, broadcastAddress, 6);
-    peerInfo.channel = 0;  
-    peerInfo.encrypt = false;
+  // Register peer
+  memcpy(peerInfo.peer_addr, broadcastAddress, 6);
+  peerInfo.channel = 0;  
+  peerInfo.encrypt = false;
 
-    // Add peer        
-    if (esp_now_add_peer(&peerInfo) != ESP_OK){
-      Serial.println("Failed to add peer");
-      return;
-    }
+  // Add peer        
+  if (esp_now_add_peer(&peerInfo) != ESP_OK){
+    Serial.println("Failed to add peer");
+    return;
+  }
 
-    // Register for a callback function that will be called when data is received
-    esp_now_register_recv_cb(OnDataRecv);
+  // Register for a callback function that will be called when data is received
+  esp_now_register_recv_cb(OnDataRecv);
 
-    sendMessage(); // request nodes to send sync messages ASAP as priorityMessage = 1
+  sendMessage(); // request nodes to send sync messages ASAP as priorityMessage = 1
 
-    Serial.println("Setup done");
+  Serial.println("Setup done");
 }
    
 void loop()
 {
-    lv_timer_handler(); /* let the GUI do its work */
-    checkVin();
-    if (millis() - newtime >= 2000)
+  lv_timer_handler(); /* let the GUI do its work */
+  checkData();
+  if (loopCounter % 910 == 0) // ~60 secs
   {
-    newtime = millis();
+    Serial.println("Sending sync message!");
     //sendMessage();
+    loopCounter = 0;
   }
-    delay(5);
+  loopCounter++;
+  delay(5);
 }
 
 //------------------------------------------------------------------------
