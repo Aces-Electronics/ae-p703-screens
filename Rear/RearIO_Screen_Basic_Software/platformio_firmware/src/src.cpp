@@ -19,11 +19,6 @@ const int hp2 = 11;
 const int lp1 = 12;
 const int lp2 = 13;
 
-String hp1Label = "HP1";
-String hp2Label = "HP2";
-String lp1Label = "LP1";
-String lp2Label = "LP2";
-
 String rearDeviceState = "Stable";
 
 int rawValue = 0;
@@ -40,7 +35,7 @@ const int numReadings = 100;
 int readings[numReadings];
 int readIndex = 0;
 long total = 0;
-char vinResult[8] = "WAIT!";
+String vinResult = "WAIT!";
 
 unsigned long newtime = 0;
 
@@ -60,93 +55,114 @@ typedef struct struct_message_priority {
   int messageID = 255;
 } struct_message_priority;
 
-//Structure example to send data
 //Must match the receiver structure
-typedef struct struct_message_in0 {
-  int messageID = 0;
-  int incomingio1 = -1; // rear: basic/pro io1
-  char incomingio1Name[7];
-  int incomingio2 = -1; // rear: basic/pro io2
-  char incomingio2Name[7];
-  int incomingio3 = -1; // rear: basic/pro io3
-  char incomingio3Name[7];
-  int incomingio4 = -1; // rear: basic/pro io4
-  char incomingio4Name[7];
-  int incomingio5 = -1; // rear: pro io5
-  char incomingio5Name[7];
-  int incomingio6 = -1; // rear: pro io6
-  char incomingio6Name[7];
-  int incomingio7 = -1; // rear: pro io7
-  char incomingio7Name[7];
-  int incomingio8 = -1; // rear: pro io8
-  char incomingio8Name[7];
-  int incomingio9 = -1; // rear: pro io9
-  char incomingio9Name[7];
-  int incomingio10 = -1; // rear: pro io10
-  char incomingio10Name[7];
-  int incomingio11 = -1; // aux: io11
-  char incomingio11Name[7];
-  int incomingio12 = -1; // aux: io12
-  char incomingio12Name[7];
-  int incomingio13 = -1; // aux: io13
-  char incomingio13Name[7];
-  int incomingio14 = -1; // aux: io14
-  char incomingio14Name[7];
-  int incomingio15 = -1; // aux: io15
-  char incomingio15Name[7];
-  int incomingio16 = -1; // aux: io16
-  char incomingio16Name[7];
-  int incomingio17 = -1; // aux: io17
-  char incomingio17Name[7];
-  int incomingio18 = -1; // aux: io18
-  char incomingio18Name[7];
-  int incomingio19 = -1; // aux: io19
-  char incomingio19Name[7];
-} struct_message_in0;
+typedef struct struct_message_rear0 { // Rear hardware message
+  int messageID = 0; // sets the message ID
+  bool dataChanged = 0; // stores whether or not the data in the struct has changed
+  int rearIO1 = -1; // rear: basic/pro IO1
+  String rearIO1Name = "15A-1";
+  int rearIO2 = -1; // rear: basic/pro IO2
+  String rearIO2Name = "15A-2";
+  int rearIO3 = -1; // rear: basic/pro IO3
+  String rearIO3Name = "10A-1";
+  int rearIO4 = -1; // rear: basic/pro IO4
+  String rearIO4Name = "10A-2";
+  int rearIO5 = -1; // rear: pro IO5
+  String rearIO5Name = "-1";
+  int rearIO6 = -1; // rear: pro IO6
+  String rearIO6Name = "-1";
+  int rearIO7 = -1; // rear: pro IO7
+  String rearIO7Name = "-1";
+  int rearIO8 = -1; // rear: pro IO8
+  String rearIO8Name = "-1";
+  int rearIO9 = -1; // rear: pro IO9
+  String rearIO9Name = "-1";
+  int rearIO10 = -1; // rear: pro IO10
+  String rearIO10Name = "-1";
 
-typedef struct struct_message_in1 {
-  int messageID = 1;
-  int incomingio20 = -1; // aux: io20
-  char incomingio20Name[7];
-  int incomingio21 = -1; // front: basic/pro io1
-  char incomingio21Name[7];
-  int incomingio22 = -1; // front: basic/pro io2
-  char incomingio22Name[7];
-  int incomingio23 = -1; // front: basic/pro io3
-  char incomingio23Name[7];
-  int incomingio24 = -1; // front: basic/pro io4
-  char incomingio24Name[7];
-  int incomingio25 = -1; // front: pro io5
-  char incomingio25Name[7];
-  int incomingio26 = -1; // front: pro io6
-  char incomingio26Name[7];
-  int incomingio27 = -1; // front: pro io7
-  char incomingio28Name[7];
-  int incomingio28 = -1; // front: pro io8
-  char incomingio29Name[7];
-  int incomingio29 = -1; // front: pro io9
-  char incomingio30Name[7];
-  int incomingio30 = -1; // front: pro io10
-  float incomingFrontMainBatt1V = -1;
-  float incomingFrontAuxBatt1V = -1;
-  float incomingRearMainBatt1V = -1;
-  float incomingRearAuxBatt1V = -1;
-  float incomingFrontMainBatt1I = -1;
-  float incomingFrontAuxBatt1I = -1;
-  float incomingRearMainBatt1I = -1;
-  float incomingRearAuxBatt1I = -1; 
   String rearDeviceState = "WAIT!";
-} struct_message_in1;
+} struct_message_rear0;
+
+typedef struct struct_message_aux0 { // Aux hardware message
+  int messageID = 1;
+  bool dataChanged = 0; // stores whether or not the data in the struct has changed
+  String auxIO10Name = "-1";;
+  int auxIO11 = -1; // aux: IO11
+  String auxIO11Name = "-1";
+  int auxIO12 = -1; // aux: IO12
+  String auxIO12Name = "-1";
+  int auxIO13 = -1; // aux: IO13
+  String auxIO13Name = "-1";
+  int auxIO14 = -1; // aux: IO14
+  String auxIO14Name = "-1";
+  int auxIO15 = -1; // aux: IO15
+  String auxIO15Name = "-1";
+  int auxIO16 = -1; // aux: IO16
+  String auxIO16Name = "-1";
+  int auxIO17 = -1; // aux: IO17
+  String auxIO17Name = "-1";
+  int auxIO18 = -1; // aux: IO18
+  String auxIO18Name = "-1";
+  int auxIO19 = -1; // aux: IO19
+  String auxIO19Name = "-1";
+  int auxIO20 = -1; // aux: IO20
+  String auxIO20Name = "-1";
+
+  String auxDeviceState = "WAIT!";
+} struct_message_aux0;
+
+typedef struct struct_message_front0 { // Front hardware message
+  int messageID = 2;
+  bool dataChanged = 0; // stores whether or not the data in the struct has changed
+  int frontIO21 = -1; // front: basic/pro IO1
+  String frontIO21Name = "-1";
+  int frontIO22 = -1; // front: basic/pro IO2
+  String frontIO22Name = "-1";
+  int frontIO23 = -1; // front: basic/pro IO3
+  String frontIO23Name = "-1";
+  int frontIO24 = -1; // front: basic/pro IO4
+  String frontIO24Name = "-1";
+  int frontIO25 = -1; // front: pro IO5
+  String frontIO25Name = "-1";
+  int frontIO26 = -1; // front: pro IO6
+  String frontIO26Name = "-1";
+  int frontIO27 = -1; // front: pro IO7
+  String frontIO28Name = "-1";
+  int frontIO28 = -1; // front: pro IO8
+  String frontIO29Name = "-1";
+  int frontIO29 = -1; // front: pro IO9
+  String frontIO30Name = "-1";
+  int frontIO30 = -1; // front: pro IO10
+
+  String frontDeviceState = "WAIT!";
+} struct_message_front0;
+
+typedef struct struct_message_voltage0 { // Voltage message
+  int messageID = 3;
+  bool dataChanged = 0; // stores whether or not the data in the struct has changed
+  float frontMainBatt1V = -1;
+  float frontAuxBatt1V = -1;
+  float rearMainBatt1V = -1;
+  float rearAuxBatt1V = -1;
+  float frontMainBatt1I = -1;
+  float frontAuxBatt1I = -1;
+  float rearMainBatt1I = -1;
+  float rearAuxBatt1I = -1; 
+} struct_message_voltage0;
 
 struct_message_priority priorityMessageStruct;
 
 // Create a struct_message called localReadings to hold sensor readings
-struct_message_in0 localReadings0Struct;
-struct_message_in1 localReadings1Struct;
+struct_message_rear0 localRear0Struct;
+struct_message_aux0 localAux0Struct;
+struct_message_front0 localFront0Struct;
+struct_message_voltage0 localVoltage0Struct;
 
 // Create a struct_message to hold incoming sensor readings
-struct_message_in0 remoteReadings0Struct;
-struct_message_in1 remoteReadings1Struct;
+struct_message_rear0 remoteRear0Struct;
+struct_message_aux0 remoteAux0Struct;
+struct_message_front0 remoteFront0Struct;
+struct_message_voltage0 remoteVoltage0Struct;
 
 esp_now_peer_info_t peerInfo;
 
@@ -170,7 +186,7 @@ void sendMessage ()
   else
   {
     // Send message via ESP-NOW
-    esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings0Struct, sizeof(localReadings0Struct));
+    esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localRear0Struct, sizeof(localRear0Struct));
     if (result0 == ESP_OK) {
       Serial.println("Sent message 0 with success");
     }
@@ -178,7 +194,7 @@ void sendMessage ()
       Serial.println("Error sending the data");
     }
     delay(200);
-    esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings1Struct, sizeof(localReadings1Struct));
+    esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localVoltage0Struct, sizeof(localVoltage0Struct));
     if (result1 == ESP_OK) {
       Serial.println("Sent message 1 with success");
     }
@@ -207,80 +223,167 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
   switch (type) {
     case 0 : // message ID 0
-      memcpy(&remoteReadings0Struct, incomingData, sizeof(remoteReadings0Struct));
+      memcpy(&remoteRear0Struct, incomingData, sizeof(remoteRear0Struct));
       Serial.print("0: Bytes received: "); Serial.println(len);
-      if (remoteReadings0Struct.incomingio1 != -1)
-      {
-        localReadings0Struct.incomingio1 = remoteReadings0Struct.incomingio1; // rear: basic/pro io1
-      } 
       
-      localReadings0Struct.incomingio1Name[0] = remoteReadings0Struct.incomingio1Name[0];
-      localReadings0Struct.incomingio2 = remoteReadings0Struct.incomingio2; // rear: basic/pro io2
-      localReadings0Struct.incomingio2Name[0] = remoteReadings0Struct.incomingio2Name[0];
-      localReadings0Struct.incomingio3 = remoteReadings0Struct.incomingio3; // rear: basic/pro io3
-      localReadings0Struct.incomingio3Name[0] = remoteReadings0Struct.incomingio3Name[0];
-      localReadings0Struct.incomingio4 = remoteReadings0Struct.incomingio4; // rear: basic/pro io4
-      localReadings0Struct.incomingio4Name[0] = remoteReadings0Struct.incomingio4Name[0];
-      localReadings0Struct.incomingio5 = remoteReadings0Struct.incomingio5; // rear: pro io5
-      localReadings0Struct.incomingio5Name[0] = remoteReadings0Struct.incomingio5Name[0];
-      localReadings0Struct.incomingio6 = remoteReadings0Struct.incomingio6; // rear: pro io6
-      localReadings0Struct.incomingio6Name[0] = remoteReadings0Struct.incomingio6Name[0];
-      localReadings0Struct.incomingio7 = remoteReadings0Struct.incomingio7; // rear: pro io7
-      localReadings0Struct.incomingio7Name[0] = remoteReadings0Struct.incomingio7Name[0];
-      localReadings0Struct.incomingio8 = remoteReadings0Struct.incomingio8; // rear: pro io8
-      localReadings0Struct.incomingio8Name[0] = remoteReadings0Struct.incomingio8Name[0];
-      localReadings0Struct.incomingio9 = remoteReadings0Struct.incomingio9; // rear: pro io9
-      localReadings0Struct.incomingio9Name[0] = remoteReadings0Struct.incomingio9Name[0];
-      localReadings0Struct.incomingio10 = remoteReadings0Struct.incomingio10; // rear: pro io10
-      localReadings0Struct.incomingio10Name[0] = remoteReadings0Struct.incomingio10Name[0];
-      localReadings0Struct.incomingio11 = remoteReadings0Struct.incomingio11; // aux: io11
-      localReadings0Struct.incomingio11Name[0] = remoteReadings0Struct.incomingio11Name[0];
-      localReadings0Struct.incomingio12 = remoteReadings0Struct.incomingio12; // aux: io12
-      localReadings0Struct.incomingio12Name[0] = remoteReadings0Struct.incomingio12Name[0];
-      localReadings0Struct.incomingio13 = remoteReadings0Struct.incomingio13; // aux: io13
-      localReadings0Struct.incomingio13Name[0] = remoteReadings0Struct.incomingio13Name[0];
-      localReadings0Struct.incomingio14 = remoteReadings0Struct.incomingio14; // aux: io14
-      localReadings0Struct.incomingio14Name[0] = remoteReadings0Struct.incomingio14Name[0];
-      localReadings0Struct.incomingio15 = remoteReadings0Struct.incomingio15; // aux: io15
-      localReadings0Struct.incomingio15Name[0] = remoteReadings0Struct.incomingio15Name[0];
-      localReadings0Struct.incomingio16 = remoteReadings0Struct.incomingio16; // aux: io16
-      localReadings0Struct.incomingio16Name[0] = remoteReadings0Struct.incomingio16Name[0];
-      localReadings0Struct.incomingio17 = remoteReadings0Struct.incomingio17; // aux: io17
-      localReadings0Struct.incomingio17Name[0] = remoteReadings0Struct.incomingio17Name[0];
-      localReadings0Struct.incomingio18 = remoteReadings0Struct.incomingio18; // aux: io18
-      localReadings0Struct.incomingio18Name[0] = remoteReadings0Struct.incomingio18Name[0];
-      localReadings0Struct.incomingio19 = remoteReadings0Struct.incomingio19; // aux: io19
-      localReadings0Struct.incomingio19Name[0] = remoteReadings0Struct.incomingio19Name[0];
-      break;
+      localRear0Struct.messageID = remoteRear0Struct.messageID; // stores the message ID
+      localRear0Struct.dataChanged = remoteRear0Struct.dataChanged; // stores whether or not the data in the struct has changed
 
-    case 1 : // message ID 1
-     memcpy(&remoteReadings1Struct, incomingData, sizeof(remoteReadings1Struct));
+      if (remoteRear0Struct.rearIO1 != -1)
+      {
+        localRear0Struct.rearIO1 = remoteRear0Struct.rearIO1; // rear: basic/pro IO1
+      } 
+
+      if (remoteRear0Struct.rearIO1Name != "-1")
+      {
+        localRear0Struct.rearIO1Name = remoteRear0Struct.rearIO1Name;
+      } 
+
+      if (remoteRear0Struct.rearIO2 != -1)
+      {
+        localRear0Struct.rearIO2 = remoteRear0Struct.rearIO2; // rear: basic/pro IO1
+      } 
+
+      if (remoteRear0Struct.rearIO2Name != "-1")
+      {
+        localRear0Struct.rearIO2Name = remoteRear0Struct.rearIO2Name;
+      } 
+       
+      if (remoteRear0Struct.rearIO3 != -1)
+      {
+        localRear0Struct.rearIO3 = remoteRear0Struct.rearIO3; // rear: basic/pro IO1
+      } 
+
+      if (remoteRear0Struct.rearIO3Name != "-1")
+      {
+        localRear0Struct.rearIO3Name = remoteRear0Struct.rearIO3Name;
+      } 
+
+      if (remoteRear0Struct.rearIO4 != -1)
+      {
+        localRear0Struct.rearIO4 = remoteRear0Struct.rearIO4; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO4Name != "-1")
+      {
+        localRear0Struct.rearIO4Name = remoteRear0Struct.rearIO4Name;
+      } 
+
+      if (remoteRear0Struct.rearIO5 != -1)
+      {
+        localRear0Struct.rearIO5 = remoteRear0Struct.rearIO5; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO5Name != "-1")
+      {
+        localRear0Struct.rearIO5Name = remoteRear0Struct.rearIO5Name;
+      } 
+
+      if (remoteRear0Struct.rearIO6 != -1)
+      {
+        localRear0Struct.rearIO6 = remoteRear0Struct.rearIO6; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO6Name != "-1")
+      {
+        localRear0Struct.rearIO6Name = remoteRear0Struct.rearIO6Name;
+      } 
+
+      if (remoteRear0Struct.rearIO7 != -1)
+      {
+        localRear0Struct.rearIO7 = remoteRear0Struct.rearIO7; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO7Name != "-1")
+      {
+        localRear0Struct.rearIO7Name = remoteRear0Struct.rearIO7Name;
+      } 
+
+      if (remoteRear0Struct.rearIO8 != -1)
+      {
+        localRear0Struct.rearIO8 = remoteRear0Struct.rearIO8; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO8Name != "-1")
+      {
+        localRear0Struct.rearIO8Name = remoteRear0Struct.rearIO8Name;
+      } 
+
+      if (remoteRear0Struct.rearIO9 != -1)
+      {
+        localRear0Struct.rearIO9 = remoteRear0Struct.rearIO9; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO9Name != "-1")
+      {
+        localRear0Struct.rearIO9Name = remoteRear0Struct.rearIO9Name;
+      } 
+
+      if (remoteRear0Struct.rearIO10 != -1)
+      {
+        localRear0Struct.rearIO10 = remoteRear0Struct.rearIO10; // rear: basic/pro IO1
+      }
+
+      if (remoteRear0Struct.rearIO10Name != "-1")
+      {
+        localRear0Struct.rearIO10Name = remoteRear0Struct.rearIO10Name;
+      } 
+
+      if (localRear0Struct.rearDeviceState != "-1")
+      {
+        localRear0Struct.rearDeviceState = remoteRear0Struct.rearDeviceState;
+        lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
+      } 
+    break;
+    break;
+
+    case 3 : // message ID 1
+      memcpy(&remoteVoltage0Struct, incomingData, sizeof(remoteVoltage0Struct));
       Serial.print("1: Bytes received: "); Serial.println(len);
-      localReadings1Struct.incomingio20 = remoteReadings1Struct.incomingio20; // aux: io20
-      localReadings1Struct.incomingio21 = remoteReadings1Struct.incomingio21; // front: basic/pro io1
-      localReadings1Struct.incomingio22 = remoteReadings1Struct.incomingio22; // front: basic/pro io2
-      localReadings1Struct.incomingio23 = remoteReadings1Struct.incomingio23; // front: basic/pro io3
-      localReadings1Struct.incomingio24 = remoteReadings1Struct.incomingio24; // front: basic/pro io4
-      localReadings1Struct.incomingio25 = remoteReadings1Struct.incomingio25; // front: pro io5
-      localReadings1Struct.incomingio26 = remoteReadings1Struct.incomingio26; // front: pro io6
-      localReadings1Struct.incomingio27 = remoteReadings1Struct.incomingio27; // front: pro io7
-      localReadings1Struct.incomingio28 = remoteReadings1Struct.incomingio28; // front: pro io8
-      localReadings1Struct.incomingio29 = remoteReadings1Struct.incomingio29; // front: pro io9
-      localReadings1Struct.incomingio30 = remoteReadings1Struct.incomingio30; // front: pro io10
-      localReadings1Struct.incomingFrontMainBatt1V = remoteReadings1Struct.incomingFrontMainBatt1V;
-      localReadings1Struct.incomingFrontAuxBatt1V = remoteReadings1Struct.incomingFrontAuxBatt1V;
-      localReadings1Struct.incomingRearMainBatt1V = remoteReadings1Struct.incomingRearMainBatt1V;
-      localReadings1Struct.incomingRearAuxBatt1V = remoteReadings1Struct.incomingRearAuxBatt1V;
-      localReadings1Struct.incomingFrontMainBatt1I = remoteReadings1Struct.incomingFrontMainBatt1I;
-      localReadings1Struct.incomingFrontAuxBatt1I = remoteReadings1Struct.incomingFrontAuxBatt1I;
-      localReadings1Struct.incomingRearMainBatt1I = remoteReadings1Struct.incomingRearMainBatt1I;
-      localReadings1Struct.incomingRearAuxBatt1I = remoteReadings1Struct.incomingRearAuxBatt1I;
-      localReadings1Struct.rearDeviceState = remoteReadings1Struct.rearDeviceState;
-      break;
+      if (remoteVoltage0Struct.frontMainBatt1V != -1)
+      {
+        localVoltage0Struct.frontMainBatt1V = remoteVoltage0Struct.frontMainBatt1V;
+      }
+
+      if (remoteVoltage0Struct.frontAuxBatt1V != -1)
+      {
+        localVoltage0Struct.frontAuxBatt1V = remoteVoltage0Struct.frontAuxBatt1V;
+      }
+
+      if (remoteVoltage0Struct.rearMainBatt1V != -1)
+      {
+        localVoltage0Struct.rearMainBatt1V = remoteVoltage0Struct.rearMainBatt1V;
+      }
+
+      if (remoteVoltage0Struct.rearAuxBatt1V != -1)
+      {
+        localVoltage0Struct.rearAuxBatt1V = remoteVoltage0Struct.rearAuxBatt1V;
+      }
+
+      if (remoteVoltage0Struct.rearAuxBatt1I != -1)
+      {
+        localVoltage0Struct.rearAuxBatt1I = remoteVoltage0Struct.rearAuxBatt1I;
+      }
+
+      if (remoteVoltage0Struct.frontAuxBatt1I != -1)
+      {
+        localVoltage0Struct.frontAuxBatt1I = remoteVoltage0Struct.frontAuxBatt1I;
+      }
+
+      if (remoteVoltage0Struct.rearMainBatt1I != -1)
+      {
+        localVoltage0Struct.rearMainBatt1I = remoteVoltage0Struct.rearMainBatt1I;
+      }  
+
+      if (remoteVoltage0Struct.rearAuxBatt1I != -1)
+      {
+        localVoltage0Struct.rearAuxBatt1I = remoteVoltage0Struct.rearAuxBatt1I;
+      }     
+    break;
 
     case 255 : // message ID 255: means that a device has rebooted and needs data outside the sync window
       sendMessage();
-      break;
+    break;
   }
 }
 
@@ -429,15 +532,15 @@ void savePreferences()
 {
   Serial.println("saving to flash");
   preferences.begin("basic", false);
-  preferences.putString("hp1Label", hp1Label);
-  preferences.putString("hp2Label", hp2Label);
-  preferences.putString("lp1Label", lp1Label);
-  preferences.putString("lp2Label", lp2Label);
+  preferences.putString("hp1Label", localRear0Struct.rearIO1Name);
+  preferences.putString("hp2Label", localRear0Struct.rearIO2Name);
+  preferences.putString("lp1Label", localRear0Struct.rearIO3Name);
+  preferences.putString("lp2Label", localRear0Struct.rearIO4Name);
 
-  preferences.putInt("hp1IOState", localReadings0Struct.incomingio1);
-  preferences.putInt("hp2IOState", localReadings0Struct.incomingio2);
-  preferences.putInt("lp1IOState", localReadings0Struct.incomingio3);
-  preferences.putInt("lp2IOState", localReadings0Struct.incomingio4);
+  preferences.putInt("hp1IOState", localRear0Struct.rearIO1);
+  preferences.putInt("hp2IOState", localRear0Struct.rearIO2);
+  preferences.putInt("lp1IOState", localRear0Struct.rearIO3);
+  preferences.putInt("lp2IOState", localRear0Struct.rearIO4);
 
   preferences.end();
 }
@@ -466,10 +569,11 @@ void ui_event_hp1TextArea(lv_event_t *e)
     if (strlen(lv_textarea_get_text(ui_hp1TextArea)) !=0)
     {
       lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      hp1Label = lv_textarea_get_text(ui_hp1TextArea);
-      lv_label_set_text(ui_hp1Label, hp1Label.c_str());
-      lv_label_set_text(ui_ioLabel1, hp1Label.c_str());
+      localRear0Struct.rearIO1Name = lv_textarea_get_text(ui_hp1TextArea);
+      lv_label_set_text(ui_hp1Label, localRear0Struct.rearIO1Name.c_str());
+      lv_label_set_text(ui_ioLabel1, localRear0Struct.rearIO1Name.c_str());
       savePreferences();
+      sendMessage();
     }
   }
   if (event_code == LV_EVENT_CLICKED)
@@ -488,9 +592,9 @@ void ui_event_hp2TextArea(lv_event_t *e)
     if (strlen(lv_textarea_get_text(ui_hp2TextArea)) !=0)
     {
       lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      hp2Label = lv_textarea_get_text(ui_hp2TextArea);
-      lv_label_set_text(ui_hp2Label, hp2Label.c_str());
-      lv_label_set_text(ui_ioLabel2, hp2Label.c_str());
+      localRear0Struct.rearIO2Name = lv_textarea_get_text(ui_hp2TextArea);
+      lv_label_set_text(ui_hp2Label, localRear0Struct.rearIO2Name.c_str());
+      lv_label_set_text(ui_ioLabel2, localRear0Struct.rearIO2Name.c_str());
       savePreferences();
     }
   }
@@ -510,9 +614,9 @@ void ui_event_lp1TextArea(lv_event_t *e)
     if (strlen(lv_textarea_get_text(ui_lp1TextArea)) !=0)
     {
       lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      lp1Label = lv_textarea_get_text(ui_lp1TextArea);
-      lv_label_set_text(ui_lp1Label, lp1Label.c_str());
-      lv_label_set_text(ui_ioLabel3, lp1Label.c_str());
+      localRear0Struct.rearIO3Name = lv_textarea_get_text(ui_lp1TextArea);
+      lv_label_set_text(ui_lp1Label, localRear0Struct.rearIO3Name.c_str());
+      lv_label_set_text(ui_ioLabel3, localRear0Struct.rearIO3Name.c_str());
       savePreferences();
     }
   }
@@ -532,9 +636,9 @@ void ui_event_lp2TextArea(lv_event_t *e)
     if (strlen(lv_textarea_get_text(ui_lp2TextArea)) !=0)
     {
       lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      lp2Label = lv_textarea_get_text(ui_lp2TextArea);
-      lv_label_set_text(ui_lp2Label, lp2Label.c_str());
-      lv_label_set_text(ui_ioLabel4, lp2Label.c_str());
+      localRear0Struct.rearIO4Name = lv_textarea_get_text(ui_lp2TextArea);
+      lv_label_set_text(ui_lp2Label, localRear0Struct.rearIO4Name.c_str());
+      lv_label_set_text(ui_ioLabel4, localRear0Struct.rearIO4Name.c_str());
       savePreferences();
     }
   }
@@ -550,21 +654,20 @@ void hp1ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    localReadings0Struct.incomingio1 = !localReadings0Struct.incomingio1; // ToDo: check this logic
-    if (localReadings0Struct.incomingio1 == 1)
+    localRear0Struct.rearIO1 = !localRear0Struct.rearIO1; // ToDo: check this logic
+    if (localRear0Struct.rearIO1 == 1)
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
-      digitalWrite(hp1, localReadings0Struct.incomingio1);
       savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
-      digitalWrite(hp1, localReadings0Struct.incomingio1);
       savePreferences();
     }
+    digitalWrite(hp1, localRear0Struct.rearIO1);
     sendMessage();
   }
 }
@@ -574,21 +677,20 @@ void hp2ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    localReadings0Struct.incomingio2 = !localReadings0Struct.incomingio2;
-    if (localReadings0Struct.incomingio2 == 1)
+    localRear0Struct.rearIO2 = !localRear0Struct.rearIO2;
+    if (localRear0Struct.rearIO2 == 1)
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
-      digitalWrite(hp2, localReadings0Struct.incomingio2);
       savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
-      digitalWrite(hp2, localReadings0Struct.incomingio2);
       savePreferences();
     }
+    digitalWrite(hp2, localRear0Struct.rearIO2);
     sendMessage();
   }
 }
@@ -598,22 +700,21 @@ void lp1ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    localReadings0Struct.incomingio3 = !localReadings0Struct.incomingio3;
-    if (localReadings0Struct.incomingio3 == 1)
+    localRear0Struct.rearIO3 = !localRear0Struct.rearIO3;
+    if (localRear0Struct.rearIO3 == 1)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
-      digitalWrite(lp1, localReadings0Struct.incomingio3);
       savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
-      digitalWrite(lp1, localReadings0Struct.incomingio3);
       savePreferences();
     }
   }
+  digitalWrite(lp1, localRear0Struct.rearIO3);
   sendMessage();
 }
 
@@ -622,22 +723,21 @@ void lp2ToggleFunction(lv_event_t *e)
   lv_event_code_t code = lv_event_get_code(e);
   if (code == LV_EVENT_CLICKED)
   {
-    localReadings0Struct.incomingio4 = !localReadings0Struct.incomingio4;
-    if (localReadings0Struct.incomingio4 == 1)
+    localRear0Struct.rearIO4 = !localRear0Struct.rearIO4;
+    if (localRear0Struct.rearIO4 == 1)
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp2, localReadings0Struct.incomingio4);
       savePreferences();
     }
     else
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-      digitalWrite(lp2, localReadings0Struct.incomingio4);
       savePreferences();
     }
   }
+  digitalWrite(lp2, localRear0Struct.rearIO4);
   sendMessage();
 }
 
@@ -691,53 +791,49 @@ void checkData()
     {
       avg += buffer[i] / buffer.size();
     }
-    auxVoltage = avg;
-    dtostrf(auxVoltage, 6, 2, vinResult);
-    char tmp[2] = "V";
-    strcat(vinResult, tmp);
 
-    if (auxVoltage <= 16.00)
+    localVoltage0Struct.rearAuxBatt1V = avg;
+    if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
     {
       if (buffer.size() > 499)
       {
         if (avg / lastReading <= 0.99995)
         {
-          rearDeviceState = "Discharging";
+          localRear0Struct.rearDeviceState = "Discharging";
         }
         else if (avg / lastReading >= 1.00005)
         {
-          rearDeviceState = "Charging";
+          localRear0Struct.rearDeviceState = "Charging";
         }
         else
         {
-          rearDeviceState = "Stable";
+          localRear0Struct.rearDeviceState = "Stable";
         }
       }
       else
       {
-        rearDeviceState = "Checking...";
+        localRear0Struct.rearDeviceState = "Checking...";
       }
       lastReading = avg;
     }
     else
     {
-      localReadings1Struct.rearDeviceState = "Error!!!";
+      localRear0Struct.rearDeviceState = "Error!!!";
     }
-    localReadings1Struct.rearDeviceState = rearDeviceState;
-    lv_label_set_text(ui_auxState, rearDeviceState.c_str());
+    localRear0Struct.rearDeviceState = rearDeviceState;
+    lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
 
-    localReadings1Struct.incomingRearAuxBatt1V = auxVoltage;
-
-    if ((abs(oldAuxVoltage-auxVoltage) > 0.002) || ((abs(oldAuxVoltage-auxVoltage) < -0.002))) // if a (large?) voltage change, send out a message
+    if ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) > 0.002) || ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) < -0.002))) // if a (large?) voltage change, send out a message
     {
       Serial.println("Voltage change detected on AuxBatt, sending message...");
       sendMessage();
     }
-    oldAuxVoltage = auxVoltage;
+    oldAuxVoltage = localVoltage0Struct.rearAuxBatt1V;
   }
-
-  lv_label_set_text(ui_auxBattVoltageLabel, vinResult);
-  if (auxVoltage < 11)
+  
+  String ui_auxBattVoltageLabelText = String(localVoltage0Struct.rearAuxBatt1V);
+  lv_label_set_text(ui_auxBattVoltageLabel, ui_auxBattVoltageLabelText.c_str());
+  if (localVoltage0Struct.rearAuxBatt1V < 11)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "FLAT!");
     lv_arc_set_value(ui_auxBattVoltageArc, 5);
@@ -746,7 +842,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.0)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.0)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "9%");
     lv_arc_set_value(ui_auxBattVoltageArc, 9);
@@ -755,7 +851,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.5)
+  else if (localVoltage0Struct.rearAuxBatt1V<= 12.5)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "14%");
     lv_arc_set_value(ui_auxBattVoltageArc, 14);
@@ -764,7 +860,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.8)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.8)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "17%");
     lv_arc_set_value(ui_auxBattVoltageArc, 17);
@@ -773,7 +869,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 12.9)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.9)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "20%");
     lv_arc_set_value(ui_auxBattVoltageArc, 20);
@@ -782,7 +878,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.0)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.0)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "30%");
     lv_arc_set_value(ui_auxBattVoltageArc, 30);
@@ -791,7 +887,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.1)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.1)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "40%");
     lv_arc_set_value(ui_auxBattVoltageArc, 40);
@@ -800,7 +896,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.15)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.15)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "70%");
     lv_arc_set_value(ui_auxBattVoltageArc, 70);
@@ -809,7 +905,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.3)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.3)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "90%");
     lv_arc_set_value(ui_auxBattVoltageArc, 90);
@@ -818,7 +914,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.4)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.4)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "99%");
     lv_arc_set_value(ui_auxBattVoltageArc, 99);
@@ -827,7 +923,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 13.55)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.55)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "100%");
     lv_arc_set_value(ui_auxBattVoltageArc, 100);
@@ -836,7 +932,7 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else if (auxVoltage <= 16.00)
+  else if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
   {
     lv_label_set_text(ui_auxBattPercentageLabel, "100%");
     lv_arc_set_value(ui_auxBattVoltageArc, 100);
@@ -856,7 +952,7 @@ void checkData()
   }
 
 
-  if (auxVoltage < 11.00)
+  if (localVoltage0Struct.rearAuxBatt1V < 11.00)
   {
     digitalWrite(hp1, 0);
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -869,7 +965,7 @@ void checkData()
   }
   else 
   {
-    if (localReadings0Struct.incomingio1 == 1)
+    if (localRear0Struct.rearIO1 == 1)
     {
       digitalWrite(hp1, 1);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -879,7 +975,7 @@ void checkData()
       digitalWrite(hp1, 0);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-    if (localReadings0Struct.incomingio2 == 1)
+    if (localRear0Struct.rearIO2 == 1)
     {
       digitalWrite(hp2, 1);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -889,7 +985,7 @@ void checkData()
       digitalWrite(hp2, 0);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-    if (localReadings0Struct.incomingio3 == 1)
+    if (localRear0Struct.rearIO3 == 1)
     {
       digitalWrite(lp1, 1);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -899,7 +995,7 @@ void checkData()
       digitalWrite(lp1, 0);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-    if (localReadings0Struct.incomingio4 == 1)
+    if (localRear0Struct.rearIO4 == 1)
     {
       digitalWrite(lp2, 1);
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -918,89 +1014,85 @@ void loadPreferences()
   {
     if (preferences.getString("hp1Label", "None") != "None")
     {
-      hp1Label = preferences.getString("hp1Label");
-      lv_label_set_text(ui_hp1Label, hp1Label.c_str());
-      lv_label_set_text(ui_ioLabel1, hp1Label.c_str());
+      localRear0Struct.rearIO1Name = preferences.getString("hp1Label");
+      lv_label_set_text(ui_hp1Label, localRear0Struct.rearIO1Name.c_str());
+      lv_label_set_text(ui_ioLabel1, localRear0Struct.rearIO1Name.c_str());
 
-      hp2Label = preferences.getString("hp2Label");
-      lv_label_set_text(ui_hp2Label, hp2Label.c_str());
-      lv_label_set_text(ui_ioLabel2, hp2Label.c_str());
+      localRear0Struct.rearIO2Name = preferences.getString("hp2Label");
+      lv_label_set_text(ui_hp2Label, localRear0Struct.rearIO2Name.c_str());
+      lv_label_set_text(ui_ioLabel2, localRear0Struct.rearIO2Name.c_str());
 
-      lp1Label = preferences.getString("lp1Label");
-      lv_label_set_text(ui_lp1Label, lp1Label.c_str());
-      lv_label_set_text(ui_ioLabel3, lp1Label.c_str());
+      localRear0Struct.rearIO3Name = preferences.getString("lp1Label");
+      lv_label_set_text(ui_lp1Label, localRear0Struct.rearIO3Name.c_str());
+      lv_label_set_text(ui_ioLabel3, localRear0Struct.rearIO3Name.c_str());
 
-      lp2Label = preferences.getString("lp2Label");
-      lv_label_set_text(ui_lp2Label, lp2Label.c_str());
-      lv_label_set_text(ui_ioLabel4, lp2Label.c_str());
+      localRear0Struct.rearIO4Name = preferences.getString("lp2Label");
+      lv_label_set_text(ui_lp2Label, localRear0Struct.rearIO4Name.c_str());
+      lv_label_set_text(ui_ioLabel4, localRear0Struct.rearIO4Name.c_str());
 
-      localReadings0Struct.incomingio1 = preferences.getInt("hp1IOState", false);
-      if (localReadings0Struct.incomingio1 == 1)
+      localRear0Struct.rearIO1 = preferences.getInt("hp1IOState", false);
+      if (localRear0Struct.rearIO1 == 1)
       {
         lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, localReadings0Struct.incomingio1);
       }
       else
       {
         lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
-        digitalWrite(hp1, localReadings0Struct.incomingio1);
       }
+      digitalWrite(hp1, localRear0Struct.rearIO1);
 
-      localReadings0Struct.incomingio2 = preferences.getInt("hp2IOState", false);
-      if (localReadings0Struct.incomingio2 == 1)
+      localRear0Struct.rearIO2 = preferences.getInt("hp2IOState", false);
+      if (localRear0Struct.rearIO2 == 1)
       {
         lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
-        digitalWrite(hp2, localReadings0Struct.incomingio2);
       }
       else
       {
         lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
-        digitalWrite(hp2, localReadings0Struct.incomingio2);
       }
+      digitalWrite(hp2, localRear0Struct.rearIO2);
 
-      localReadings0Struct.incomingio3 = preferences.getInt("lp1IOState", false);
-      if (localReadings0Struct.incomingio3 == 1)
+      localRear0Struct.rearIO3 = preferences.getInt("lp1IOState", false);
+      if (localRear0Struct.rearIO3 == 1)
       {
         lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
-        digitalWrite(lp1, localReadings0Struct.incomingio3);
       }
       else
       {
         lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
-        digitalWrite(lp1, localReadings0Struct.incomingio3);
       }
+      digitalWrite(lp1, localRear0Struct.rearIO3);
 
-      localReadings0Struct.incomingio4 = preferences.getInt("lp2IOState", false);
-      if (localReadings0Struct.incomingio4 == 1)
+      localRear0Struct.rearIO4 = preferences.getInt("lp2IOState", false);
+      if (localRear0Struct.rearIO4 == 1)
       {
         lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-        digitalWrite(lp2, localReadings0Struct.incomingio4);
       }
       else
       {
         lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-        digitalWrite(lp2, localReadings0Struct.incomingio4);
       }
+      digitalWrite(lp2, localRear0Struct.rearIO4);
     }
     else
     {
-      preferences.putString("hp1Label", hp1Label);
-      preferences.putString("hp2Label", hp2Label);
-      preferences.putString("lp1Label", lp1Label);
-      preferences.putString("lp2Label", lp2Label);
+      preferences.putString("hp1Label", localRear0Struct.rearIO1Name);
+      preferences.putString("hp2Label", localRear0Struct.rearIO2Name);
+      preferences.putString("lp1Label", localRear0Struct.rearIO3Name);
+      preferences.putString("lp2Label", localRear0Struct.rearIO4Name);
 
-      preferences.putInt("hp1IOState", localReadings0Struct.incomingio1);
-      preferences.putInt("hp2IOState", localReadings0Struct.incomingio2);
-      preferences.putInt("lp1IOState", localReadings0Struct.incomingio3);
-      preferences.putInt("lp2IOState", localReadings0Struct.incomingio4);
+      preferences.putInt("hp1IOState", localRear0Struct.rearIO1);
+      preferences.putInt("hp2IOState", localRear0Struct.rearIO2);
+      preferences.putInt("lp1IOState", localRear0Struct.rearIO3);
+      preferences.putInt("lp2IOState", localRear0Struct.rearIO4);
     }
   }
   preferences.end();
@@ -1079,7 +1171,11 @@ void setup()
 void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
-  checkData();
+
+  if (loopCounter % 3 == 0) // ~1 secs
+  {
+    checkData();
+  }
 
   if (loopCounter % 910 == 0) // ~60 secs
   {
