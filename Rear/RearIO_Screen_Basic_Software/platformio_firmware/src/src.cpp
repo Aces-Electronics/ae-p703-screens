@@ -58,6 +58,12 @@ uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
 // Variable to store if sending data was successful
 String success;
 
+bool priorityMessage = 0;
+
+typedef struct struct_message_priority {
+  int messageID = 255;
+} struct_message_priority;
+
 //Structure example to send data
 //Must match the receiver structure
 typedef struct struct_message_in0 {
@@ -135,15 +141,55 @@ typedef struct struct_message_in1 {
   float incomingRearAuxBatt1I = -1; 
 } struct_message_in1;
 
+struct_message_priority priorityMessageStruct;
+
 // Create a struct_message called localReadings to hold sensor readings
-struct_message_in0 localReadings0;
-struct_message_in1 localReadings1;
+struct_message_in0 localReadings0Struct;
+struct_message_in1 localReadings1Struct;
 
 // Create a struct_message to hold incoming sensor readings
 struct_message_in0 remoteReadings0;
 struct_message_in1 remoteReadings1;
 
 esp_now_peer_info_t peerInfo;
+
+void sendMessage ()
+{
+  // create the data
+  //localReadings0StructStruct.incomingio1Name[0] = 'Test';
+
+  if (priorityMessage)
+  {
+    // Send message via ESP-NOW
+    esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &priorityMessageStruct, sizeof(priorityMessageStruct));
+    if (result0 == ESP_OK) {
+      Serial.println("Sent priority message with success");
+    }
+    else {
+      Serial.println("Error sending the data");
+    }
+    priorityMessage = 0;
+  }
+  else
+  {
+    // Send message via ESP-NOW
+    esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings0Struct, sizeof(localReadings0Struct));
+    if (result0 == ESP_OK) {
+      Serial.println("Sent message 0 with success");
+    }
+    else {
+      Serial.println("Error sending the data");
+    }
+    delay(200);
+    esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings1Struct, sizeof(localReadings1Struct));
+    if (result1 == ESP_OK) {
+      Serial.println("Sent message 1 with success");
+    }
+    else {
+      Serial.println("Error sending the data");
+    }
+  }
+}
 
 // Callback when data is sent
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
@@ -162,75 +208,80 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
   uint8_t type = incomingData[0]; 
 
-    switch (type) {
-  case 0 : 
-    memcpy(&remoteReadings0, incomingData, sizeof(remoteReadings0));
-    Serial.print("0 Bytes received: ");
-    Serial.println(len);
-    localReadings0.incomingio1 = remoteReadings0.incomingio1; // rear: basic/pro io1
-    localReadings0.incomingio1Name[0] = remoteReadings0.incomingio1Name[0];
-    localReadings0.incomingio2 = remoteReadings0.incomingio2; // rear: basic/pro io2
-    localReadings0.incomingio2Name[0] = remoteReadings0.incomingio2Name[0];
-    localReadings0.incomingio3 = remoteReadings0.incomingio3; // rear: basic/pro io3
-    localReadings0.incomingio3Name[0] = remoteReadings0.incomingio3Name[0];
-    localReadings0.incomingio4 = remoteReadings0.incomingio4; // rear: basic/pro io4
-    localReadings0.incomingio4Name[0] = remoteReadings0.incomingio4Name[0];
-    localReadings0.incomingio5 = remoteReadings0.incomingio5; // rear: pro io5
-    localReadings0.incomingio5Name[0] = remoteReadings0.incomingio5Name[0];
-    localReadings0.incomingio6 = remoteReadings0.incomingio6; // rear: pro io6
-    localReadings0.incomingio6Name[0] = remoteReadings0.incomingio6Name[0];
-    localReadings0.incomingio7 = remoteReadings0.incomingio7; // rear: pro io7
-    localReadings0.incomingio7Name[0] = remoteReadings0.incomingio7Name[0];
-    localReadings0.incomingio8 = remoteReadings0.incomingio8; // rear: pro io8
-    localReadings0.incomingio8Name[0] = remoteReadings0.incomingio8Name[0];
-    localReadings0.incomingio9 = remoteReadings0.incomingio9; // rear: pro io9
-    localReadings0.incomingio9Name[0] = remoteReadings0.incomingio9Name[0];
-    localReadings0.incomingio10 = remoteReadings0.incomingio10; // rear: pro io10
-    localReadings0.incomingio10Name[0] = remoteReadings0.incomingio10Name[0];
-    localReadings0.incomingio11 = remoteReadings0.incomingio11; // aux: io11
-    localReadings0.incomingio11Name[0] = remoteReadings0.incomingio11Name[0];
-    localReadings0.incomingio12 = remoteReadings0.incomingio12; // aux: io12
-    localReadings0.incomingio12Name[0] = remoteReadings0.incomingio12Name[0];
-    localReadings0.incomingio13 = remoteReadings0.incomingio13; // aux: io13
-    localReadings0.incomingio13Name[0] = remoteReadings0.incomingio13Name[0];
-    localReadings0.incomingio14 = remoteReadings0.incomingio14; // aux: io14
-    localReadings0.incomingio14Name[0] = remoteReadings0.incomingio14Name[0];
-    localReadings0.incomingio15 = remoteReadings0.incomingio15; // aux: io15
-    localReadings0.incomingio15Name[0] = remoteReadings0.incomingio15Name[0];
-    localReadings0.incomingio16 = remoteReadings0.incomingio16; // aux: io16
-    localReadings0.incomingio16Name[0] = remoteReadings0.incomingio16Name[0];
-    localReadings0.incomingio17 = remoteReadings0.incomingio17; // aux: io17
-    localReadings0.incomingio17Name[0] = remoteReadings0.incomingio17Name[0];
-    localReadings0.incomingio18 = remoteReadings0.incomingio18; // aux: io18
-    localReadings0.incomingio18Name[0] = remoteReadings0.incomingio18Name[0];
-    localReadings0.incomingio19 = remoteReadings0.incomingio19; // aux: io19
-    localReadings0.incomingio19Name[0] = remoteReadings0.incomingio19Name[0];
-    break;
+  switch (type) {
+    case 0 : // message ID 0
+      memcpy(&remoteReadings0, incomingData, sizeof(remoteReadings0));
+      Serial.print("0 Bytes received: ");
+      Serial.println(len);
+      localReadings0Struct.incomingio1 = remoteReadings0.incomingio1; // rear: basic/pro io1
+      localReadings0Struct.incomingio1Name[0] = remoteReadings0.incomingio1Name[0];
+      localReadings0Struct.incomingio2 = remoteReadings0.incomingio2; // rear: basic/pro io2
+      localReadings0Struct.incomingio2Name[0] = remoteReadings0.incomingio2Name[0];
+      localReadings0Struct.incomingio3 = remoteReadings0.incomingio3; // rear: basic/pro io3
+      localReadings0Struct.incomingio3Name[0] = remoteReadings0.incomingio3Name[0];
+      localReadings0Struct.incomingio4 = remoteReadings0.incomingio4; // rear: basic/pro io4
+      localReadings0Struct.incomingio4Name[0] = remoteReadings0.incomingio4Name[0];
+      localReadings0Struct.incomingio5 = remoteReadings0.incomingio5; // rear: pro io5
+      localReadings0Struct.incomingio5Name[0] = remoteReadings0.incomingio5Name[0];
+      localReadings0Struct.incomingio6 = remoteReadings0.incomingio6; // rear: pro io6
+      localReadings0Struct.incomingio6Name[0] = remoteReadings0.incomingio6Name[0];
+      localReadings0Struct.incomingio7 = remoteReadings0.incomingio7; // rear: pro io7
+      localReadings0Struct.incomingio7Name[0] = remoteReadings0.incomingio7Name[0];
+      localReadings0Struct.incomingio8 = remoteReadings0.incomingio8; // rear: pro io8
+      localReadings0Struct.incomingio8Name[0] = remoteReadings0.incomingio8Name[0];
+      localReadings0Struct.incomingio9 = remoteReadings0.incomingio9; // rear: pro io9
+      localReadings0Struct.incomingio9Name[0] = remoteReadings0.incomingio9Name[0];
+      localReadings0Struct.incomingio10 = remoteReadings0.incomingio10; // rear: pro io10
+      localReadings0Struct.incomingio10Name[0] = remoteReadings0.incomingio10Name[0];
+      localReadings0Struct.incomingio11 = remoteReadings0.incomingio11; // aux: io11
+      localReadings0Struct.incomingio11Name[0] = remoteReadings0.incomingio11Name[0];
+      localReadings0Struct.incomingio12 = remoteReadings0.incomingio12; // aux: io12
+      localReadings0Struct.incomingio12Name[0] = remoteReadings0.incomingio12Name[0];
+      localReadings0Struct.incomingio13 = remoteReadings0.incomingio13; // aux: io13
+      localReadings0Struct.incomingio13Name[0] = remoteReadings0.incomingio13Name[0];
+      localReadings0Struct.incomingio14 = remoteReadings0.incomingio14; // aux: io14
+      localReadings0Struct.incomingio14Name[0] = remoteReadings0.incomingio14Name[0];
+      localReadings0Struct.incomingio15 = remoteReadings0.incomingio15; // aux: io15
+      localReadings0Struct.incomingio15Name[0] = remoteReadings0.incomingio15Name[0];
+      localReadings0Struct.incomingio16 = remoteReadings0.incomingio16; // aux: io16
+      localReadings0Struct.incomingio16Name[0] = remoteReadings0.incomingio16Name[0];
+      localReadings0Struct.incomingio17 = remoteReadings0.incomingio17; // aux: io17
+      localReadings0Struct.incomingio17Name[0] = remoteReadings0.incomingio17Name[0];
+      localReadings0Struct.incomingio18 = remoteReadings0.incomingio18; // aux: io18
+      localReadings0Struct.incomingio18Name[0] = remoteReadings0.incomingio18Name[0];
+      localReadings0Struct.incomingio19 = remoteReadings0.incomingio19; // aux: io19
+      localReadings0Struct.incomingio19Name[0] = remoteReadings0.incomingio19Name[0];
+      break;
 
-  case 1 :
-    memcpy(&remoteReadings1, incomingData, sizeof(remoteReadings1));
-    Serial.print("1 Bytes received: ");
-    Serial.println(len);
-    localReadings1.incomingio20 = remoteReadings1.incomingio20; // aux: io20
-    localReadings1.incomingio21 = remoteReadings1.incomingio21; // front: basic/pro io1
-    localReadings1.incomingio22 = remoteReadings1.incomingio22; // front: basic/pro io2
-    localReadings1.incomingio23 = remoteReadings1.incomingio23; // front: basic/pro io3
-    localReadings1.incomingio24 = remoteReadings1.incomingio24; // front: basic/pro io4
-    localReadings1.incomingio25 = remoteReadings1.incomingio25; // front: pro io5
-    localReadings1.incomingio26 = remoteReadings1.incomingio26; // front: pro io6
-    localReadings1.incomingio27 = remoteReadings1.incomingio27; // front: pro io7
-    localReadings1.incomingio28 = remoteReadings1.incomingio28; // front: pro io8
-    localReadings1.incomingio29 = remoteReadings1.incomingio29; // front: pro io9
-    localReadings1.incomingio30 = remoteReadings1.incomingio30; // front: pro io10
-    localReadings1.incomingFrontMainBatt1V = remoteReadings1.incomingFrontMainBatt1V;
-    localReadings1.incomingFrontAuxBatt1V = remoteReadings1.incomingFrontAuxBatt1V;
-    localReadings1.incomingRearMainBatt1V = remoteReadings1.incomingRearMainBatt1V;
-    localReadings1.incomingRearAuxBatt1V = remoteReadings1.incomingRearAuxBatt1V;
-    localReadings1.incomingFrontMainBatt1I = remoteReadings1.incomingFrontMainBatt1I;
-    localReadings1.incomingFrontAuxBatt1I = remoteReadings1.incomingFrontAuxBatt1I;
-    localReadings1.incomingRearMainBatt1I = remoteReadings1.incomingRearMainBatt1I;
-    localReadings1.incomingRearAuxBatt1I = remoteReadings1.incomingRearAuxBatt1I;
-    break;
+    case 1 : // message ID 1
+      memcpy(&remoteReadings1, incomingData, sizeof(remoteReadings1));
+      Serial.print("1 Bytes received: ");
+      Serial.println(len);
+      localReadings1Struct.incomingio20 = remoteReadings1.incomingio20; // aux: io20
+      localReadings1Struct.incomingio21 = remoteReadings1.incomingio21; // front: basic/pro io1
+      localReadings1Struct.incomingio22 = remoteReadings1.incomingio22; // front: basic/pro io2
+      localReadings1Struct.incomingio23 = remoteReadings1.incomingio23; // front: basic/pro io3
+      localReadings1Struct.incomingio24 = remoteReadings1.incomingio24; // front: basic/pro io4
+      localReadings1Struct.incomingio25 = remoteReadings1.incomingio25; // front: pro io5
+      localReadings1Struct.incomingio26 = remoteReadings1.incomingio26; // front: pro io6
+      localReadings1Struct.incomingio27 = remoteReadings1.incomingio27; // front: pro io7
+      localReadings1Struct.incomingio28 = remoteReadings1.incomingio28; // front: pro io8
+      localReadings1Struct.incomingio29 = remoteReadings1.incomingio29; // front: pro io9
+      localReadings1Struct.incomingio30 = remoteReadings1.incomingio30; // front: pro io10
+      localReadings1Struct.incomingFrontMainBatt1V = remoteReadings1.incomingFrontMainBatt1V;
+      localReadings1Struct.incomingFrontAuxBatt1V = remoteReadings1.incomingFrontAuxBatt1V;
+      localReadings1Struct.incomingRearMainBatt1V = remoteReadings1.incomingRearMainBatt1V;
+      localReadings1Struct.incomingRearAuxBatt1V = remoteReadings1.incomingRearAuxBatt1V;
+      localReadings1Struct.incomingFrontMainBatt1I = remoteReadings1.incomingFrontMainBatt1I;
+      localReadings1Struct.incomingFrontAuxBatt1I = remoteReadings1.incomingFrontAuxBatt1I;
+      localReadings1Struct.incomingRearMainBatt1I = remoteReadings1.incomingRearMainBatt1I;
+      localReadings1Struct.incomingRearAuxBatt1I = remoteReadings1.incomingRearAuxBatt1I;
+      break;
+
+    case 255 : // message ID 255: means that a device has rebooted and needs data outside the sync window
+      sendMessage();
+      break;
+
   }
 }
 
@@ -500,6 +551,8 @@ void hp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     hp1IOState = !hp1IOState;
+    localReadings0Struct.incomingio1 = hp1IOState; 
+    sendMessage();
     if (hp1IOState == 1)
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -523,6 +576,8 @@ void hp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     hp2IOState = !hp2IOState;
+    localReadings0Struct.incomingio2 = hp2IOState; 
+    sendMessage();
     if (hp2IOState == 1)
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -546,6 +601,8 @@ void lp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     lp1IOState = !lp1IOState;
+    localReadings0Struct.incomingio3 = lp1IOState; 
+    sendMessage();
     if (lp1IOState == 1)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -569,6 +626,8 @@ void lp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     lp2IOState = !lp2IOState;
+    localReadings0Struct.incomingio4 = lp2IOState; 
+    sendMessage();
     if (lp2IOState == 1)
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -621,30 +680,6 @@ long smooth()
   return average;
 }
 
-void sendMessage ()
-{
-  // create the data
-  localReadings1.incomingRearAuxBatt1V = auxVoltage;
-  localReadings0.incomingio1Name[0] = 'Test';
-
-  // Send message via ESP-NOW
-  esp_err_t result0 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings0, sizeof(localReadings0));
-  if (result0 == ESP_OK) {
-    Serial.println("Sent with success");
-  }
-  else {
-    Serial.println("Error sending the data");
-  }
-  delay(200);
-  esp_err_t result1 = esp_now_send(broadcastAddress, (uint8_t *) &localReadings1, sizeof(localReadings1));
-  if (result1 == ESP_OK) {
-    Serial.println("Sent with success");
-  }
-  else {
-    Serial.println("Error sending the data");
-  }
-}
-
 void checkVin()
 {
   readAnalogVoltage(); // no calibration
@@ -694,12 +729,12 @@ void checkVin()
     }
     lv_label_set_text(ui_auxState, batteryState.c_str());
 
-    float temp = abs(oldAuxVoltage-auxVoltage);
-    if ((abs(oldAuxVoltage-auxVoltage) > 0.002) || ((abs(oldAuxVoltage-auxVoltage) < -0.002)))
+    localReadings1Struct.incomingRearAuxBatt1V = auxVoltage;
+
+    if ((abs(oldAuxVoltage-auxVoltage) > 0.002) || ((abs(oldAuxVoltage-auxVoltage) < -0.002))) // if a (large?) voltage change, send out a message
     {
-      Serial.print("temp: "); Serial.println(temp);
+      Serial.println("Voltage change detected on AuxBatt, sending message...");
       sendMessage();
-     
     }
     oldAuxVoltage = auxVoltage;
   }
@@ -1047,4 +1082,5 @@ void loop()
     loopCounter = 0;
   }
   loopCounter++;
+
 }
