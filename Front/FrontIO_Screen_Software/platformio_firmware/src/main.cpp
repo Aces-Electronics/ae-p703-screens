@@ -2,16 +2,15 @@
 
 #define TOUCH_MODULES_CST_SELF
 #include <Arduino.h>
-#include <lvgl.h>
 #include <driver/adc.h>
 #include <nvs_flash.h>
-#include <Preferences.h>
 #include <CircularBuffer.h>
 #include "ui.h"
 #include <Arduino_GFX_Library.h>
 #include <TouchLib.h>
 #include <esp_now.h>
 #include <WiFi.h>
+#include <lvgl.h>
 
 #include "pin_config.h"
 
@@ -40,8 +39,6 @@ long total = 0;
 String vinResult = "WAIT!";
 
 unsigned long newtime = 0;
-
-Preferences preferences;
 
 CircularBuffer<float, 500> buffer;
 
@@ -451,13 +448,6 @@ void my_touchpad_read(lv_indev_drv_t *indev_driver, lv_indev_data_t *data)
     }
 }
 
-void savePreferences()
-{
-  Serial.println("saving to flash");
-  preferences.begin("basic", false);
-  preferences.end();
-}
-
 void set_screen_brightness(lv_event_t *e)
 {
   lv_obj_t *slider = lv_event_get_target(e);
@@ -546,8 +536,8 @@ void lp2ToggleFunction(lv_event_t *e)
 
 void factoryReset(lv_event_t *e)
 {
-  nvs_flash_erase(); // erase the NVS partition.
-  nvs_flash_init();  // initialize the NVS partition.
+  //nvs_flash_erase(); // erase the NVS partition.
+  //nvs_flash_init();  // initialize the NVS partition.
   delay(500);
   ESP.restart(); // reset to clear memory
 }
@@ -758,19 +748,36 @@ void checkData()
   }
 }
 
-void loadPreferences()
+void my_log_cb(lv_log_level_t level, const char * file, uint32_t line, const char * fn_name, const char * dsc)
 {
-  if (preferences.begin("basic", false))
-  {
-    Serial.println("Pref load");
-  }
+  /*Send the logs via serial port*/
+  if(level == LV_LOG_LEVEL_ERROR) Serial.println("ERROR: ");
+  if(level == LV_LOG_LEVEL_WARN)  Serial.println("WARNING: ");
+  if(level == LV_LOG_LEVEL_INFO)  Serial.println("INFO: ");
+  if(level == LV_LOG_LEVEL_TRACE) Serial.println("TRACE: ");
 
-  preferences.end();
+  Serial.print("File: ");
+  Serial.println(file);
+
+  char line_str[8];
+  sprintf(line_str,"%d", line);
+  Serial.print("#");
+  Serial.print(line_str);
+
+  Serial.print(": ");
+  Serial.print(fn_name);
+  Serial.print(": ");
+  Serial.print(dsc);
+  Serial.println("\n");
 }
 
 void setup()
 {
   Serial.begin(115200); /* prepare for possible serial debug */
+
+  #if LV_USE_LOG
+    lv_log_register_print_cb(my_log_cb);
+  #endif
 
   pinMode(PIN_LCD_BL, OUTPUT);
   digitalWrite(PIN_LCD_BL, HIGH);
@@ -815,7 +822,6 @@ void setup()
 
   ui_init();
   
-  //loadPreferences();
   newtime = millis();
 
   WiFi.mode(WIFI_MODE_STA);
@@ -843,7 +849,7 @@ void setup()
   // Register for a callback function that will be called when data is received
   esp_now_register_recv_cb(OnDataRecv);
 
-  //sendMessage(); // request nodes to send sync messages ASAP as priorityMessage = 1
+  sendMessage(); // request nodes to send sync messages ASAP as priorityMessage = 1
 
   Serial.println("Setup done");
 }

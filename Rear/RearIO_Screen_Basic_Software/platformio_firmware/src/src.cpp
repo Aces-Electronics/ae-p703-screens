@@ -494,7 +494,7 @@ LGFX tft;
 #define screenHeight 320
 
 static lv_disp_draw_buf_t draw_buf;
-static lv_color_t buf[screenWidth * 10];
+static lv_color_t buf[screenWidth * screenHeight / 10];
 
 void my_disp_flush(lv_disp_drv_t *disp, const lv_area_t *area, lv_color_t *color_p)
 {
