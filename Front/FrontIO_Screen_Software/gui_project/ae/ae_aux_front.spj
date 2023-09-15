@@ -2434,7 +2434,7 @@
                       {
                         "nid": -10171372,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_22",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -2798,7 +2798,7 @@
                       {
                         "nid": -192350434,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_22",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -3162,7 +3162,7 @@
                       {
                         "nid": 1676727258,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_22",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -3526,7 +3526,7 @@
                       {
                         "nid": -1888912085,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_22",
+                        "strval": "montserrat_20",
                         "InheritedType": 3
                       }
                     ],
@@ -4166,7 +4166,7 @@
           {
             "disabled": false,
             "nid": 844250777,
-            "strtype": "SCREEN/EventHandler",
+            "strtype": "_event/EventHandler",
             "strval": "GESTURE_UP(GESTURE)",
             "childs": [
               {
@@ -4189,7 +4189,7 @@
               },
               {
                 "nid": 481646960,
-                "strtype": "_custom/action",
+                "strtype": "_event/action",
                 "strval": "CHANGE SCREEN",
                 "childs": [
                   {
@@ -6993,7 +6993,7 @@
           {
             "disabled": false,
             "nid": -1597038040,
-            "strtype": "SCREEN/EventHandler",
+            "strtype": "_event/EventHandler",
             "strval": "GESTURE_DOWN(GESTURE)",
             "childs": [
               {
@@ -7016,7 +7016,7 @@
               },
               {
                 "nid": 2035857907,
-                "strtype": "_custom/action",
+                "strtype": "_event/action",
                 "strval": "CHANGE SCREEN",
                 "childs": [
                   {
@@ -7084,7 +7084,7 @@
   "animations": [],
   "info": {
     "name": "SquareLine_Project.spj",
-    "depth": 1,
+    "depth": 2,
     "width": 320,
     "height": 170,
     "rotation": 180,
@@ -7105,9 +7105,9 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/gui_project/ae",
-    "backup_cnt": 2421,
+    "backup_cnt": 3432,
     "autosave_cnt": 0,
-    "lvgl_version": "8.3.4",
+    "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",
     "lvgl_include_path": "",
     "BitDepth": 16,
