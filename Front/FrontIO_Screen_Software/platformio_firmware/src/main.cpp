@@ -760,29 +760,6 @@ long smooth()
   return average;
 }
 
-void my_log_cb(lv_log_level_t level, const char * file, uint32_t line, const char * fn_name, const char * dsc)
-{
-  /*Send the logs via serial port*/
-  if(level == LV_LOG_LEVEL_ERROR) Serial.println("ERROR: ");
-  if(level == LV_LOG_LEVEL_WARN)  Serial.println("WARNING: ");
-  if(level == LV_LOG_LEVEL_INFO)  Serial.println("INFO: ");
-  if(level == LV_LOG_LEVEL_TRACE) Serial.println("TRACE: ");
-
-  Serial.print("File: ");
-  Serial.println(file);
-
-  char line_str[8];
-  sprintf(line_str,"%d", line);
-  Serial.print("#");
-  Serial.print(line_str);
-
-  Serial.print(": ");
-  Serial.print(fn_name);
-  Serial.print(": ");
-  Serial.print(dsc);
-  Serial.println("\n");
-}
-
 void setup()
 {
   Serial.begin(115200); /* prepare for possible serial debug */

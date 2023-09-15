@@ -337,7 +337,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
     break;
     break;
 
-    case 3 : // message ID 1
+    case 3 : // message ID 3, voltage
       memcpy(&remoteVoltage0Struct, incomingData, sizeof(remoteVoltage0Struct));
       Serial.print("1: Bytes received: "); Serial.println(len);
       if (remoteVoltage0Struct.frontMainBatt1V != -1)
