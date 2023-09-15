@@ -1602,7 +1602,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -2,
+                  -4,
                   -2
                 ],
                 "InheritedType": 7
@@ -2196,8 +2196,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -124,
-                  72
+                  -122,
+                  71
                 ],
                 "InheritedType": 7
               },
@@ -2434,7 +2434,7 @@
                       {
                         "nid": -10171372,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_18",
                         "InheritedType": 3
                       }
                     ],
@@ -2560,8 +2560,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -44,
-                  72
+                  -42,
+                  71
                 ],
                 "InheritedType": 7
               },
@@ -2798,7 +2798,7 @@
                       {
                         "nid": -192350434,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_18",
                         "InheritedType": 3
                       }
                     ],
@@ -2925,7 +2925,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   40,
-                  72
+                  71
                 ],
                 "InheritedType": 7
               },
@@ -3162,7 +3162,7 @@
                       {
                         "nid": 1676727258,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_18",
                         "InheritedType": 3
                       }
                     ],
@@ -3289,7 +3289,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   119,
-                  72
+                  71
                 ],
                 "InheritedType": 7
               },
@@ -3526,7 +3526,7 @@
                       {
                         "nid": -1888912085,
                         "strtype": "_style/Text_Font",
-                        "strval": "montserrat_20",
+                        "strval": "montserrat_18",
                         "InheritedType": 3
                       }
                     ],
@@ -7105,7 +7105,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Front/FrontIO_Screen_Software/gui_project/ae",
-    "backup_cnt": 3432,
+    "backup_cnt": 3439,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",

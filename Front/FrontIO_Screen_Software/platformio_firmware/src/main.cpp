@@ -215,6 +215,7 @@ void checkData()
 {
   char rearAuxBatt1VChars[8];
   dtostrf(localVoltage0Struct.rearAuxBatt1V,6,2,rearAuxBatt1VChars);
+  strcat(rearAuxBatt1VChars,"V");
   lv_label_set_text(ui_auxBattVoltageLabel, rearAuxBatt1VChars);
   if (localVoltage0Struct.rearAuxBatt1V < 11)
   {
