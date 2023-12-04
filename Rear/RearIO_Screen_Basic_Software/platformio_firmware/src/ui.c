@@ -195,6 +195,7 @@ void ui_event_brightnessBar( lv_event_t * e) {
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
       set_screen_brightness( e );
 }
+
 }
 void ui_event_factoryResetScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);

@@ -40,37 +40,37 @@ lv_obj_set_style_bg_opa(ui_brightnessBar, 255, LV_PART_MAIN| LV_STATE_DEFAULT);
 ui_hp1DisplayLabel = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp1DisplayLabel, -163 );
+lv_obj_set_x( ui_hp1DisplayLabel, -142 );
 lv_obj_set_y( ui_hp1DisplayLabel, 57 );
 lv_obj_set_align( ui_hp1DisplayLabel, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_hp1DisplayLabel,"HP1 Text");
+lv_label_set_text(ui_hp1DisplayLabel,"15A-1 Name");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_hp1DisplayLabel1 = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel1, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel1, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp1DisplayLabel1, -160 );
+lv_obj_set_x( ui_hp1DisplayLabel1, -142 );
 lv_obj_set_y( ui_hp1DisplayLabel1, 108 );
 lv_obj_set_align( ui_hp1DisplayLabel1, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_hp1DisplayLabel1,"HP2 Text");
+lv_label_set_text(ui_hp1DisplayLabel1,"15A-2 Name");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel1, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_hp1DisplayLabel2 = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel2, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel2, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp1DisplayLabel2, -166 );
+lv_obj_set_x( ui_hp1DisplayLabel2, -142 );
 lv_obj_set_y( ui_hp1DisplayLabel2, 162 );
 lv_obj_set_align( ui_hp1DisplayLabel2, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_hp1DisplayLabel2,"LP1 Text");
+lv_label_set_text(ui_hp1DisplayLabel2,"10A-1 Name");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel2, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_hp1DisplayLabel3 = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_hp1DisplayLabel3, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_hp1DisplayLabel3, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_hp1DisplayLabel3, -162 );
+lv_obj_set_x( ui_hp1DisplayLabel3, -142 );
 lv_obj_set_y( ui_hp1DisplayLabel3, 215 );
 lv_obj_set_align( ui_hp1DisplayLabel3, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_hp1DisplayLabel3,"LP2 Text");
+lv_label_set_text(ui_hp1DisplayLabel3,"10A-2 Name");
 lv_obj_set_style_text_font(ui_hp1DisplayLabel3, &lv_font_montserrat_30, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_hp1TextArea = lv_textarea_create(ui_settingsStateScreen);

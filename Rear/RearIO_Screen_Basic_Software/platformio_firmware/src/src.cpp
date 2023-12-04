@@ -1015,7 +1015,10 @@ void loadPreferences()
   {
     if (preferences.getString("hp1Label", "None") != "None")
     {
+      // ToDo: do better below with the c_str() stuff
       localRear0Struct.rearIO1Name = preferences.getString("hp1Label");
+      Serial.print("Preferences io1 label: "); Serial.println(preferences.getString("hp1Label"));
+      Serial.print("Local io1 label: "); Serial.println(localRear0Struct.rearIO1Name);
       lv_label_set_text(ui_hp1Label, localRear0Struct.rearIO1Name.c_str());
       lv_label_set_text(ui_ioLabel1, localRear0Struct.rearIO1Name.c_str());
 

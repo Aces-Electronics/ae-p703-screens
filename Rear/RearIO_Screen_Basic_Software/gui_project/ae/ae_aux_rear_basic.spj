@@ -2691,7 +2691,7 @@
               {
                 "nid": 1870264192,
                 "strtype": "LABEL/Text",
-                "strval": "HP1",
+                "strval": "15A-1",
                 "InheritedType": 10
               },
               {
@@ -3055,7 +3055,7 @@
               {
                 "nid": -1446877731,
                 "strtype": "LABEL/Text",
-                "strval": "HP2",
+                "strval": "15A-2",
                 "InheritedType": 10
               },
               {
@@ -3419,7 +3419,7 @@
               {
                 "nid": -1342018363,
                 "strtype": "LABEL/Text",
-                "strval": "LP1",
+                "strval": "10A-1",
                 "InheritedType": 10
               },
               {
@@ -3783,7 +3783,7 @@
               {
                 "nid": 737165706,
                 "strtype": "LABEL/Text",
-                "strval": "LP2",
+                "strval": "10A-2",
                 "InheritedType": 10
               },
               {
@@ -6163,7 +6163,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -163,
+                  -168,
                   -117
                 ],
                 "InheritedType": 7
@@ -6377,7 +6377,7 @@
               {
                 "nid": -1336502680,
                 "strtype": "LABEL/Text",
-                "strval": "HP1",
+                "strval": "15A-1",
                 "InheritedType": 10
               },
               {
@@ -6458,7 +6458,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -163,
+                  -168,
                   -38
                 ],
                 "InheritedType": 7
@@ -6672,7 +6672,7 @@
               {
                 "nid": 2006549178,
                 "strtype": "LABEL/Text",
-                "strval": "HP2",
+                "strval": "15A-2",
                 "InheritedType": 10
               },
               {
@@ -6967,7 +6967,7 @@
               {
                 "nid": 274724761,
                 "strtype": "LABEL/Text",
-                "strval": "LP1",
+                "strval": "10A-1",
                 "InheritedType": 10
               },
               {
@@ -7262,7 +7262,7 @@
               {
                 "nid": 1927971102,
                 "strtype": "LABEL/Text",
-                "strval": "LP2",
+                "strval": "10A-2",
                 "InheritedType": 10
               },
               {
@@ -8602,7 +8602,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -163,
+                  -142,
                   57
                 ],
                 "InheritedType": 7
@@ -8815,7 +8815,7 @@
               {
                 "nid": -1296986774,
                 "strtype": "LABEL/Text",
-                "strval": "HP1 Text",
+                "strval": "15A-1 Name",
                 "InheritedType": 10
               },
               {
@@ -8890,7 +8890,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -160,
+                  -142,
                   108
                 ],
                 "InheritedType": 7
@@ -9104,7 +9104,7 @@
               {
                 "nid": -2107754614,
                 "strtype": "LABEL/Text",
-                "strval": "HP2 Text",
+                "strval": "15A-2 Name",
                 "InheritedType": 10
               },
               {
@@ -9179,7 +9179,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -166,
+                  -142,
                   162
                 ],
                 "InheritedType": 7
@@ -9394,7 +9394,7 @@
               {
                 "nid": 404265310,
                 "strtype": "LABEL/Text",
-                "strval": "LP1 Text",
+                "strval": "10A-1 Name",
                 "InheritedType": 10
               },
               {
@@ -9469,7 +9469,7 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -162,
+                  -142,
                   215
                 ],
                 "InheritedType": 7
@@ -9684,7 +9684,7 @@
               {
                 "nid": -697037226,
                 "strtype": "LABEL/Text",
-                "strval": "LP2 Text",
+                "strval": "10A-2 Name",
                 "InheritedType": 10
               },
               {
@@ -13687,7 +13687,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 1937,
+    "backup_cnt": 2276,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",

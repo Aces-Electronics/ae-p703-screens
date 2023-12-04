@@ -665,6 +665,7 @@ void hp1ToggleFunction(lv_event_t *e)
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
     }
+    sendMessage();
   }
 }
 
@@ -684,6 +685,8 @@ void hp2ToggleFunction(lv_event_t *e)
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
     }
+    sendMessage();
+
   }
 }
 
@@ -703,6 +706,7 @@ void lp1ToggleFunction(lv_event_t *e)
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
     }
+    sendMessage();
   }
 }
 
@@ -722,13 +726,14 @@ void lp2ToggleFunction(lv_event_t *e)
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
     }
+    sendMessage();
   }
 }
 
 void factoryReset(lv_event_t *e)
 {
-  //nvs_flash_erase(); // erase the NVS partition.
-  //nvs_flash_init();  // initialize the NVS partition.
+  nvs_flash_erase(); // erase the NVS partition.
+  nvs_flash_init();  // initialize the NVS partition.
   delay(500);
   ESP.restart(); // reset to clear memory
 }
@@ -846,7 +851,7 @@ void loop()
   if (loopCounter % 2500 == 0) // ~60 secs
   {
     Serial.println("Sending sync message!");
-    //sendMessage();
+    sendMessage();
     loopCounter = 0;
   }
   loopCounter++;
