@@ -1,6 +1,9 @@
 // REAR IO Basic
 #define LGFX_USE_V1
 
+//3 seconds WDT
+#define WDT_TIMEOUT 3 
+
 #include <Arduino.h>
 #include <LovyanGFX.hpp>
 #include <driver/adc.h>
@@ -11,6 +14,12 @@
 #include "ui.h"
 #include <esp_now.h>
 #include <WiFi.h>
+#include <esp_task_wdt.h>
+
+// RS485
+const int RS_RXD = 1;
+const int RS_RTS = 2;
+const int RS_TXD = 42;
 
 // GPIO definitions
 const int vin = 14;
@@ -31,7 +40,7 @@ int loopCounter;
 const float r1 = 82000.0f; // R1 in ohm, 82k
 const float r2 = 16000.0f; // R2 in ohm, 16k
 float vRefScale = (3.3f / 4096.0f) * ((r1 + r2) / r2);
-const int numReadings = 100;
+const int numReadings = 50;
 int readings[numReadings];
 int readIndex = 0;
 long total = 0;
@@ -41,7 +50,7 @@ unsigned long newtime = 0;
 
 Preferences preferences;
 
-CircularBuffer<float, 500> buffer;
+CircularBuffer<float, 250> buffer;
 
 // REPLACE WITH THE MAC Address of your receiver 
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -334,7 +343,6 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
         localRear0Struct.rearDeviceState = remoteRear0Struct.rearDeviceState;
         lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
       } 
-    break;
     break;
 
     case 3 : // message ID 3, voltage
@@ -795,7 +803,7 @@ void checkData()
     localVoltage0Struct.rearAuxBatt1V = avg;
     if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
     {
-      if (buffer.size() > 499)
+      if (buffer.size() == buffer.capacity)
       {
         if (avg / lastReading <= 0.99995)
         {
@@ -1104,6 +1112,9 @@ void loadPreferences()
 
 void setup()
 {
+  esp_task_wdt_init(WDT_TIMEOUT, true); //enable panic so ESP32 restarts
+  esp_task_wdt_add(NULL); //add current thread to WDT watch
+
   Serial.begin(115200); /* prepare for possible serial debug */
 
   pinMode(hp1, OUTPUT);
@@ -1113,7 +1124,7 @@ void setup()
   pinMode(vin, INPUT);
 
   tft.begin();
-  tft.setRotation(3);     // 3 = upside down
+  tft.setRotation(1);     // 3 = upside down
   tft.setBrightness(255); // ToDo: make this an NVRAM setting and read it in on boot
 
   lv_init();
@@ -1175,6 +1186,7 @@ void setup()
 void loop()
 {
   lv_timer_handler(); /* let the GUI do its work */
+  esp_task_wdt_reset(); // reset the watchdog
 
   if (loopCounter % 3 == 0) // ~1 secs
   {
