@@ -14,7 +14,7 @@
 
 #include "pin_config.h"
 
-// GPIO definitions
+// GPIO definitionsk
 const int vin = 14;
 const int hp1 = 10; // outputs
 const int hp2 = 11;

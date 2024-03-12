@@ -1200,5 +1200,7 @@ void loop()
     loopCounter = 0;
   }
   loopCounter++;
-  delay(5);
+  //esp_sleep_enable_timer_wakeup(25 * 1000); //light sleep for 25 milli seconds
+  //esp_light_sleep_start(); 
+  delay(1);
 }
