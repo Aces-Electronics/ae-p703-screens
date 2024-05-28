@@ -22,11 +22,13 @@ const int RS_RTS = 2;
 const int RS_TXD = 42;
 
 // GPIO definitions
-const int vin = 14;
-const int hp1 = 10; // outputs
-const int hp2 = 11;
-const int lp1 = 12;
-const int lp2 = 13;
+const int VIn = 21; // mapped to unused pin for now
+const int OP1 = 10; // outputs
+const int OP2 = 11;
+const int OP3 = 12;
+const int AE_SDA = 13;
+const int AE_SDL = 14;
+//const int SPARE = 21; // unused
 
 String rearDeviceState = "Stable";
 
@@ -635,28 +637,6 @@ void ui_event_lp1TextArea(lv_event_t *e)
   }
 }
 
-void ui_event_lp2TextArea(lv_event_t *e)
-{
-  lv_event_code_t event_code = lv_event_get_code(e);
-  lv_obj_t *target = lv_event_get_target(e);
-  if (event_code == LV_EVENT_READY)
-  {
-    if (strlen(lv_textarea_get_text(ui_lp2TextArea)) !=0)
-    {
-      lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      localRear0Struct.rearIO4Name = lv_textarea_get_text(ui_lp2TextArea);
-      lv_label_set_text(ui_lp2Label, localRear0Struct.rearIO4Name.c_str());
-      lv_label_set_text(ui_ioLabel4, localRear0Struct.rearIO4Name.c_str());
-      savePreferences();
-    }
-  }
-  if (event_code == LV_EVENT_CLICKED)
-  {
-    _ui_keyboard_set_target(ui_settingsKeyboard, ui_lp2TextArea);
-    toggleKeyboard(e);
-  }
-}
-
 void hp1ToggleFunction(lv_event_t *e)
 {
   lv_event_code_t code = lv_event_get_code(e);
@@ -675,7 +655,7 @@ void hp1ToggleFunction(lv_event_t *e)
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
       savePreferences();
     }
-    digitalWrite(hp1, localRear0Struct.rearIO1);
+    digitalWrite(OP1, localRear0Struct.rearIO1);
     sendMessage();
   }
 }
@@ -698,7 +678,7 @@ void hp2ToggleFunction(lv_event_t *e)
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
       savePreferences();
     }
-    digitalWrite(hp2, localRear0Struct.rearIO2);
+    digitalWrite(OP2, localRear0Struct.rearIO2);
     sendMessage();
   }
 }
@@ -722,30 +702,7 @@ void lp1ToggleFunction(lv_event_t *e)
       savePreferences();
     }
   }
-  digitalWrite(lp1, localRear0Struct.rearIO3);
-  sendMessage();
-}
-
-void lp2ToggleFunction(lv_event_t *e)
-{
-  lv_event_code_t code = lv_event_get_code(e);
-  if (code == LV_EVENT_CLICKED)
-  {
-    localRear0Struct.rearIO4 = !localRear0Struct.rearIO4;
-    if (localRear0Struct.rearIO4 == 1)
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-      savePreferences();
-    }
-    else
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-      savePreferences();
-    }
-  }
-  digitalWrite(lp2, localRear0Struct.rearIO4);
+  digitalWrite(OP3, localRear0Struct.rearIO3);
   sendMessage();
 }
 
@@ -759,7 +716,7 @@ void factoryReset(lv_event_t *e)
 
 void readAnalogVoltage()
 {                  /* function readAnalogSmooth */
-  analogRead(vin); // turn and burn
+  analogRead(VIn); // turn and burn
 }
 
 long smooth()
@@ -769,7 +726,7 @@ long smooth()
   // subtract the last reading:
   total = total - readings[readIndex];
   // read the sensor:
-  readings[readIndex] = analogRead(vin);
+  readings[readIndex] = analogRead(VIn);
   // add value to total:
   total = total + readings[readIndex];
   // handle index
@@ -963,56 +920,44 @@ void checkData()
 
   if (localVoltage0Struct.rearAuxBatt1V < 11.00)
   {
-    digitalWrite(hp1, 0);
+    digitalWrite(OP1, 0);
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(hp2, 0);
+    digitalWrite(OP2, 0);
     lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(lp1, 0);
+    digitalWrite(OP3, 0);
     lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(lp2, 0);
-    lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   else 
   {
     if (localRear0Struct.rearIO1 == 1)
     {
-      digitalWrite(hp1, 1);
+      digitalWrite(OP1, 1);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(hp1, 0);
+      digitalWrite(OP1, 0);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     if (localRear0Struct.rearIO2 == 1)
     {
-      digitalWrite(hp2, 1);
+      digitalWrite(OP2, 1);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(hp2, 0);
+      digitalWrite(OP2, 0);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     if (localRear0Struct.rearIO3 == 1)
     {
-      digitalWrite(lp1, 1);
+      digitalWrite(OP3, 1);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(lp1, 0);
+      digitalWrite(OP3, 0);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    if (localRear0Struct.rearIO4 == 1)
-    {
-      digitalWrite(lp2, 1);
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    else
-    {
-      digitalWrite(lp2, 0);
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
   }
 }
@@ -1038,10 +983,6 @@ void loadPreferences()
       lv_label_set_text(ui_lp1Label, localRear0Struct.rearIO3Name.c_str());
       lv_label_set_text(ui_ioLabel3, localRear0Struct.rearIO3Name.c_str());
 
-      localRear0Struct.rearIO4Name = preferences.getString("lp2Label");
-      lv_label_set_text(ui_lp2Label, localRear0Struct.rearIO4Name.c_str());
-      lv_label_set_text(ui_ioLabel4, localRear0Struct.rearIO4Name.c_str());
-
       localRear0Struct.rearIO1 = preferences.getInt("hp1IOState", false);
       if (localRear0Struct.rearIO1 == 1)
       {
@@ -1053,7 +994,7 @@ void loadPreferences()
         lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
       }
-      digitalWrite(hp1, localRear0Struct.rearIO1);
+      digitalWrite(OP1, localRear0Struct.rearIO1);
 
       localRear0Struct.rearIO2 = preferences.getInt("hp2IOState", false);
       if (localRear0Struct.rearIO2 == 1)
@@ -1066,7 +1007,7 @@ void loadPreferences()
         lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
       }
-      digitalWrite(hp2, localRear0Struct.rearIO2);
+      digitalWrite(OP2, localRear0Struct.rearIO2);
 
       localRear0Struct.rearIO3 = preferences.getInt("lp1IOState", false);
       if (localRear0Struct.rearIO3 == 1)
@@ -1079,32 +1020,17 @@ void loadPreferences()
         lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
         lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
       }
-      digitalWrite(lp1, localRear0Struct.rearIO3);
-
-      localRear0Struct.rearIO4 = preferences.getInt("lp2IOState", false);
-      if (localRear0Struct.rearIO4 == 1)
-      {
-        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-      }
-      else
-      {
-        lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-        lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
-      }
-      digitalWrite(lp2, localRear0Struct.rearIO4);
+      digitalWrite(OP3, localRear0Struct.rearIO3);
     }
     else
     {
       preferences.putString("hp1Label", localRear0Struct.rearIO1Name);
       preferences.putString("hp2Label", localRear0Struct.rearIO2Name);
       preferences.putString("lp1Label", localRear0Struct.rearIO3Name);
-      preferences.putString("lp2Label", localRear0Struct.rearIO4Name);
 
       preferences.putInt("hp1IOState", localRear0Struct.rearIO1);
       preferences.putInt("hp2IOState", localRear0Struct.rearIO2);
       preferences.putInt("lp1IOState", localRear0Struct.rearIO3);
-      preferences.putInt("lp2IOState", localRear0Struct.rearIO4);
     }
   }
   preferences.end();
@@ -1117,11 +1043,10 @@ void setup()
 
   Serial.begin(115200); /* prepare for possible serial debug */
 
-  pinMode(hp1, OUTPUT);
-  pinMode(hp2, OUTPUT);
-  pinMode(lp1, OUTPUT);
-  pinMode(lp2, OUTPUT);
-  pinMode(vin, INPUT);
+  pinMode(OP1, OUTPUT);
+  pinMode(OP2, OUTPUT);
+  pinMode(OP3, OUTPUT);
+  pinMode(VIn, INPUT);
 
   tft.begin();
   tft.setRotation(1);     // 3 = upside down

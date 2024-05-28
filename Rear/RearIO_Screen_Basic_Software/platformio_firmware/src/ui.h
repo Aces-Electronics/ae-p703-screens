@@ -45,8 +45,6 @@ void ui_event_hp2Label( lv_event_t * e);
 extern lv_obj_t *ui_hp2Label;
 void ui_event_lp1Label( lv_event_t * e);
 extern lv_obj_t *ui_lp1Label;
-void ui_event_lp2Label( lv_event_t * e);
-extern lv_obj_t *ui_lp2Label;
 extern lv_obj_t *ui_auxBatteryStateLegend1;
 extern lv_obj_t *ui_auxState1;
 // SCREEN: ui_accessoryStateScreen
@@ -59,12 +57,9 @@ void ui_event_io2( lv_event_t * e);
 extern lv_obj_t *ui_io2;
 void ui_event_io3( lv_event_t * e);
 extern lv_obj_t *ui_io3;
-void ui_event_io4( lv_event_t * e);
-extern lv_obj_t *ui_io4;
 extern lv_obj_t *ui_ioLabel1;
 extern lv_obj_t *ui_ioLabel2;
 extern lv_obj_t *ui_ioLabel3;
-extern lv_obj_t *ui_ioLabel4;
 // SCREEN: ui_settingsStateScreen
 void ui_settingsStateScreen_screen_init(void);
 void ui_event_settingsStateScreen( lv_event_t * e);
@@ -76,15 +71,12 @@ extern lv_obj_t *ui_brightnessBar;
 extern lv_obj_t *ui_hp1DisplayLabel;
 extern lv_obj_t *ui_hp1DisplayLabel1;
 extern lv_obj_t *ui_hp1DisplayLabel2;
-extern lv_obj_t *ui_hp1DisplayLabel3;
 void ui_event_hp1TextArea( lv_event_t * e);
 extern lv_obj_t *ui_hp1TextArea;
 void ui_event_hp2TextArea( lv_event_t * e);
 extern lv_obj_t *ui_hp2TextArea;
 void ui_event_lp1TextArea( lv_event_t * e);
 extern lv_obj_t *ui_lp1TextArea;
-void ui_event_lp2TextArea( lv_event_t * e);
-extern lv_obj_t *ui_lp2TextArea;
 extern lv_obj_t *ui_settingsKeyboard;
 // SCREEN: ui_factoryResetScreen
 void ui_factoryResetScreen_screen_init(void);
