@@ -25,7 +25,6 @@ const int RS_RTS = 2;
 const int RS_TXD = 42;
 
 // GPIO definitions
-const int VIn = -1; // mapped to unused pin for now
 const int OP1 = 12; // outputs
 const int OP2 = 11;
 const int OP3 = 10;
@@ -1022,7 +1021,6 @@ void setup()
   pinMode(OP1, OUTPUT);
   pinMode(OP2, OUTPUT);
   pinMode(OP3, OUTPUT);
-  pinMode(VIn, INPUT);
 
   devicesFound = INA.begin(MAXIMUM_AMPS, SHUNT_MICRO_OHM);  // Expected max Amp & shunt resistance
   Serial.print(F(" - Detected "));

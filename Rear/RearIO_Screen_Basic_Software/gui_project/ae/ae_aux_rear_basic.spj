@@ -7078,8 +7078,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -145,
-                  267
+                  -138,
+                  64
                 ],
                 "InheritedType": 7
               },
@@ -7368,8 +7368,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  80,
-                  124
+                  81,
+                  -77
                 ],
                 "InheritedType": 7
               },
@@ -7415,7 +7415,7 @@
               {
                 "nid": 2035308454,
                 "strtype": "OBJECT/Press_lock",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -7457,13 +7457,13 @@
               {
                 "nid": 1230627109,
                 "strtype": "OBJECT/Gesture_bubble",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
                 "nid": 1762383443,
                 "strtype": "OBJECT/Snappable",
-                "strval": "True",
+                "strval": "False",
                 "InheritedType": 2
               },
               {
@@ -7728,8 +7728,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -141,
-                  70
+                  -138,
+                  127
                 ],
                 "InheritedType": 7
               },
@@ -8016,8 +8016,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -141,
-                  134
+                  -138,
+                  195
                 ],
                 "InheritedType": 7
               },
@@ -8305,8 +8305,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  -141,
-                  198
+                  -138,
+                  259
                 ],
                 "InheritedType": 7
               },
@@ -8596,7 +8596,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   87,
-                  -70
+                  -15
                 ],
                 "InheritedType": 7
               },
@@ -9013,7 +9013,7 @@
                       {
                         "nid": -1481185519,
                         "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "False",
+                        "strval": "True",
                         "InheritedType": 2
                       }
                     ],
@@ -9065,7 +9065,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   87,
-                  -6
+                  53
                 ],
                 "InheritedType": 7
               },
@@ -9550,7 +9550,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   87,
-                  58
+                  118
                 ],
                 "InheritedType": 7
               },
@@ -10353,13 +10353,13 @@
           {
             "nid": 1752631208,
             "strtype": "OBJECT/Scroll_elastic",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": 1477917142,
             "strtype": "OBJECT/Scroll_momentum",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -10377,7 +10377,7 @@
           {
             "nid": -557879847,
             "strtype": "OBJECT/Scroll_direction",
-            "strval": "ALL",
+            "strval": "HOR",
             "InheritedType": 3
           },
           {
@@ -11757,13 +11757,13 @@
           {
             "nid": -254694578,
             "strtype": "OBJECT/Scroll_elastic",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": -2098320435,
             "strtype": "OBJECT/Scroll_momentum",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -11781,7 +11781,7 @@
           {
             "nid": 131788790,
             "strtype": "OBJECT/Scroll_direction",
-            "strval": "ALL",
+            "strval": "HOR",
             "InheritedType": 3
           },
           {
@@ -12038,7 +12038,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 2287,
+    "backup_cnt": 2294,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",

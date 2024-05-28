@@ -8,7 +8,8 @@
 void ui_factoryResetScreen_screen_init(void)
 {
 ui_factoryResetScreen = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_factoryResetScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_clear_flag( ui_factoryResetScreen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
+lv_obj_set_scroll_dir(ui_factoryResetScreen, LV_DIR_HOR);
 
 ui_factoryResetText = lv_label_create(ui_factoryResetScreen);
 lv_obj_set_width( ui_factoryResetText, LV_SIZE_CONTENT);  /// 1
