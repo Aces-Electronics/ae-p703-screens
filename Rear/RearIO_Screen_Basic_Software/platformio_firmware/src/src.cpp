@@ -29,6 +29,8 @@ const int VIn = -1; // mapped to unused pin for now
 const int OP1 = 12; // outputs
 const int OP2 = 11;
 const int OP3 = 10;
+const int OFF = 1;
+const int ON = 0;
 //const int SPARE = 21; // unused
 
 String rearDeviceState = "Stable";
@@ -875,43 +877,43 @@ void checkData()
 
   if (localVoltage0Struct.rearAuxBatt1V < 11.00)
   {
-    digitalWrite(OP1, 0);
+    digitalWrite(OP1, OFF);
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(OP2, 0);
+    digitalWrite(OP2, OFF);
     lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(OP3, 0);
+    digitalWrite(OP3, OFF);
     lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   else 
   {
-    if (localRear0Struct.rearIO1 == 1)
+    if (localRear0Struct.rearIO1 == ON)
     {
-      digitalWrite(OP1, 1);
+      digitalWrite(OP1, ON);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(OP1, 0);
+      digitalWrite(OP1, OFF);
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-    if (localRear0Struct.rearIO2 == 1)
+    if (localRear0Struct.rearIO2 == ON)
     {
-      digitalWrite(OP2, 1);
+      digitalWrite(OP2, ON);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(OP2, 0);
+      digitalWrite(OP2, OFF);
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
-    if (localRear0Struct.rearIO3 == 1)
+    if (localRear0Struct.rearIO3 == ON)
     {
-      digitalWrite(OP3, 1);
+      digitalWrite(OP3, ON);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
     else
     {
-      digitalWrite(OP3, 0);
+      digitalWrite(OP3, OFF);
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
     }
   }
