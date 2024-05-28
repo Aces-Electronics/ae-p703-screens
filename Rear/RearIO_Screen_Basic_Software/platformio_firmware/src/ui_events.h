@@ -20,7 +20,6 @@ void set_screen_brightness(lv_event_t * e);
 void toggleKeyboard(lv_event_t * e);
 void toggleKeyboard(lv_event_t * e);
 void toggleKeyboard(lv_event_t * e);
-void toggleKeyboard(lv_event_t * e);
 void factoryReset(lv_event_t * e);
 
 #ifdef __cplusplus

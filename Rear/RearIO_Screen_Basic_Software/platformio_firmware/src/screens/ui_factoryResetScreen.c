@@ -16,7 +16,7 @@ lv_obj_set_height( ui_factoryResetText, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_factoryResetText, 4 );
 lv_obj_set_y( ui_factoryResetText, -64 );
 lv_obj_set_align( ui_factoryResetText, LV_ALIGN_CENTER );
-lv_label_set_text(ui_factoryResetText,"Hold down the reset \nbutton below to \nfactory reset this \ndevice");
+lv_label_set_text(ui_factoryResetText,"Hold down the reset \nbutton to factory \nreset this device");
 lv_obj_clear_flag( ui_factoryResetText, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
 lv_obj_set_style_text_align(ui_factoryResetText, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN| LV_STATE_DEFAULT);
 lv_obj_set_style_text_font(ui_factoryResetText, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
