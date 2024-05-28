@@ -15,6 +15,9 @@
 #include <esp_now.h>
 #include <WiFi.h>
 #include <esp_task_wdt.h>
+#include <Wire.h>
+#include <INA.h>
+
 
 // RS485
 const int RS_RXD = 1;
@@ -22,31 +25,29 @@ const int RS_RTS = 2;
 const int RS_TXD = 42;
 
 // GPIO definitions
-const int VIn = 21; // mapped to unused pin for now
-const int OP1 = 10; // outputs
+const int VIn = -1; // mapped to unused pin for now
+const int OP1 = 12; // outputs
 const int OP2 = 11;
-const int OP3 = 12;
-const int AE_SDA = 13;
-const int AE_SDL = 14;
+const int OP3 = 10;
 //const int SPARE = 21; // unused
 
 String rearDeviceState = "Stable";
 
 int rawValue = 0;
+int loopCounter;
+
 float auxVoltage;
 float oldAuxVoltage;
 float lastReading;
 
-int loopCounter;
-
-const float r1 = 82000.0f; // R1 in ohm, 82k
-const float r2 = 16000.0f; // R2 in ohm, 16k
-float vRefScale = (3.3f / 4096.0f) * ((r1 + r2) / r2);
 const int numReadings = 50;
-int readings[numReadings];
-int readIndex = 0;
+
 long total = 0;
-String vinResult = "WAIT!";
+
+const uint32_t SHUNT_MICRO_OHM{010000};  ///< Shunt resistance in Micro-Ohm, e.g. 100000 is 0.1 Ohm
+const uint16_t MAXIMUM_AMPS{32};          ///< Max expected amps, clamped from 1A to a max of 1022A
+uint8_t        devicesFound{0};          ///< Number of INAs found
+INA_Class      INA;                      ///< INA class instantiation to use EEPROM
 
 unsigned long newtime = 0;
 
@@ -545,12 +546,10 @@ void savePreferences()
   preferences.putString("hp1Label", localRear0Struct.rearIO1Name);
   preferences.putString("hp2Label", localRear0Struct.rearIO2Name);
   preferences.putString("lp1Label", localRear0Struct.rearIO3Name);
-  preferences.putString("lp2Label", localRear0Struct.rearIO4Name);
 
   preferences.putInt("hp1IOState", localRear0Struct.rearIO1);
   preferences.putInt("hp2IOState", localRear0Struct.rearIO2);
   preferences.putInt("lp1IOState", localRear0Struct.rearIO3);
-  preferences.putInt("lp2IOState", localRear0Struct.rearIO4);
 
   preferences.end();
 }
@@ -714,70 +713,26 @@ void factoryReset(lv_event_t *e)
   ESP.restart(); // reset to clear memory
 }
 
-void readAnalogVoltage()
-{                  /* function readAnalogSmooth */
-  analogRead(VIn); // turn and burn
-}
-
-long smooth()
-{ /* function smooth */
-  ////Perform average on sensor readings
-  long average;
-  // subtract the last reading:
-  total = total - readings[readIndex];
-  // read the sensor:
-  readings[readIndex] = analogRead(VIn);
-  // add value to total:
-  total = total + readings[readIndex];
-  // handle index
-  readIndex = readIndex + 1;
-  if (readIndex >= numReadings)
-  {
-    readIndex = 0;
-  }
-  // calculate the average:
-  average = total / numReadings;
-
-  return average;
-}
-
 void checkData()
 {
-  readAnalogVoltage(); // no calibration
-  buffer.push(smooth() * (vRefScale * 1.006)); // fill the circular buffer for super smooth values
-
   if (millis() - newtime >= 1000)
   {
     newtime = millis();
-    float avg = 0.0;
-    // the following ensures using the right type for the index variable
-    using index_t = decltype(buffer)::index_t;
-    for (index_t i = 0; i < buffer.size(); i++)
-    {
-      avg += buffer[i] / buffer.size();
-    }
-
+    float avg = float((INA.getBusMilliVolts(2) * 1.00) / 1000);
     localVoltage0Struct.rearAuxBatt1V = avg;
     if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
     {
-      if (buffer.size() == buffer.capacity)
+      if (avg / lastReading <= 0.99995)
       {
-        if (avg / lastReading <= 0.99995)
-        {
-          localRear0Struct.rearDeviceState = "Discharging";
-        }
-        else if (avg / lastReading >= 1.00005)
-        {
-          localRear0Struct.rearDeviceState = "Charging";
-        }
-        else
-        {
-          localRear0Struct.rearDeviceState = "Stable";
-        }
+        localRear0Struct.rearDeviceState = "Discharging";
+      }
+      else if (avg / lastReading >= 1.00005)
+      {
+        localRear0Struct.rearDeviceState = "Charging";
       }
       else
       {
-        localRear0Struct.rearDeviceState = "Checking...";
+        localRear0Struct.rearDeviceState = "Stable";
       }
       lastReading = avg;
     }
@@ -1036,6 +991,25 @@ void loadPreferences()
   preferences.end();
 }
 
+void pollADC()
+{
+  static char     sprintfBuffer[100];  // Buffer to format output
+  static char     busChar[8], shuntChar[10], busMAChar[10], busMWChar[10];  // Output buffers
+  Serial.print(F("Nr Adr Type   Bus      Shunt       Bus         Bus\n"));
+  Serial.print(F("== === ====== ======== =========== =========== ===========\n"));
+  for (uint8_t i = 0; i < devicesFound; i++)  // Loop through all devices
+  {
+    dtostrf(INA.getBusMilliVolts(i) / 1000.0, 7, 4, busChar);      // Convert floating point to char
+    dtostrf(INA.getShuntMicroVolts(i) / 1000.0, 9, 4, shuntChar);  // Convert floating point to char
+    dtostrf(INA.getBusMicroAmps(i) / 1000.0, 9, 4, busMAChar);     // Convert floating point to char
+    dtostrf(INA.getBusMicroWatts(i) / 1000.0, 9, 4, busMWChar);    // Convert floating point to char
+    sprintf(sprintfBuffer, "%2d %3d %s %sV %smV %smA %smW\n", i + 1, INA.getDeviceAddress(i),
+            INA.getDeviceName(i), busChar, shuntChar, busMAChar, busMWChar);
+    Serial.print(sprintfBuffer);
+  }  // for-next each INA device loop
+  Serial.print(F("\n\n"));
+}
+
 void setup()
 {
   esp_task_wdt_init(WDT_TIMEOUT, true); //enable panic so ESP32 restarts
@@ -1047,6 +1021,17 @@ void setup()
   pinMode(OP2, OUTPUT);
   pinMode(OP3, OUTPUT);
   pinMode(VIn, INPUT);
+
+  devicesFound = INA.begin(MAXIMUM_AMPS, SHUNT_MICRO_OHM);  // Expected max Amp & shunt resistance
+  Serial.print(F(" - Detected "));
+  Serial.print(devicesFound);
+  Serial.println(F(" INA devices on the I2C bus"));
+
+  INA.setBusConversion(8500);             // Maximum conversion time 8.244ms
+  INA.setShuntConversion(8500);           // Maximum conversion time 8.244ms
+  INA.setAveraging(128);                  // Average each reading n-times
+  INA.setMode(INA_MODE_CONTINUOUS_BOTH);  // Bus/shunt measured continuously
+  //INA.alertOnBusOverVoltage(true, 5000);  // Trigger alert if over 5V on bus
 
   tft.begin();
   tft.setRotation(1);     // 3 = upside down
@@ -1122,9 +1107,11 @@ void loop()
   {
     Serial.println("Sending sync message!");
     sendMessage();
+    //pollADC();
     loopCounter = 0;
   }
   loopCounter++;
+
   //esp_sleep_enable_timer_wakeup(25 * 1000); //light sleep for 25 milli seconds
   //esp_light_sleep_start(); 
   delay(1);
