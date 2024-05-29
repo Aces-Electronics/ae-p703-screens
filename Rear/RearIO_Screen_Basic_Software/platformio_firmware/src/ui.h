@@ -79,6 +79,8 @@ void ui_event_lp1TextArea( lv_event_t * e);
 extern lv_obj_t *ui_lp1TextArea;
 void ui_event_settingsKeyboard( lv_event_t * e);
 extern lv_obj_t *ui_settingsKeyboard;
+void ui_event_resetButton( lv_event_t * e);
+extern lv_obj_t *ui_resetButton;
 // SCREEN: ui_factoryResetScreen
 void ui_factoryResetScreen_screen_init(void);
 void ui_event_factoryResetScreen( lv_event_t * e);
@@ -87,6 +89,9 @@ extern lv_obj_t *ui_factoryResetText;
 extern lv_obj_t *ui_factoryResetButton;
 void ui_event_resetLabel( lv_event_t * e);
 extern lv_obj_t *ui_resetLabel;
+extern lv_obj_t *ui_Button1;
+void ui_event_Label1( lv_event_t * e);
+extern lv_obj_t *ui_Label1;
 extern lv_obj_t *ui____initial_actions0;
 
 LV_IMG_DECLARE( ui_img_ae_red_290_nobg_png);   // assets/ae_red_290_nobg.png

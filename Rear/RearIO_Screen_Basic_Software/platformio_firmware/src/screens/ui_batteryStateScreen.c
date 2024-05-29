@@ -123,6 +123,7 @@ lv_obj_set_height( ui_hp2Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_hp2Label, -1 );
 lv_obj_set_y( ui_hp2Label, 136 );
 lv_obj_set_align( ui_hp2Label, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_hp2Label,LV_LABEL_LONG_SCROLL);
 lv_label_set_text(ui_hp2Label,"OP2");
 lv_obj_add_flag( ui_hp2Label, LV_OBJ_FLAG_CLICKABLE );   /// Flags
 lv_obj_clear_flag( ui_hp2Label, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
@@ -137,6 +138,7 @@ lv_obj_set_height( ui_lp1Label, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_x( ui_lp1Label, 167 );
 lv_obj_set_y( ui_lp1Label, 136 );
 lv_obj_set_align( ui_lp1Label, LV_ALIGN_CENTER );
+lv_label_set_long_mode(ui_lp1Label,LV_LABEL_LONG_SCROLL);
 lv_label_set_text(ui_lp1Label,"OP3");
 lv_obj_add_flag( ui_lp1Label, LV_OBJ_FLAG_CLICKABLE );   /// Flags
 lv_obj_clear_flag( ui_lp1Label, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags

@@ -763,7 +763,7 @@ void checkData()
     }
     else
     {
-      localRear0Struct.rearDeviceState = "Error!!!";
+      localRear0Struct.rearDeviceState = "V Error!!!";
     }
     localRear0Struct.rearDeviceState = rearDeviceState;
     lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
