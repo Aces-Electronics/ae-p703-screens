@@ -8596,7 +8596,7 @@
                 "strtype": "OBJECT/Position",
                 "intarray": [
                   87,
-                  -15
+                  -13
                 ],
                 "InheritedType": 7
               },
@@ -8923,7 +8923,7 @@
                 "disabled": false,
                 "nid": 406830801,
                 "strtype": "_event/EventHandler",
-                "strval": "CLICKED",
+                "strval": "FOCUSED",
                 "childs": [
                   {
                     "nid": -68495969,
@@ -9013,8 +9013,272 @@
                       {
                         "nid": -1481185519,
                         "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "True",
+                        "strval": "False",
                         "InheritedType": 2
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1637230016,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 1518166343,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -936361531,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 903064795,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 520636589,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -665157649,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -5801065,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -1608197843,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1863638745,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1988955677,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1500425521,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 553610989,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1075954913,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 2068850351,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -554203921,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 701180967,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -803093847,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74814293-466353S2562248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1609160082,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 241307864,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 427731618,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 349644197,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1979308985,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -209243193,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 731170606,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74814293-466353S2562248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1920320952,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -1333999858,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": -85,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": -1085148138,
+                "strtype": "TEXTAREA/EventHandler",
+                "strval": "DEFOCUSED",
+                "childs": [
+                  {
+                    "nid": -576923043,
+                    "strtype": "_custom/name",
+                    "strval": "Event19",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -2019289387,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1016041298,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1992907631,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -1058557255,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -662408709,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1814230548,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 40346252,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 298573107,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1093126420,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 914344588,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -776612913,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -427277032,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1480879836,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1948388516,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
                       }
                     ],
                     "InheritedType": 10
@@ -9506,6 +9770,385 @@
                   }
                 ],
                 "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": -1971243603,
+                "strtype": "TEXTAREA/EventHandler",
+                "strval": "FOCUSED",
+                "childs": [
+                  {
+                    "nid": -1924471688,
+                    "strtype": "_custom/name",
+                    "strval": "Event13",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1819715419,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 53801326,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 62152837,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 1835957110,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -180833513,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 823991361,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 80237071,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1114328421,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -65691955,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -1818238938,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1192980410,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1595398060,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1585364277,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1157117392,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1329401733,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 406530491,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -2070233767,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1398760756,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 434909538,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1835748731,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -2035571653,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1466060604,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -1919893032,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -81892560,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1326291899,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1789107811,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 392855358,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 475324757,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": -85,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": 1922996480,
+                "strtype": "TEXTAREA/EventHandler",
+                "strval": "DEFOCUSED",
+                "childs": [
+                  {
+                    "nid": 1155539624,
+                    "strtype": "_custom/name",
+                    "strval": "Event18",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1988814700,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1296433307,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 2048858226,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -755444496,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1593344926,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1367974833,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1489386206,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1296293728,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1741538675,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -1332061444,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 822052725,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1265654406,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1465368512,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 964723425,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 864229065,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -1563615942,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1943815990,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 928200588,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 744083485,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1079549420,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 1131092167,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 87,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1994138835,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 965066522,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -613784790,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1458083098,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1139460363,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1004686243,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 1206673549,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 53,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "TEXTAREA"
@@ -9991,6 +10634,298 @@
                   }
                 ],
                 "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": 506128843,
+                "strtype": "TEXTAREA/EventHandler",
+                "strval": "DEFOCUSED",
+                "childs": [
+                  {
+                    "nid": -2044809644,
+                    "strtype": "_custom/name",
+                    "strval": "Event20",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 480349257,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 149890157,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1905797321,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 468419670,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -99313846,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1007118159,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 667432109,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 442891911,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1406402430,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -488789586,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1553377460,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1643641943,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -2055017401,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1963896015,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
+              },
+              {
+                "disabled": false,
+                "nid": -1896478958,
+                "strtype": "TEXTAREA/EventHandler",
+                "strval": "FOCUSED",
+                "childs": [
+                  {
+                    "nid": 239084002,
+                    "strtype": "_custom/name",
+                    "strval": "Event21",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1755231748,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 885251419,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1161659840,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -59861368,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1392756337,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1716186919,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -750003436,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -396910828,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -105632119,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 830559698,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1518559536,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1888168477,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 662788752,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1423059439,
+                        "strtype": "SET OPACITY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1826299067,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -1702131406,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1805396698,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1058706347,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1336533297,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74703955-469810S2682248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -1064385115,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 2075753805,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 8,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1025446470,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -525760426,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -475320892,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -631662127,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1430531630,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74703955-469810S2682248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -208678312,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 1358571266,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": -83,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "TEXTAREA"
@@ -10034,8 +10969,8 @@
                 "flags": 17,
                 "strtype": "OBJECT/Position",
                 "intarray": [
-                  1,
-                  57
+                  0,
+                  54
                 ],
                 "InheritedType": 7
               },
@@ -10245,12 +11180,13 @@
               {
                 "nid": 792244877,
                 "strtype": "KEYBOARD/Target_textarea",
+                "strval": "-",
                 "InheritedType": 9
               },
               {
                 "nid": -1917087210,
                 "strtype": "KEYBOARD/Mode",
-                "strval": "TEXT_LOWER",
+                "strval": "TEXT_UPPER",
                 "InheritedType": 3
               },
               {
@@ -10260,6 +11196,296 @@
                 "strtype": "KEYBOARD/Style_items",
                 "strval": "lv.PART.ITEMS, Rectangle, Pad, Text",
                 "InheritedType": 11
+              },
+              {
+                "disabled": false,
+                "nid": -1947511220,
+                "strtype": "KEYBOARD/EventHandler",
+                "strval": "READY",
+                "childs": [
+                  {
+                    "nid": 1175970515,
+                    "strtype": "_custom/name",
+                    "strval": "Event17",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 334574847,
+                    "strtype": "_custom/condition_C",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -717282748,
+                    "strtype": "_custom/condition_P",
+                    "strval": "",
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 2112208610,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -1379886150,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 105542022,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -626114306,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -369470358,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74814293-466353S2562248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1875518943,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -1051115808,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": -13,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -252858787,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -737989885,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1222993316,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1648983360,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1844135483,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -877079523,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 687358520,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 53,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1392307107,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 2062089992,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 797966746,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -953559914,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1835307802,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74703955-469810S2682248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1247073873,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_Y",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -962132216,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 118,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 1788301902,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 1091061564,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1313804286,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1207572208,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 510860810,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74814293-466353S2562248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -955726039,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 387674023,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 87,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -812483854,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": 1054652881,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -2142435828,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1443612517,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1987274895,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID39581370-468671S792248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1842378118,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": 440570868,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 87,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": 402656148,
+                    "strtype": "_custom/action",
+                    "strval": "BASIC_PROPERTY",
+                    "childs": [
+                      {
+                        "nid": -525132986,
+                        "strtype": "BASIC_PROPERTY/Name",
+                        "strval": "BASIC_PROPERTY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1195162429,
+                        "strtype": "BASIC_PROPERTY/Call",
+                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1674003421,
+                        "strtype": "BASIC_PROPERTY/CallC",
+                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -2112280386,
+                        "strtype": "BASIC_PROPERTY/Target",
+                        "strval": "GUID74703955-469810S2682248",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": -895094594,
+                        "strtype": "BASIC_PROPERTY/Property",
+                        "strval": "Position_X",
+                        "InheritedType": 3
+                      },
+                      {
+                        "nid": -479481068,
+                        "strtype": "BASIC_PROPERTY/Value",
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  }
+                ],
+                "InheritedType": 4
               }
             ],
             "saved_objtypeKey": "KEYBOARD"
@@ -12038,7 +13264,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 2294,
+    "backup_cnt": 2413,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",

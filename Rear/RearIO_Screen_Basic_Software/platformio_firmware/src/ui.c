@@ -64,6 +64,7 @@ void ui_event_hp2TextArea( lv_event_t * e);
 lv_obj_t *ui_hp2TextArea;
 void ui_event_lp1TextArea( lv_event_t * e);
 lv_obj_t *ui_lp1TextArea;
+void ui_event_settingsKeyboard( lv_event_t * e);
 lv_obj_t *ui_settingsKeyboard;
 
 // SCREEN: ui_factoryResetScreen
@@ -175,7 +176,16 @@ void ui_event_brightnessBar( lv_event_t * e) {
 if ( event_code == LV_EVENT_VALUE_CHANGED) {
       set_screen_brightness( e );
 }
-
+void ui_event_settingsKeyboard( lv_event_t * e) {
+    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
+if ( event_code == LV_EVENT_READY) {
+      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -13);
+      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  53);
+      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  118);
+      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  0);
+}
 }
 void ui_event_factoryResetScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);

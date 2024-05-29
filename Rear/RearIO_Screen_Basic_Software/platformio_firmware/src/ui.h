@@ -77,6 +77,7 @@ void ui_event_hp2TextArea( lv_event_t * e);
 extern lv_obj_t *ui_hp2TextArea;
 void ui_event_lp1TextArea( lv_event_t * e);
 extern lv_obj_t *ui_lp1TextArea;
+void ui_event_settingsKeyboard( lv_event_t * e);
 extern lv_obj_t *ui_settingsKeyboard;
 // SCREEN: ui_factoryResetScreen
 void ui_factoryResetScreen_screen_init(void);
