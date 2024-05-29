@@ -14,7 +14,7 @@ lv_obj_set_scroll_dir(ui_factoryResetScreen, LV_DIR_HOR);
 ui_factoryResetText = lv_label_create(ui_factoryResetScreen);
 lv_obj_set_width( ui_factoryResetText, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_factoryResetText, LV_SIZE_CONTENT);   /// 1
-lv_obj_set_x( ui_factoryResetText, 4 );
+lv_obj_set_x( ui_factoryResetText, 1 );
 lv_obj_set_y( ui_factoryResetText, -64 );
 lv_obj_set_align( ui_factoryResetText, LV_ALIGN_CENTER );
 lv_label_set_text(ui_factoryResetText,"Need to factory reset?\nHold the RESET \nbutton");

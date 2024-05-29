@@ -66,8 +66,9 @@ void ui_event_lp1TextArea( lv_event_t * e);
 lv_obj_t *ui_lp1TextArea;
 void ui_event_settingsKeyboard( lv_event_t * e);
 lv_obj_t *ui_settingsKeyboard;
-void ui_event_resetButton( lv_event_t * e);
 lv_obj_t *ui_resetButton;
+void ui_event_resetPanel( lv_event_t * e);
+lv_obj_t *ui_resetPanel;
 
 // SCREEN: ui_factoryResetScreen
 void ui_factoryResetScreen_screen_init(void);
@@ -185,7 +186,7 @@ if ( event_code == LV_EVENT_READY) {
       _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
 }
 }
-void ui_event_resetButton( lv_event_t * e) {
+void ui_event_resetPanel( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       _ui_screen_change( ui_factoryResetScreen, LV_SCR_LOAD_ANIM_MOVE_LEFT, 500, 0);
