@@ -10058,94 +10058,6 @@
                       }
                     ],
                     "InheritedType": 10
-                  },
-                  {
-                    "nid": 864229065,
-                    "strtype": "_custom/action",
-                    "strval": "BASIC_PROPERTY",
-                    "childs": [
-                      {
-                        "nid": -1563615942,
-                        "strtype": "BASIC_PROPERTY/Name",
-                        "strval": "BASIC_PROPERTY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1943815990,
-                        "strtype": "BASIC_PROPERTY/Call",
-                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 928200588,
-                        "strtype": "BASIC_PROPERTY/CallC",
-                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 744083485,
-                        "strtype": "BASIC_PROPERTY/Target",
-                        "strval": "GUID39581370-468671S792248",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 1079549420,
-                        "strtype": "BASIC_PROPERTY/Property",
-                        "strval": "Position_X",
-                        "InheritedType": 3
-                      },
-                      {
-                        "nid": 1131092167,
-                        "strtype": "BASIC_PROPERTY/Value",
-                        "integer": 87,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1994138835,
-                    "strtype": "_custom/action",
-                    "strval": "BASIC_PROPERTY",
-                    "childs": [
-                      {
-                        "nid": 965066522,
-                        "strtype": "BASIC_PROPERTY/Name",
-                        "strval": "BASIC_PROPERTY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -613784790,
-                        "strtype": "BASIC_PROPERTY/Call",
-                        "strval": "SetPanelProperty(<{Target}>, '<{Property}>', <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1458083098,
-                        "strtype": "BASIC_PROPERTY/CallC",
-                        "strval": "_ui_basic_set_property(<{Target}>, _UI_BASIC_PROPERTY_<{Property}>,  <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1139460363,
-                        "strtype": "BASIC_PROPERTY/Target",
-                        "strval": "GUID39581370-468671S792248",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 1004686243,
-                        "strtype": "BASIC_PROPERTY/Property",
-                        "strval": "Position_X",
-                        "InheritedType": 3
-                      },
-                      {
-                        "nid": 1206673549,
-                        "strtype": "BASIC_PROPERTY/Value",
-                        "integer": 53,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
                   }
                 ],
                 "InheritedType": 4
@@ -11479,6 +11391,7 @@
                       {
                         "nid": -479481068,
                         "strtype": "BASIC_PROPERTY/Value",
+                        "integer": 87,
                         "InheritedType": 6
                       }
                     ],
@@ -13264,7 +13177,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 2413,
+    "backup_cnt": 2425,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",
