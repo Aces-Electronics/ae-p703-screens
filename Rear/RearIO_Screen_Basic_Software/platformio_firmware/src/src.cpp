@@ -580,10 +580,6 @@ void ui_event_hp1TextArea( lv_event_t * e) {
         _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  0);
         _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -85);
   }
-  if ( event_code == LV_EVENT_DEFOCUSED) {
-        _ui_opacity_set( ui_brightnessLabel, 100);
-        _ui_opacity_set( ui_brightnessBar, 100);
-  }
   if (event_code == LV_EVENT_READY)
   {
     if (strlen(lv_textarea_get_text(ui_hp1TextArea)) !=0)
@@ -614,10 +610,6 @@ void ui_event_hp2TextArea( lv_event_t * e) {
         _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  0);
         _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -85);
   }
-  if ( event_code == LV_EVENT_DEFOCUSED) {
-        _ui_opacity_set( ui_brightnessLabel, 100);
-        _ui_opacity_set( ui_brightnessBar, 100);
-  }
   if (event_code == LV_EVENT_READY)
   {
     if (strlen(lv_textarea_get_text(ui_hp2TextArea)) !=0)
@@ -640,10 +632,6 @@ void ui_event_lp1TextArea( lv_event_t * e) {
 if ( event_code == LV_EVENT_CLICKED) {
       toggleKeyboard( e );
       _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp1TextArea);
-}
-if ( event_code == LV_EVENT_DEFOCUSED) {
-      _ui_opacity_set( ui_brightnessLabel, 100);
-      _ui_opacity_set( ui_brightnessBar, 100);
 }
 if ( event_code == LV_EVENT_FOCUSED) {
       _ui_opacity_set( ui_brightnessLabel, 0);
