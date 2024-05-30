@@ -8,7 +8,7 @@
 void ui_accessoryStateScreen_screen_init(void)
 {
 ui_accessoryStateScreen = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_accessoryStateScreen, LV_OBJ_FLAG_CLICKABLE );    /// Flags
+lv_obj_clear_flag( ui_accessoryStateScreen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
 
 ui_io1 = lv_switch_create(ui_accessoryStateScreen);
 lv_obj_set_width( ui_io1, 230);

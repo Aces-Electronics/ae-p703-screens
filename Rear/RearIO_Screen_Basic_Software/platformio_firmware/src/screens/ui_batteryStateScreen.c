@@ -8,7 +8,7 @@
 void ui_batteryStateScreen_screen_init(void)
 {
 ui_batteryStateScreen = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_batteryStateScreen, LV_OBJ_FLAG_SCROLLABLE );    /// Flags
+lv_obj_clear_flag( ui_batteryStateScreen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
 lv_obj_set_scrollbar_mode(ui_batteryStateScreen, LV_SCROLLBAR_MODE_OFF);
 
 ui_auxBattVoltageArc = lv_arc_create(ui_batteryStateScreen);

@@ -8,7 +8,7 @@
 void ui_settingsStateScreen_screen_init(void)
 {
 ui_settingsStateScreen = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_settingsStateScreen, LV_OBJ_FLAG_CLICKABLE );    /// Flags
+lv_obj_clear_flag( ui_settingsStateScreen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
 lv_obj_set_scroll_dir(ui_settingsStateScreen, LV_DIR_HOR);
 
 ui_settingsLabel = lv_label_create(ui_settingsStateScreen);

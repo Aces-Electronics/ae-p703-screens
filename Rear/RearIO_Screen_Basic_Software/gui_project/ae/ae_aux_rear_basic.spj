@@ -4256,13 +4256,13 @@
           {
             "nid": -1711210827,
             "strtype": "OBJECT/Scroll_elastic",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": -1719150528,
             "strtype": "OBJECT/Scroll_momentum",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -6764,7 +6764,7 @@
           {
             "nid": 1267757014,
             "strtype": "OBJECT/Clickable",
-            "strval": "False",
+            "strval": "True",
             "InheritedType": 2
           },
           {
@@ -6800,19 +6800,19 @@
           {
             "nid": 1909049094,
             "strtype": "OBJECT/Scrollable",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": -674540452,
             "strtype": "OBJECT/Scroll_elastic",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": -80492260,
             "strtype": "OBJECT/Scroll_momentum",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -9054,6 +9054,7 @@
               },
               {
                 "nid": 1665490767,
+                "flags": 1048576,
                 "strtype": "OBJECT/States",
                 "InheritedType": 1
               },
@@ -9107,6 +9108,7 @@
               },
               {
                 "nid": 967264923,
+                "flags": 1048576,
                 "strtype": "TEXTAREA/Label",
                 "InheritedType": 1
               },
@@ -9324,7 +9326,7 @@
                       {
                         "nid": -1481185519,
                         "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "True",
+                        "strval": "False",
                         "InheritedType": 2
                       }
                     ],
@@ -9486,109 +9488,6 @@
                         "nid": -1333999858,
                         "strtype": "BASIC_PROPERTY/Value",
                         "integer": -85,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
-              },
-              {
-                "disabled": false,
-                "nid": -1085148138,
-                "strtype": "TEXTAREA/EventHandler",
-                "strval": "DEFOCUSED",
-                "childs": [
-                  {
-                    "nid": -576923043,
-                    "strtype": "_custom/name",
-                    "strval": "Event19",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -2019289387,
-                    "strtype": "_custom/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1016041298,
-                    "strtype": "_custom/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1992907631,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": -1058557255,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -662408709,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1814230548,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 40346252,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID43703910-467568S5322106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 298573107,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1093126420,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": 914344588,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -776612913,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -427277032,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1480879836,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID22076901-467569S4852106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": -1948388516,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
                         "InheritedType": 6
                       }
                     ],
@@ -10035,7 +9934,7 @@
                       {
                         "nid": -885312823,
                         "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "True",
+                        "strval": "False",
                         "InheritedType": 2
                       }
                     ],
@@ -10262,109 +10161,6 @@
                         "nid": 475324757,
                         "strtype": "BASIC_PROPERTY/Value",
                         "integer": -85,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
-              },
-              {
-                "disabled": false,
-                "nid": 1922996480,
-                "strtype": "TEXTAREA/EventHandler",
-                "strval": "DEFOCUSED",
-                "childs": [
-                  {
-                    "nid": 1155539624,
-                    "strtype": "_custom/name",
-                    "strval": "Event18",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1988814700,
-                    "strtype": "_custom/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1296433307,
-                    "strtype": "_custom/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 2048858226,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": -755444496,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1593344926,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1367974833,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1489386206,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID43703910-467568S5322106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": -1296293728,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1741538675,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": -1332061444,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 822052725,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1265654406,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 1465368512,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID22076901-467569S4852106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 964723425,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
                         "InheritedType": 6
                       }
                     ],
@@ -10811,7 +10607,7 @@
                       {
                         "nid": 1621430696,
                         "strtype": "CALL FUNCTION/Dont_export_function",
-                        "strval": "True",
+                        "strval": "False",
                         "InheritedType": 2
                       }
                     ],
@@ -10851,109 +10647,6 @@
                         "strtype": "KEYBOARD SET TARGET/TextArea",
                         "strval": "GUID74703955-469810S2682248",
                         "InheritedType": 9
-                      }
-                    ],
-                    "InheritedType": 10
-                  }
-                ],
-                "InheritedType": 4
-              },
-              {
-                "disabled": false,
-                "nid": 506128843,
-                "strtype": "TEXTAREA/EventHandler",
-                "strval": "DEFOCUSED",
-                "childs": [
-                  {
-                    "nid": -2044809644,
-                    "strtype": "_custom/name",
-                    "strval": "Event20",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 480349257,
-                    "strtype": "_custom/condition_C",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 149890157,
-                    "strtype": "_custom/condition_P",
-                    "strval": "",
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": 1905797321,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": 468419670,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -99313846,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1007118159,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": 667432109,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID43703910-467568S5322106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": 442891911,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
-                        "InheritedType": 6
-                      }
-                    ],
-                    "InheritedType": 10
-                  },
-                  {
-                    "nid": -1406402430,
-                    "strtype": "_custom/action",
-                    "strval": "SET OPACITY",
-                    "childs": [
-                      {
-                        "nid": -488789586,
-                        "strtype": "SET OPACITY/Name",
-                        "strval": "SET OPACITY",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1553377460,
-                        "strtype": "SET OPACITY/Call",
-                        "strval": "set_opacity( <{Target}>, <{Value}>)",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -1643641943,
-                        "strtype": "SET OPACITY/CallC",
-                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
-                        "InheritedType": 10
-                      },
-                      {
-                        "nid": -2055017401,
-                        "strtype": "SET OPACITY/Target",
-                        "strval": "GUID22076901-467569S4852106",
-                        "InheritedType": 9
-                      },
-                      {
-                        "nid": -1963896015,
-                        "strtype": "SET OPACITY/Value",
-                        "integer": 100,
-                        "InheritedType": 6
                       }
                     ],
                     "InheritedType": 10
@@ -11403,7 +11096,6 @@
               {
                 "nid": 792244877,
                 "strtype": "KEYBOARD/Target_textarea",
-                "strval": "-",
                 "InheritedType": 9
               },
               {
@@ -11707,6 +11399,82 @@
                       }
                     ],
                     "InheritedType": 10
+                  },
+                  {
+                    "nid": -534078609,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 1819843908,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 121382934,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1120047528,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -748747908,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1378047092,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -427003521,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -1580857245,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -104090358,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 1552635469,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 265994273,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1364449647,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
                   }
                 ],
                 "InheritedType": 4
@@ -11994,6 +11762,82 @@
                         "nid": -2056791446,
                         "strtype": "BASIC_PROPERTY/Value",
                         "integer": 118,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -1450698233,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": 315511431,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -522278798,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -2031167543,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1680934303,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID43703910-467568S5322106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1761177521,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
+                        "InheritedType": 6
+                      }
+                    ],
+                    "InheritedType": 10
+                  },
+                  {
+                    "nid": -625615394,
+                    "strtype": "_custom/action",
+                    "strval": "SET OPACITY",
+                    "childs": [
+                      {
+                        "nid": -850773222,
+                        "strtype": "SET OPACITY/Name",
+                        "strval": "SET OPACITY",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 302490205,
+                        "strtype": "SET OPACITY/Call",
+                        "strval": "set_opacity( <{Target}>, <{Value}>)",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": 616054171,
+                        "strtype": "SET OPACITY/CallC",
+                        "strval": "_ui_opacity_set( <{Target}>, <{Value}>);",
+                        "InheritedType": 10
+                      },
+                      {
+                        "nid": -1329368828,
+                        "strtype": "SET OPACITY/Target",
+                        "strval": "GUID22076901-467569S4852106",
+                        "InheritedType": 9
+                      },
+                      {
+                        "nid": 1206925664,
+                        "strtype": "SET OPACITY/Value",
+                        "integer": 100,
                         "InheritedType": 6
                       }
                     ],
@@ -12740,7 +12584,7 @@
           {
             "nid": 1122611372,
             "strtype": "OBJECT/Clickable",
-            "strval": "False",
+            "strval": "True",
             "InheritedType": 2
           },
           {
@@ -12776,19 +12620,19 @@
           {
             "nid": 804124808,
             "strtype": "OBJECT/Scrollable",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": 1752631208,
             "strtype": "OBJECT/Scroll_elastic",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
             "nid": 1477917142,
             "strtype": "OBJECT/Scroll_momentum",
-            "strval": "True",
+            "strval": "False",
             "InheritedType": 2
           },
           {
@@ -14960,7 +14804,7 @@
     "theme_color2": 0,
     "exportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/platformio_firmware/src",
     "projectExportFolderPath": "/Users/acea/Documents/Ace's Elcectronics/projects/ae-p703-screens/Rear/RearIO_Screen_Basic_Software/gui_project/ae",
-    "backup_cnt": 2550,
+    "backup_cnt": 2562,
     "autosave_cnt": 0,
     "lvgl_version": "8.3.6",
     "callfuncsexport": "DONT_EXPORT",
