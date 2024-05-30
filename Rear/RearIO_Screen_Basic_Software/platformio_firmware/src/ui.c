@@ -178,27 +178,6 @@ if ( event_code == LV_EVENT_VALUE_CHANGED) {
 }
 void ui_event_settingsKeyboard( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_READY) {
-      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -13);
-      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  53);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  118);
-      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_opacity_set( ui_brightnessLabel, 100);
-      _ui_opacity_set( ui_brightnessBar, 100);
-}
-if ( event_code == LV_EVENT_CANCEL) {
-      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -13);
-      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  53);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  118);
-      lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
-      _ui_opacity_set( ui_brightnessLabel, 100);
-      _ui_opacity_set( ui_brightnessBar, 100);
-}
 }
 void ui_event_resetPanel( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
