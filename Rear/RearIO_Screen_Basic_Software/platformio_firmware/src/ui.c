@@ -46,6 +46,7 @@ lv_obj_t *ui_io3;
 lv_obj_t *ui_ioLabel1;
 lv_obj_t *ui_ioLabel2;
 lv_obj_t *ui_ioLabel3;
+lv_obj_t *ui_switchesLabel;
 
 // SCREEN: ui_settingsStateScreen
 void ui_settingsStateScreen_screen_init(void);
@@ -184,6 +185,14 @@ if ( event_code == LV_EVENT_READY) {
       _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
       _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
       _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+}
+if ( event_code == LV_EVENT_CANCEL) {
+      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+      _ui_basic_set_property(ui_hp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -13);
+      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+      _ui_basic_set_property(ui_hp2TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  53);
+      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  87);
+      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  118);
 }
 }
 void ui_event_resetPanel( lv_event_t * e) {

@@ -60,6 +60,7 @@ extern lv_obj_t *ui_io3;
 extern lv_obj_t *ui_ioLabel1;
 extern lv_obj_t *ui_ioLabel2;
 extern lv_obj_t *ui_ioLabel3;
+extern lv_obj_t *ui_switchesLabel;
 // SCREEN: ui_settingsStateScreen
 void ui_settingsStateScreen_screen_init(void);
 void ui_event_settingsStateScreen( lv_event_t * e);

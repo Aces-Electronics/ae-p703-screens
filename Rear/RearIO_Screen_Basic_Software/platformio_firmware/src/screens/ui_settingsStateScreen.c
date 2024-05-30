@@ -8,15 +8,17 @@
 void ui_settingsStateScreen_screen_init(void)
 {
 ui_settingsStateScreen = lv_obj_create(NULL);
-lv_obj_clear_flag( ui_settingsStateScreen, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM );    /// Flags
+lv_obj_clear_flag( ui_settingsStateScreen, LV_OBJ_FLAG_CLICKABLE );    /// Flags
 lv_obj_set_scroll_dir(ui_settingsStateScreen, LV_DIR_HOR);
 
 ui_settingsLabel = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_settingsLabel, LV_SIZE_CONTENT);  /// 1
 lv_obj_set_height( ui_settingsLabel, LV_SIZE_CONTENT);   /// 1
 lv_obj_set_align( ui_settingsLabel, LV_ALIGN_TOP_MID );
-lv_label_set_text(ui_settingsLabel,"Settings");
-lv_obj_set_style_text_font(ui_settingsLabel, &lv_font_montserrat_42, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_label_set_text(ui_settingsLabel,"SETTINGS");
+lv_obj_clear_flag( ui_settingsLabel, LV_OBJ_FLAG_PRESS_LOCK | LV_OBJ_FLAG_CLICK_FOCUSABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SNAPPABLE | LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC | LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN );    /// Flags
+lv_obj_set_style_text_decor(ui_settingsLabel, LV_TEXT_DECOR_UNDERLINE, LV_PART_MAIN| LV_STATE_DEFAULT);
+lv_obj_set_style_text_font(ui_settingsLabel, &lv_font_montserrat_40, LV_PART_MAIN| LV_STATE_DEFAULT);
 
 ui_brightnessLabel = lv_label_create(ui_settingsStateScreen);
 lv_obj_set_width( ui_brightnessLabel, LV_SIZE_CONTENT);  /// 1
@@ -135,7 +137,7 @@ lv_obj_set_style_text_font(ui_lp1TextArea, &lv_font_montserrat_20, LV_PART_TEXTA
 
 ui_settingsKeyboard = lv_keyboard_create(ui_settingsStateScreen);
 lv_keyboard_set_mode(ui_settingsKeyboard,LV_KEYBOARD_MODE_TEXT_UPPER);
-lv_obj_set_width( ui_settingsKeyboard, 454);
+lv_obj_set_width( ui_settingsKeyboard, 460);
 lv_obj_set_height( ui_settingsKeyboard, 179);
 lv_obj_set_x( ui_settingsKeyboard, 0 );
 lv_obj_set_y( ui_settingsKeyboard, 54 );

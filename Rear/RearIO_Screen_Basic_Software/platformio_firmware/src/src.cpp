@@ -73,13 +73,13 @@ typedef struct struct_message_rear0 { // Rear hardware message
   int messageID = 0; // sets the message ID
   bool dataChanged = 0; // stores whether or not the data in the struct has changed
   int rearIO1 = -1; // rear: basic/pro IO1
-  String rearIO1Name = "15A-1";
+  String rearIO1Name = "OP1";
   int rearIO2 = -1; // rear: basic/pro IO2
-  String rearIO2Name = "15A-2";
+  String rearIO2Name = "OP2";
   int rearIO3 = -1; // rear: basic/pro IO3
-  String rearIO3Name = "10A-1";
+  String rearIO3Name = "OP3";
   int rearIO4 = -1; // rear: basic/pro IO4
-  String rearIO4Name = "10A-2";
+  String rearIO4Name = "N/A";
   int rearIO5 = -1; // rear: pro IO5
   String rearIO5Name = "-1";
   int rearIO6 = -1; // rear: pro IO6
@@ -582,8 +582,19 @@ void ui_event_hp1TextArea( lv_event_t * e) {
       savePreferences();
       sendMessage();
     } else {
-      toggleKeyboard( e );
+      lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
+    }
   }
+  if ( event_code == LV_EVENT_CANCEL) {
+        lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
+  }
+  if ( event_code == LV_EVENT_DEFOCUSED) {
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
   }
   if ( event_code == LV_EVENT_FOCUSED) {
       _ui_keyboard_set_target(ui_settingsKeyboard,  ui_hp1TextArea);
@@ -611,8 +622,15 @@ void ui_event_hp2TextArea( lv_event_t * e) {
       savePreferences();
       sendMessage();
     } else {
-      toggleKeyboard( e );
+      lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
     }
+  }
+  if ( event_code == LV_EVENT_CANCEL) {
+        lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
   }
   if ( event_code == LV_EVENT_CLICKED) {
         toggleKeyboard( e );
@@ -642,23 +660,30 @@ void ui_event_lp1TextArea( lv_event_t * e) {
       savePreferences();
       sendMessage();
     } else {
-      toggleKeyboard( e );
+      lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
     }
   }
-if ( event_code == LV_EVENT_CLICKED) {
-      toggleKeyboard( e );
-      _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp1TextArea);
-}
-if ( event_code == LV_EVENT_DEFOCUSED) {
-      _ui_opacity_set( ui_brightnessLabel, 100);
-      _ui_opacity_set( ui_brightnessBar, 100);
-}
-if ( event_code == LV_EVENT_FOCUSED) {
-      _ui_opacity_set( ui_brightnessLabel, 0);
-      _ui_opacity_set( ui_brightnessBar, 0);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  8);
-      _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -83);
-}
+  if ( event_code == LV_EVENT_CANCEL) {
+        lv_obj_add_flag(ui_settingsKeyboard, LV_OBJ_FLAG_HIDDEN);
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
+  }
+  if ( event_code == LV_EVENT_CLICKED) {
+        toggleKeyboard( e );
+        _ui_keyboard_set_target(ui_settingsKeyboard,  ui_lp1TextArea);
+  }
+  if ( event_code == LV_EVENT_DEFOCUSED) {
+        _ui_opacity_set( ui_brightnessLabel, 100);
+        _ui_opacity_set( ui_brightnessBar, 100);
+  }
+  if ( event_code == LV_EVENT_FOCUSED) {
+        _ui_opacity_set( ui_brightnessLabel, 0);
+        _ui_opacity_set( ui_brightnessBar, 0);
+        _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_X,  0);
+        _ui_basic_set_property(ui_lp1TextArea, _UI_BASIC_PROPERTY_POSITION_Y,  -85);
+  }
 }
 
 void hp1ToggleFunction(lv_event_t *e)
