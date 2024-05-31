@@ -8545,6 +8545,19 @@
 		)
 		(uuid "63b41afe-a300-42f4-a225-211108ae494b")
 	)
+	(text "Make the pins go 1 to 1\nswap GND and 12V"
+		(exclude_from_sim no)
+		(at 274.828 143.002 0)
+		(effects
+			(font
+				(size 2.2 2.2)
+				(thickness 0.44)
+				(bold yes)
+			)
+			(justify left bottom)
+		)
+		(uuid "640cc403-8cd4-4cea-9c8e-7593da4d0e26")
+	)
 	(text "OUT"
 		(exclude_from_sim no)
 		(at 224.282 130.556 90)

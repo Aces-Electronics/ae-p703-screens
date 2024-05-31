@@ -1168,7 +1168,7 @@ void loop()
   {
     Serial.println("Sending sync message!");
     sendMessage();
-    //pollADC();
+    pollADC();
     loopCounter = 0;
   }
   loopCounter++;
