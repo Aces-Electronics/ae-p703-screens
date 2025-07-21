@@ -13,11 +13,9 @@ extern "C" {
 void hp1ToggleFunction(lv_event_t * e);
 void hp2ToggleFunction(lv_event_t * e);
 void lp1ToggleFunction(lv_event_t * e);
-void lp2ToggleFunction(lv_event_t * e);
 void hp1ToggleFunction(lv_event_t * e);
 void hp2ToggleFunction(lv_event_t * e);
 void lp1ToggleFunction(lv_event_t * e);
-void lp2ToggleFunction(lv_event_t * e);
 
 #ifdef __cplusplus
 } /*extern "C"*/

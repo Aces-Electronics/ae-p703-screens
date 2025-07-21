@@ -29,8 +29,6 @@ void ui_event_hp2Label( lv_event_t * e);
 lv_obj_t *ui_hp2Label;
 void ui_event_lp1Label( lv_event_t * e);
 lv_obj_t *ui_lp1Label;
-void ui_event_lp2Label( lv_event_t * e);
-lv_obj_t *ui_lp2Label;
 lv_obj_t *ui_auxBatteryStateLegend1;
 
 // SCREEN: ui_accessoryStateScreen
@@ -43,12 +41,9 @@ void ui_event_io2( lv_event_t * e);
 lv_obj_t *ui_io2;
 void ui_event_io3( lv_event_t * e);
 lv_obj_t *ui_io3;
-void ui_event_io4( lv_event_t * e);
-lv_obj_t *ui_io4;
 lv_obj_t *ui_ioLabel1;
 lv_obj_t *ui_ioLabel2;
 lv_obj_t *ui_ioLabel3;
-lv_obj_t *ui_ioLabel4;
 lv_obj_t *ui____initial_actions0;
 
 ///////////////////// TEST LVGL SETTINGS ////////////////////
@@ -97,12 +92,6 @@ if ( event_code == LV_EVENT_CLICKED) {
       lp1ToggleFunction( e );
 }
 }
-void ui_event_lp2Label( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_CLICKED) {
-      lp2ToggleFunction( e );
-}
-}
 void ui_event_accessoryStateScreen( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_GESTURE &&  lv_indev_get_gesture_dir(lv_indev_get_act()) == LV_DIR_TOP  ) {
@@ -130,12 +119,6 @@ void ui_event_io3( lv_event_t * e) {
     lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
 if ( event_code == LV_EVENT_CLICKED) {
       lp1ToggleFunction( e );
-}
-}
-void ui_event_io4( lv_event_t * e) {
-    lv_event_code_t event_code = lv_event_get_code(e);lv_obj_t * target = lv_event_get_target(e);
-if ( event_code == LV_EVENT_CLICKED) {
-      lp2ToggleFunction( e );
 }
 }
 

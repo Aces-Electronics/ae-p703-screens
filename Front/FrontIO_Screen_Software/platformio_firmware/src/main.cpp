@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <driver/adc.h>
 #include <nvs_flash.h>
-#include <CircularBuffer.hpp>
+#include <CircularBuffer.h>
 #include "ui.h"
 #include <Arduino_GFX_Library.h>
 #include <TouchLib.h>
@@ -688,26 +688,6 @@ void lp1ToggleFunction(lv_event_t *e)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
-    }
-    sendMessage();
-  }
-}
-
-void lp2ToggleFunction(lv_event_t *e)
-{
-  lv_event_code_t code = lv_event_get_code(e);
-  if (code == LV_EVENT_CLICKED)
-  {
-    localRear0Struct.rearIO4 = !localRear0Struct.rearIO4;
-    if (localRear0Struct.rearIO4 == ON)
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-    }
-    else
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
     }
     sendMessage();
   }
