@@ -4,7 +4,7 @@
 #include <Arduino.h>
 #include <driver/adc.h>
 #include <nvs_flash.h>
-#include <CircularBuffer.h>
+#include <CircularBuffer.hpp>
 #include "ui.h"
 #include <Arduino_GFX_Library.h>
 #include <TouchLib.h>
@@ -14,12 +14,14 @@
 
 #include "pin_config.h"
 
-// GPIO definitionsk
+// GPIO definitions
 const int vin = 14;
-const int hp1 = 10; // outputs
-const int hp2 = 11;
-const int lp1 = 12;
-const int lp2 = 13;
+const int OP1 = 10; // outputs
+const int OP2 = 11;
+const int OP3 = 12;
+
+const int OFF = 1;
+const int ON = 0;
 
 int rawValue = 0;
 float lastReading;
@@ -36,7 +38,7 @@ long total = 0;
 
 unsigned long newtime = 0;
 
-CircularBuffer<float, 500> buffer;
+CircularBuffer<float, 250> buffer;
 
 // REPLACE WITH THE MAC Address of your receiver 
 uint8_t broadcastAddress[] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
@@ -55,13 +57,13 @@ typedef struct struct_message_rear0 { // Rear hardware message
   int messageID = 0; // sets the message ID
   bool dataChanged = 0; // stores whether or not the data in the struct has changed
   int rearIO1 = -1; // rear: basic/pro IO1
-  String rearIO1Name = "15A-1";
+  String rearIO1Name = "OP1";
   int rearIO2 = -1; // rear: basic/pro IO2
-  String rearIO2Name = "15A-2";
+  String rearIO2Name = "OP2";
   int rearIO3 = -1; // rear: basic/pro IO3
-  String rearIO3Name = "10A-1";
+  String rearIO3Name = "OP3";
   int rearIO4 = -1; // rear: basic/pro IO4
-  String rearIO4Name = "10A-2";
+  String rearIO4Name = "N/A";
   int rearIO5 = -1; // rear: pro IO5
   String rearIO5Name = "-1";
   int rearIO6 = -1; // rear: pro IO6
@@ -325,27 +327,26 @@ void checkData()
     lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
-  else
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "V HIGH!");
-    lv_arc_set_value(ui_auxBattVoltageArc, 100);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
+  // else // ToDo: work out why this was being triggered
+  // {
+  //   lv_label_set_text(ui_auxBattPercentageLabel, "V HIGH!");
+  //   lv_arc_set_value(ui_auxBattVoltageArc, 100);
+  //   lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  // }
   
   
-  if (localVoltage0Struct.rearAuxBatt1V < 11.00)
+  if (localVoltage0Struct.rearAuxBatt1V < 10.00) // ToDO: double check this
   {
     lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
     lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
   }
   else 
   {
-    if (localRear0Struct.rearIO1 == 1)
+    if (localRear0Struct.rearIO1 == ON)
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
@@ -355,8 +356,7 @@ void checkData()
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io1, LV_STATE_CHECKED);
     }
-
-      if (localRear0Struct.rearIO2 == 1)
+      if (localRear0Struct.rearIO2 == ON)
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
@@ -366,8 +366,7 @@ void checkData()
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
     }
-
-      if (localRear0Struct.rearIO3 == 1)
+      if (localRear0Struct.rearIO3 == ON)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
@@ -376,17 +375,6 @@ void checkData()
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_clear_state(ui_io3, LV_STATE_CHECKED);
-    }
-
-      if (localRear0Struct.rearIO4 == 1)
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_add_state(ui_io4, LV_STATE_CHECKED);
-    }
-    else
-    {
-      lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-      lv_obj_clear_state(ui_io4, LV_STATE_CHECKED);
     }
   }
 }
@@ -453,11 +441,7 @@ void OnDataRecv(const uint8_t * mac, const uint8_t *incomingData, int len) {
 
       if (remoteRear0Struct.rearIO4Name != "-1")
       {
-        char rearIO4NameChar[7];
         localRear0Struct.rearIO4Name = remoteRear0Struct.rearIO4Name;
-        localRear0Struct.rearIO4Name.toCharArray(rearIO4NameChar, 7);
-
-        lv_label_set_text(ui_lp2Label, rearIO4NameChar);
       } 
 
       if (remoteRear0Struct.rearIO5 != -1)
@@ -655,7 +639,7 @@ void hp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     localRear0Struct.rearIO1 = !localRear0Struct.rearIO1; // ToDo: check this logic
-    if (localRear0Struct.rearIO1 == 1)
+    if (localRear0Struct.rearIO1 == ON)
     {
       lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io1, LV_STATE_CHECKED);
@@ -675,7 +659,7 @@ void hp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     localRear0Struct.rearIO2 = !localRear0Struct.rearIO2;
-    if (localRear0Struct.rearIO2 == 1)
+    if (localRear0Struct.rearIO2 == ON)
     {
       lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io2, LV_STATE_CHECKED);
@@ -686,7 +670,6 @@ void hp2ToggleFunction(lv_event_t *e)
       lv_obj_clear_state(ui_io2, LV_STATE_CHECKED);
     }
     sendMessage();
-
   }
 }
 
@@ -696,7 +679,7 @@ void lp1ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     localRear0Struct.rearIO3 = !localRear0Struct.rearIO3;
-    if (localRear0Struct.rearIO3 == 1)
+    if (localRear0Struct.rearIO3 == ON)
     {
       lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io3, LV_STATE_CHECKED);
@@ -716,7 +699,7 @@ void lp2ToggleFunction(lv_event_t *e)
   if (code == LV_EVENT_CLICKED)
   {
     localRear0Struct.rearIO4 = !localRear0Struct.rearIO4;
-    if (localRear0Struct.rearIO4 == 1)
+    if (localRear0Struct.rearIO4 == ON)
     {
       lv_obj_set_style_text_color(ui_lp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
       lv_obj_add_state(ui_io4, LV_STATE_CHECKED);

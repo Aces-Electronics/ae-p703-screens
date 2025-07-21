@@ -9,7 +9,7 @@
 #include <driver/adc.h>
 #include <nvs_flash.h>
 #include <Preferences.h>
-#include <CircularBuffer.h>
+#include <CircularBuffer.hpp>
 #include "lvgl.h"
 #include "ui.h"
 #include <esp_now.h>
@@ -226,6 +226,209 @@ void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status) {
   }
   else{
     success = "Delivery Fail :(";
+  }
+}
+void checkData()
+{
+  if (millis() - newtime >= 1000)
+  {
+    newtime = millis();
+    float avg = float((INA.getBusMilliVolts(2) * 1.00) / 1000);
+    localVoltage0Struct.rearAuxBatt1V = avg;
+    if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
+    {
+      if (avg / lastReading <= 0.99995)
+      {
+        localRear0Struct.rearDeviceState = "Discharging";
+      }
+      else if (avg / lastReading >= 1.00005)
+      {
+        localRear0Struct.rearDeviceState = "Charging";
+      }
+      else
+      {
+        localRear0Struct.rearDeviceState = "Stable";
+      }
+      lastReading = avg;
+    }
+    else
+    {
+      localRear0Struct.rearDeviceState = "V Error!!!";
+    }
+    localRear0Struct.rearDeviceState = rearDeviceState;
+    lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
+
+    if ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) > 0.002) || ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) < -0.002))) // if a (large?) voltage change, send out a message
+    {
+      Serial.println("Voltage change detected on AuxBatt, sending message...");
+      sendMessage();
+    }
+    oldAuxVoltage = localVoltage0Struct.rearAuxBatt1V;
+  }
+  
+  String ui_auxBattVoltageLabelText = String(localVoltage0Struct.rearAuxBatt1V);
+  ui_auxBattVoltageLabelText.concat("V");
+  lv_label_set_text(ui_auxBattVoltageLabel, ui_auxBattVoltageLabelText.c_str());
+  if (localVoltage0Struct.rearAuxBatt1V < 11)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "FLAT!");
+    lv_arc_set_value(ui_auxBattVoltageArc, 5);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.0)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "9%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 9);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.5)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "14%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 14);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.8)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "17%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 17);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 12.9)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "20%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 20);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.0)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "30%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 30);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.1)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "40%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 40);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.15)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "70%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 70);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.3)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "90%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 90);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.4)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "99%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 99);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 13.55)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "100%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 100);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
+  {
+    lv_label_set_text(ui_auxBattPercentageLabel, "100%");
+    lv_arc_set_value(ui_auxBattVoltageArc, 100);
+    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  // else // ToDo: work out why this was being triggered
+  // {
+  //   lv_label_set_text(ui_auxBattPercentageLabel, "V HIGH!");
+  //   lv_arc_set_value(ui_auxBattVoltageArc, 100);
+  //   lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  //   lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+  // }
+
+
+  if (localVoltage0Struct.rearAuxBatt1V < 10.00) // ToDO: double check this
+  {
+    digitalWrite(OP1, OFF);
+    lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    digitalWrite(OP2, OFF);
+    lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+    digitalWrite(OP3, OFF);
+    lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
+  }
+  else 
+  {
+    if (localRear0Struct.rearIO1 == ON)
+    {
+      digitalWrite(OP1, ON);
+      lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      digitalWrite(OP1, OFF);
+      lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if (localRear0Struct.rearIO2 == ON)
+    {
+      digitalWrite(OP2, ON);
+      lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      digitalWrite(OP2, OFF);
+      lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    if (localRear0Struct.rearIO3 == ON)
+    {
+      digitalWrite(OP3, ON);
+      lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
+    else
+    {
+      digitalWrite(OP3, OFF);
+      lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
+    }
   }
 }
 
@@ -775,209 +978,7 @@ void factoryReset(lv_event_t *e)
   ESP.restart(); // reset to clear memory
 }
 
-void checkData()
-{
-  if (millis() - newtime >= 1000)
-  {
-    newtime = millis();
-    float avg = float((INA.getBusMilliVolts(2) * 1.00) / 1000);
-    localVoltage0Struct.rearAuxBatt1V = avg;
-    if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
-    {
-      if (avg / lastReading <= 0.99995)
-      {
-        localRear0Struct.rearDeviceState = "Discharging";
-      }
-      else if (avg / lastReading >= 1.00005)
-      {
-        localRear0Struct.rearDeviceState = "Charging";
-      }
-      else
-      {
-        localRear0Struct.rearDeviceState = "Stable";
-      }
-      lastReading = avg;
-    }
-    else
-    {
-      localRear0Struct.rearDeviceState = "V Error!!!";
-    }
-    localRear0Struct.rearDeviceState = rearDeviceState;
-    lv_label_set_text(ui_auxState, localRear0Struct.rearDeviceState.c_str());
 
-    if ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) > 0.002) || ((abs(oldAuxVoltage-localVoltage0Struct.rearAuxBatt1V) < -0.002))) // if a (large?) voltage change, send out a message
-    {
-      Serial.println("Voltage change detected on AuxBatt, sending message...");
-      sendMessage();
-    }
-    oldAuxVoltage = localVoltage0Struct.rearAuxBatt1V;
-  }
-  
-  String ui_auxBattVoltageLabelText = String(localVoltage0Struct.rearAuxBatt1V);
-  ui_auxBattVoltageLabelText.concat("V");
-  lv_label_set_text(ui_auxBattVoltageLabel, ui_auxBattVoltageLabelText.c_str());
-  if (localVoltage0Struct.rearAuxBatt1V < 11)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "FLAT!");
-    lv_arc_set_value(ui_auxBattVoltageArc, 5);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 12.0)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "9%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 9);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V<= 12.5)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "14%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 14);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xFF0000), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 12.8)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "17%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 17);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xF06319), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xF06319), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 12.9)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "20%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 20);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.0)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "30%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 30);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE8B23B), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE8B23B), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.1)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "40%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 40);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0xE3ED00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0xE3ED00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.15)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "70%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 70);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.3)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "90%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 90);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.4)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "99%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 99);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 13.55)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "100%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 100);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else if (localVoltage0Struct.rearAuxBatt1V <= 16.00)
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "100%");
-    lv_arc_set_value(ui_auxBattVoltageArc, 100);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else
-  {
-    lv_label_set_text(ui_auxBattPercentageLabel, "V HIGH!");
-    lv_arc_set_value(ui_auxBattVoltageArc, 100);
-    lv_obj_set_style_arc_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_INDICATOR | LV_STATE_DEFAULT);
-    lv_obj_set_style_bg_color(ui_auxBattVoltageArc, lv_color_hex(0x00FF00), LV_PART_KNOB | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattPercentageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_color(ui_auxBattVoltageLabel, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-
-
-  if (localVoltage0Struct.rearAuxBatt1V < 11.00)
-  {
-    digitalWrite(OP1, OFF);
-    lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(OP2, OFF);
-    lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-    digitalWrite(OP3, OFF);
-    lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0xFF0000), LV_PART_MAIN | LV_STATE_DEFAULT);
-  }
-  else 
-  {
-    if (localRear0Struct.rearIO1 == ON)
-    {
-      digitalWrite(OP1, ON);
-      lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    else
-    {
-      digitalWrite(OP1, OFF);
-      lv_obj_set_style_text_color(ui_hp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    if (localRear0Struct.rearIO2 == ON)
-    {
-      digitalWrite(OP2, ON);
-      lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    else
-    {
-      digitalWrite(OP2, OFF);
-      lv_obj_set_style_text_color(ui_hp2Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    if (localRear0Struct.rearIO3 == ON)
-    {
-      digitalWrite(OP3, ON);
-      lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x00FF00), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-    else
-    {
-      digitalWrite(OP3, OFF);
-      lv_obj_set_style_text_color(ui_lp1Label, lv_color_hex(0x808080), LV_PART_MAIN | LV_STATE_DEFAULT);
-    }
-  }
-}
 
 void loadPreferences()
 {
@@ -1173,7 +1174,22 @@ void loop()
   }
   loopCounter++;
 
-  //esp_sleep_enable_timer_wakeup(25 * 1000); //light sleep for 25 milli seconds
-  //esp_light_sleep_start(); 
+  // // the below code works to put the ESP32 and the screen to sleep. Just no way to wake it up yet.
+  // tft.setBrightness(25);
+  // tft.getPanel()->setSleep(true);
+
+  //int16_t pin_bl = ( (lgfx::Light_PWM*) tft.getPanel()->getLight() )->config().pin_bl;
+  //if( pin_bl > -1 ) {
+  //  gpio_hold_en((gpio_num_t) pin_bl ); // keep TFT_LED off while in deep sleep
+  //  gpio_deep_sleep_hold_en();
+  //}
+
+  // delay(10000);
+  // esp_deep_sleep_start();
+
+
+  // // this part is older code
+  // //esp_sleep_enable_timer_wakeup(25 * 1000); //light sleep for 25 milli seconds
+  // //esp_light_sleep_start(); 
   delay(1);
 }
